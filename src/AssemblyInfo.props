@@ -1,0 +1,19 @@
+<Project>
+
+  <PropertyGroup>
+    <PackageId>DotGGPK</PackageId>
+    <Authors>Tobias Koch</Authors>
+    <Company>Tobias Koch</Company>
+    <Product>DotGGPK</Product>
+    <Description>A .NET standard library for parsing Path of Exile's GGPK archive file format</Description>
+    <Copyright>Copyright © 2018-2019 Tobias Koch</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://gitlab.com/tobiaskoch/DotGGPK</PackageProjectUrl>
+    <RepositoryUrl>https://gitlab.com/tobiaskoch/DotGGPK.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageIconUrl>https://gitlab.com/tobiaskoch/DotGGPK/raw/master/img/DotGGPK.png</PackageIconUrl>
+    <PackageTags>pathofexile poe ggpk</PackageTags>
+  </PropertyGroup>
+  
+</Project>
