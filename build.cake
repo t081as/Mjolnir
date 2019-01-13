@@ -77,10 +77,10 @@ Task("build")
 
     if (configuration == "Release")
     {
-        // Information("Release - generating documentation");
-        // DocFxMetadata("./docs/docfx.json");
-        // DocFxBuild("./docs/docfx.json");
-        // CopyDirectory("docs/_site", "./public");
+        Information("Release - generating documentation");
+        DocFxMetadata("./docs/docfx.json");
+        DocFxBuild("./docs/docfx.json");
+        CopyDirectory("docs/_site", "./public");
     }
 });
 
