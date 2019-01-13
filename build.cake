@@ -63,7 +63,7 @@ Task("versioning")
     Information("Version (long): " + longVersionString);
     Information("Version (short): " + shortVersionString);
 
-    WriteVersion("./src/Mjolnir/Version.props", shortVersionString, versionString);
+    WriteVersion("./src/Version.props", shortVersionString, versionString);
 });
 
 Task("build")
