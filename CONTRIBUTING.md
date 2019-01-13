@@ -1,9 +1,9 @@
 Thank you for your interest in contributing to this project.
 This file contains some basic information about possible contributions.
 
-- [DotGGPK repository][1]
-- [DotGGPK issue tracker][2]
-- [DotGGPK continuous integration][3]
+- [Mjolnir repository][1]
+- [Mjolnir issue tracker][2]
+- [Mjolnir continuous integration][3]
 
 # Issues
 All issues can be found in the [project issue tracker][2].
@@ -35,9 +35,9 @@ Since you do not have write access to the repository a [project forking workflow
 # Donations
 If you like the software consider a [donation][10].
 
-[1]: https://gitlab.com/tobiaskoch/DotGGPK
-[2]: https://gitlab.com/tobiaskoch/DotGGPK/issues
-[3]: https://gitlab.com/tobiaskoch/DotGGPK/pipelines
+[1]: https://gitlab.com/tobiaskoch/Mjolnir
+[2]: https://gitlab.com/tobiaskoch/Mjolnir/issues
+[3]: https://gitlab.com/tobiaskoch/Mjolnir/pipelines
 
 [10]: https://www.tk-software.de/donate
 
