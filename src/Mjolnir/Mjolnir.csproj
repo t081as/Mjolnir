@@ -25,7 +25,7 @@
 	  <DefineConstants>$(DefineConstants);NETFULL</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" $(TargetFramework)' == 'net47' ">
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net47' ">
 	  <DefineConstants>$(DefineConstants);NETFULL</DefineConstants>
   </PropertyGroup>
 
