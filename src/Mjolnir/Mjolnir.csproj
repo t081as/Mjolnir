@@ -29,6 +29,18 @@
 	  <DefineConstants>$(DefineConstants);NETFULL</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+    <Reference Include="System.Windows.Forms.dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net471'">
+    <Reference Include="System.Windows.Forms.dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net47'">
+    <Reference Include="System.Windows.Forms.dll" />
+  </ItemGroup>
+
   <ItemGroup>
     <None Include="..\Mjolnir.ruleset" Link="Mjolnir.ruleset" />
     <None Include="..\..\LICENSE.md" Pack="true" PackagePath=""/>
