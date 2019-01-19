@@ -28,7 +28,6 @@
 #if NETFULL
 
 #region Namespaces
-using System;
 using System.Reflection;
 using System.Windows.Forms;
 #endregion
