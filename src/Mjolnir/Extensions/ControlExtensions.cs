@@ -29,6 +29,7 @@
 
 #region Namespaces
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 #endregion
 
@@ -39,6 +40,26 @@ namespace Mjolnir.Extensions
     /// </summary>
     public static class ControlExtensions
     {
+        #region Methods
+
+        /// <summary>
+        /// Enables double buffering of a <see cref="Control"/>.
+        /// </summary>
+        /// <param name="control">The <see cref="Control"/> that shall be double buffered.</param>
+        /// <example>
+        /// The following example demonstrates how to use the <see cref="ControlExtensions.EnableDoubleBuffering(Control)"/>
+        /// method to enable double buffering:
+        /// <code>
+        /// Control doubleBufferedControl = new Control();
+        /// doubleBufferedControl.EnableDoubleBuffering();
+        /// </code>
+        /// </example>
+        public static void EnableDoubleBuffering(this Control control)
+        {
+            typeof(Control).GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(control, true, null);
+        }
+
+        #endregion
     }
 }
 
