@@ -43,7 +43,7 @@ namespace Mjolnir.IO
         /// Gets all configuration key-value-pairs.
         /// </summary>
         /// <value>A <see cref="IReadOnlyDictionary{TKey, TValue}"/> containing all configuration key-value-pairs.</value>
-        IReadOnlyDictionary<string, string> Configuration { get; }
+        IReadOnlyDictionary<string, string> Entries { get; }
 
         #endregion
 

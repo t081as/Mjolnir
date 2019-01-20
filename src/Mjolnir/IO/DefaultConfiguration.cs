@@ -58,23 +58,6 @@ namespace Mjolnir.IO
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultConfiguration"/> class with the given
-        /// configuration values.
-        /// </summary>
-        /// <param name="configuration">The configuration values that shall be added.</param>
-        public DefaultConfiguration(IDictionary<string, string> configuration)
-            : this()
-        {
-            lock (this.configurationValues.SyncRoot)
-            {
-                foreach (var key in configuration.Keys)
-                {
-                    this.configurationValues.Value.Add(key, configuration[key]);
-                }
-            }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DefaultConfiguration"/> class
         /// based on the given <paramref name="configuration"/>.
         /// </summary>
@@ -84,7 +67,7 @@ namespace Mjolnir.IO
         {
             lock (this.configurationValues.SyncRoot)
             {
-                foreach (KeyValuePair<string, string> entry in configuration.Configuration)
+                foreach (KeyValuePair<string, string> entry in configuration.Entries)
                 {
                     this.configurationValues.Value.Add(entry.Key, entry.Value);
                 }
@@ -99,7 +82,7 @@ namespace Mjolnir.IO
         /// Gets all configuration key-value-pairs.
         /// </summary>
         /// <value>A <see cref="IReadOnlyDictionary{TKey, TValue}"/> containing all configuration key-value-pairs.</value>
-        public IReadOnlyDictionary<string, string> Configuration
+        public IReadOnlyDictionary<string, string> Entries
         {
             get
             {

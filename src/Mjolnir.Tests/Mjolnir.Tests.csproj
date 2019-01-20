@@ -30,9 +30,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Mjolnir\Mjolnir.csproj" />
   </ItemGroup>
-    
-  <ItemGroup>
-    <Folder Include="IO\" />
-  </ItemGroup>
 
 </Project>
