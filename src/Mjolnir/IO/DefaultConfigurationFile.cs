@@ -54,6 +54,21 @@ namespace Mjolnir.IO
 
         #region Properties
 
+        /// <summary>
+        /// Gets all configuration values.
+        /// </summary>
+        /// <value>A <see cref="IReadOnlyDictionary{TKey, TValue}"/> containing all configuration values.</value>
+        public IReadOnlyDictionary<string, string> Configuration
+        {
+            get
+            {
+                lock (this.configurationValues.SyncRoot)
+                {
+                    return new Dictionary<string, string>(this.configurationValues.Value);
+                }
+            }
+        }
+
         #endregion
 
         #region Methods
