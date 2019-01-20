@@ -35,7 +35,7 @@ namespace Mjolnir.IO
     /// <summary>
     /// Represents the abstract base class of classes providing key-value-based configurations.
     /// </summary>
-    public abstract class Configuration : IConfiguration
+    public abstract class DefaultConfiguration : IConfiguration
     {
         #region Methods
 
