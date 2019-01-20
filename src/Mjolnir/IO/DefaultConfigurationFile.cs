@@ -69,6 +69,23 @@ namespace Mjolnir.IO
         public override void SetValue(string key, string value)
         {
             this.CheckParameter(key);
+
+            if (value is null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            lock (this.configurationValues.SyncRoot)
+            {
+                if (this.configurationValues.Value.ContainsKey(key))
+                {
+                    this.configurationValues.Value[key] = value;
+                }
+                else
+                {
+                    this.configurationValues.Value.Add(key, value);
+                }
+            }
         }
 
         /// <summary>
