@@ -117,7 +117,7 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         public override void SetValue(string key, string value)
         {
-            this.CheckParameter(key);
+            this.CheckKeyNullOrEmpty(key);
 
             if (value is null)
             {
@@ -147,7 +147,7 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentException"><c>key</c> does not contain a value.</exception>
         public override string GetValue(string key)
         {
-            this.CheckParameter(key);
+            this.CheckKeyNullOrEmpty(key);
 
             lock (this.configurationValues.SyncRoot)
             {

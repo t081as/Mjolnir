@@ -70,7 +70,7 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         public string GetValue(string key, string defaultValue)
         {
-            this.CheckParameter(key);
+            this.CheckKeyNullOrEmpty(key);
 
             try
             {
@@ -93,7 +93,7 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentException"><c>key</c> does not contain a value.</exception>
         public T GetValue<T>(string key)
         {
-            this.CheckParameter(key);
+            this.CheckKeyNullOrEmpty(key);
             return (T)Convert.ChangeType(this.GetValue(key), typeof(T), CultureInfo.InvariantCulture);
         }
 
@@ -109,7 +109,7 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         public T GetValue<T>(string key, T defaultValue)
         {
-            this.CheckParameter(key);
+            this.CheckKeyNullOrEmpty(key);
 
             try
             {
@@ -130,7 +130,7 @@ namespace Mjolnir.IO
         /// <returns><c>True</c> if the value is available, <c>false</c> otherwise.</returns>
         public bool TryGetValue<T>(string key, out T value)
         {
-            this.CheckParameter(key);
+            this.CheckKeyNullOrEmpty(key);
 
             try
             {
@@ -150,7 +150,7 @@ namespace Mjolnir.IO
         /// <param name="key">The key that shall be checked.</param>
         /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
-        protected virtual void CheckParameter(string key)
+        protected virtual void CheckKeyNullOrEmpty(string key)
         {
             if (key is null)
             {
