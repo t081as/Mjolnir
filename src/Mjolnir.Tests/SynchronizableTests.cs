@@ -37,7 +37,7 @@ namespace Mjolnir.Tests
     /// Contains unit tests for the <see cref="Synchronizable{T}"/> class.
     /// </summary>
     [TestClass]
-    public class SynchronizableTest
+    public class SynchronizableTests
     {
         #region Methods
 
