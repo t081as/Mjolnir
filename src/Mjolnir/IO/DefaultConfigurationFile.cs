@@ -36,7 +36,7 @@ namespace Mjolnir.IO
     /// Represents an implementation of the <see cref="IConfiguration"/> interface storing the data
     /// in a simple line-based text file.
     /// </summary>
-    public class DefaultConfigurationFile : Configuration
+    public class DefaultConfigurationFile : DefaultConfiguration
     {
         #region Constants and Fields
 
