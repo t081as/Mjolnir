@@ -27,16 +27,91 @@
 
 #region Namespaces
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 #endregion
 
 namespace Mjolnir.IO
 {
     /// <summary>
-    /// Represents the abstract base class of classes providing key-value-based configurations.
+    /// Provides a key-value-based configuration.
     /// </summary>
-    public abstract class DefaultConfiguration : IConfiguration
+    public class DefaultConfiguration : IConfiguration
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// The synchronizable dictionary storing the actual configuration.
+        /// </summary>
+        private Synchronizable<Dictionary<string, string>> configurationValues =
+            new Synchronizable<Dictionary<string, string>>(new Dictionary<string, string>());
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultConfiguration"/> class.
+        /// </summary>
+        public DefaultConfiguration()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultConfiguration"/> class with the given
+        /// configuration values.
+        /// </summary>
+        /// <param name="configuration">The configuration values that shall be added.</param>
+        public DefaultConfiguration(IDictionary<string, string> configuration)
+            : this()
+        {
+            lock (this.configurationValues.SyncRoot)
+            {
+                foreach (var key in configuration.Keys)
+                {
+                    this.configurationValues.Value.Add(key, configuration[key]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultConfiguration"/> class
+        /// based on the given <paramref name="configuration"/>.
+        /// </summary>
+        /// <param name="configuration">The configuration that shall be copied.</param>
+        public DefaultConfiguration(IConfiguration configuration)
+            : this()
+        {
+            lock (this.configurationValues.SyncRoot)
+            {
+                foreach (KeyValuePair<string, string> entry in configuration.Configuration)
+                {
+                    this.configurationValues.Value.Add(entry.Key, entry.Value);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets all configuration key-value-pairs.
+        /// </summary>
+        /// <value>A <see cref="IReadOnlyDictionary{TKey, TValue}"/> containing all configuration key-value-pairs.</value>
+        public IReadOnlyDictionary<string, string> Configuration
+        {
+            get
+            {
+                lock (this.configurationValues.SyncRoot)
+                {
+                    return new Dictionary<string, string>(this.configurationValues.Value);
+                }
+            }
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -47,7 +122,27 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentNullException"><c>value</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
-        public abstract void SetValue(string key, string value);
+        public void SetValue(string key, string value)
+        {
+            this.CheckKeyNullOrEmpty(key);
+
+            if (value is null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            lock (this.configurationValues.SyncRoot)
+            {
+                if (this.configurationValues.Value.ContainsKey(key))
+                {
+                    this.configurationValues.Value[key] = value;
+                }
+                else
+                {
+                    this.configurationValues.Value.Add(key, value);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets the value associated with the given <paramref name="key"/>.
@@ -57,7 +152,20 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         /// <exception cref="ArgumentException"><c>key</c> does not contain a value.</exception>
-        public abstract string GetValue(string key);
+        public string GetValue(string key)
+        {
+            this.CheckKeyNullOrEmpty(key);
+
+            lock (this.configurationValues.SyncRoot)
+            {
+                if (!this.configurationValues.Value.ContainsKey(key))
+                {
+                    throw new ArgumentException($"No value found for key {key}", nameof(key));
+                }
+
+                return this.configurationValues.Value[key];
+            }
+        }
 
         /// <summary>
         /// Gets the value associated with the given <paramref name="key"/> or the given

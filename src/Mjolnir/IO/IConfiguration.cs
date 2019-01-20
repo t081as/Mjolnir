@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.Collections.Generic;
 #endregion
 
 namespace Mjolnir.IO
@@ -36,6 +37,16 @@ namespace Mjolnir.IO
     /// </summary>
     public interface IConfiguration
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets all configuration key-value-pairs.
+        /// </summary>
+        /// <value>A <see cref="IReadOnlyDictionary{TKey, TValue}"/> containing all configuration key-value-pairs.</value>
+        IReadOnlyDictionary<string, string> Configuration { get; }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
