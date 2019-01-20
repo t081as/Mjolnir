@@ -41,6 +41,16 @@ namespace Mjolnir.IO
         #region Constants and Fields
 
         /// <summary>
+        /// The marker indicating a comment.
+        /// </summary>
+        private const string CommentMarker = "#";
+
+        /// <summary>
+        /// The marker seperating key and value.
+        /// </summary>
+        private const string Seperator = "=";
+
+        /// <summary>
         /// The synchronizable dictionary storing the configuration.
         /// </summary>
         private Synchronizable<Dictionary<string, string>> configurationValues =
@@ -49,6 +59,30 @@ namespace Mjolnir.IO
         #endregion
 
         #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultConfigurationFile"/> class.
+        /// </summary>
+        public DefaultConfigurationFile()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultConfigurationFile"/> class with the given
+        /// configuration values.
+        /// </summary>
+        /// <param name="configuration">The configuration values that shall be added.</param>
+        public DefaultConfigurationFile(IDictionary<string, string> configuration)
+            : this()
+        {
+            lock (this.configurationValues.SyncRoot)
+            {
+                foreach (var key in configuration.Keys)
+                {
+                    this.configurationValues.Value.Add(key, configuration[key]);
+                }
+            }
+        }
 
         #endregion
 
