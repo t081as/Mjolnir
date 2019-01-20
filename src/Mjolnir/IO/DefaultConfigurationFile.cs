@@ -68,7 +68,7 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         public override void SetValue(string key, string value)
         {
-            throw new NotImplementedException();
+            this.CheckParameter(key);
         }
 
         /// <summary>
@@ -81,7 +81,17 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentException"><c>key</c> does not contain a value.</exception>
         public override string GetValue(string key)
         {
-            throw new NotImplementedException();
+            this.CheckParameter(key);
+
+            lock (this.configurationValues.SyncRoot)
+            {
+                if (!this.configurationValues.Value.ContainsKey(key))
+                {
+                    throw new ArgumentException($"No value found for key {key}", nameof(key));
+                }
+
+                return this.configurationValues.Value[key];
+            }
         }
 
         #endregion
