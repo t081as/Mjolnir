@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endregion
 
@@ -39,6 +40,25 @@ namespace Mjolnir.Tests
     public class SynchronizableTest
     {
         #region Methods
+
+        /// <summary>
+        /// Checks the <see cref="Synchronizable{T}"/> class.
+        /// </summary>
+        [TestMethod]
+        public void TestSynchronizable()
+        {
+            Synchronizable<List<int>> synchronizable = new Synchronizable<List<int>>(new List<int>());
+
+            synchronizable.Value.Add(11);
+            synchronizable.Value.Add(275);
+
+            lock (synchronizable.SyncRoot)
+            {
+                ((List<int>)synchronizable).Add(500);
+            }
+
+            Assert.AreEqual(3, synchronizable.Value.Count);
+        }
 
         #endregion
     }
