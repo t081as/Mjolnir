@@ -39,7 +39,12 @@ namespace Mjolnir
     /// <example>
     /// The following example demonstrates how to use the <see cref="Synchronizable{T}"/> class to synchronize objects:
     /// <code>
-    /// 
+    /// Synchronizable&lt;List&lt;int&gt;&gt; synchronizable = new Synchronizable&lt;List&lt;int&gt;&gt;(new List&lt;int&gt;());
+    ///
+    /// lock (synchronizable.SyncRoot)
+    /// {
+    ///     synchronizable.Value.Add(500);
+    /// }
     /// </code>
     /// </example>
     public class Synchronizable<T>
