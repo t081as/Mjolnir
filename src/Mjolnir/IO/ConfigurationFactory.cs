@@ -38,6 +38,15 @@ namespace Mjolnir.IO
     {
         #region Methods
 
+        /// <summary>
+        /// Creates and returns a new implementation of the <see cref="IConfiguration"/> interface.
+        /// </summary>
+        /// <returns>A new implementation of the <see cref="IConfiguration"/> interface.</returns>
+        public static IConfiguration New()
+        {
+            return new DefaultConfiguration();
+        }
+
         #endregion
     }
 }
