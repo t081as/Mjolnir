@@ -115,6 +115,18 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual("adgt-h", newConfiguration.GetValue("test2"));
         }
 
+        /// <summary>
+        /// Check the <see cref="IConfiguration.Entries"/> property.
+        /// </summary>
+        [TestMethod]
+        public void EntriesTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+
+            Assert.AreEqual("ab-c", configuration.Entries["test1"]);
+        }
+
         #endregion
     }
 }
