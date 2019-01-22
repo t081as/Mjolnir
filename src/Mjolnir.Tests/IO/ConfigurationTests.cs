@@ -39,5 +39,66 @@ namespace Mjolnir.Tests.IO
     [TestClass]
     public class ConfigurationTests
     {
+        #region Methods
+
+        /// <summary>
+        /// Check the <see cref="IConfiguration.SetValue(string, string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void SetValueTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+
+            Assert.AreEqual("ab-c", configuration.GetValue("test1"));
+        }
+
+        /// <summary>
+        /// Check the <see cref="IConfiguration.SetValue(string, string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void SetValueChangeValueTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+            configuration.SetValue("test1", "d19465G");
+
+            Assert.AreEqual("d19465G", configuration.GetValue("test1"));
+        }
+
+        /// <summary>
+        /// Check the <see cref="IConfiguration.SetValue(string, string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void SetValueKeyNullTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue(null, "ab-c");
+        }
+
+        /// <summary>
+        /// Check the <see cref="IConfiguration.SetValue(string, string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SetValueKeyEmptyTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue(string.Empty, "ab-c");
+        }
+
+        /// <summary>
+        /// Check the <see cref="IConfiguration.SetValue(string, string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void SetValueValueNullTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test-2", null);
+        }
+
+        #endregion
     }
 }

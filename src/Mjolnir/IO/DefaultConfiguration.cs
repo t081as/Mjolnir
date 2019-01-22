@@ -36,7 +36,7 @@ namespace Mjolnir.IO
     /// <summary>
     /// Provides a key-value-based configuration.
     /// </summary>
-    public class DefaultConfiguration : IConfiguration
+    internal class DefaultConfiguration : IConfiguration
     {
         #region Constants and Fields
 
