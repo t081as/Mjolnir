@@ -47,6 +47,17 @@ namespace Mjolnir.IO
             return new DefaultConfiguration();
         }
 
+        /// <summary>
+        /// Creates and returns an implementation of the <see cref="IConfiguration"/> interface
+        /// base on the given <paramref name="configuration"/>.
+        /// </summary>
+        /// <param name="configuration">The <see cref="IConfiguration"/> that shall be copied.</param>
+        /// <returns>A new implementation of the <see cref="IConfiguration"/> interface.</returns>
+        public static IConfiguration Copy(IConfiguration configuration)
+        {
+            return new DefaultConfiguration(configuration);
+        }
+
         #endregion
     }
 }

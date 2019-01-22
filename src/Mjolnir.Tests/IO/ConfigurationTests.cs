@@ -99,6 +99,22 @@ namespace Mjolnir.Tests.IO
             configuration.SetValue("test-2", null);
         }
 
+        /// <summary>
+        /// Check the <see cref="IConfiguration"/> copy constructor.
+        /// </summary>
+        [TestMethod]
+        public void CopyTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+            configuration.SetValue("test2", "adgt-h");
+
+            IConfiguration newConfiguration = ConfigurationFactory.Copy(configuration);
+
+            Assert.AreEqual("ab-c", newConfiguration.GetValue("test1"));
+            Assert.AreEqual("adgt-h", newConfiguration.GetValue("test2"));
+        }
+
         #endregion
     }
 }
