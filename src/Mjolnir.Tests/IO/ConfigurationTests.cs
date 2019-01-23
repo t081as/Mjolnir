@@ -42,7 +42,7 @@ namespace Mjolnir.Tests.IO
         #region Methods
 
         /// <summary>
-        /// Check the <see cref="IConfiguration.SetValue(string, string)"/> method.
+        /// Checks the <see cref="IConfiguration.SetValue(string, string)"/> method.
         /// </summary>
         [TestMethod]
         public void SetValueTest()
@@ -54,7 +54,7 @@ namespace Mjolnir.Tests.IO
         }
 
         /// <summary>
-        /// Check the <see cref="IConfiguration.SetValue(string, string)"/> method.
+        /// Checks the <see cref="IConfiguration.SetValue(string, string)"/> method.
         /// </summary>
         [TestMethod]
         public void SetValueChangeValueTest()
@@ -67,7 +67,7 @@ namespace Mjolnir.Tests.IO
         }
 
         /// <summary>
-        /// Check the <see cref="IConfiguration.SetValue(string, string)"/> method.
+        /// Checks the <see cref="IConfiguration.SetValue(string, string)"/> method.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -78,7 +78,7 @@ namespace Mjolnir.Tests.IO
         }
 
         /// <summary>
-        /// Check the <see cref="IConfiguration.SetValue(string, string)"/> method.
+        /// Checks the <see cref="IConfiguration.SetValue(string, string)"/> method.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -89,7 +89,7 @@ namespace Mjolnir.Tests.IO
         }
 
         /// <summary>
-        /// Check the <see cref="IConfiguration.SetValue(string, string)"/> method.
+        /// Checks the <see cref="IConfiguration.SetValue(string, string)"/> method.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -100,7 +100,7 @@ namespace Mjolnir.Tests.IO
         }
 
         /// <summary>
-        /// Check the <see cref="IConfiguration"/> copy constructor.
+        /// Checks the <see cref="IConfiguration"/> copy constructor.
         /// </summary>
         [TestMethod]
         public void CopyTest()
@@ -116,7 +116,7 @@ namespace Mjolnir.Tests.IO
         }
 
         /// <summary>
-        /// Check the <see cref="IConfiguration.Entries"/> property.
+        /// Checks the <see cref="IConfiguration.Entries"/> property.
         /// </summary>
         [TestMethod]
         public void EntriesTest()
@@ -125,6 +125,57 @@ namespace Mjolnir.Tests.IO
             configuration.SetValue("test1", "ab-c");
 
             Assert.AreEqual("ab-c", configuration.Entries["test1"]);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void GetValueTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+
+            Assert.AreEqual("ab-c", configuration.GetValue("test1"));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetValueKeyNullTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+
+            Assert.AreEqual("ab-c", configuration.GetValue(null));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetValueKeyEmptyTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+
+            Assert.AreEqual("ab-c", configuration.GetValue(string.Empty));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetValueWrongKeyTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+
+            Assert.AreEqual("ab-c", configuration.GetValue("i-do-not-exist"));
         }
 
         #endregion
