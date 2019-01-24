@@ -178,6 +178,45 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual("ab-c", configuration.GetValue("i-do-not-exist"));
         }
 
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue(string, string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void GetValueDefaultTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+
+            Assert.AreEqual("ab-c", configuration.GetValue("test1", "de-f"));
+            Assert.AreEqual("de-f", configuration.GetValue("i-do-not-exist", "de-f"));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue(string, string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetValueDefaultKeyNullTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+
+            Assert.AreEqual("ab-c", configuration.GetValue(null, "de-f"));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue(string, string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetValueDefaultKeyEmptyTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "ab-c");
+
+            Assert.AreEqual("ab-c", configuration.GetValue(string.Empty, "de-f"));
+        }
+
         #endregion
     }
 }
