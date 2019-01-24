@@ -217,6 +217,57 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual("ab-c", configuration.GetValue(string.Empty, "de-f"));
         }
 
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue{T}(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void GetValueTTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "4634");
+
+            Assert.AreEqual(4634, configuration.GetValue<int>("test1"));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue{T}(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetValueTKeyNullTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "123");
+
+            Assert.AreEqual(123, configuration.GetValue<int>(null));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue{T}(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetValueTKeyEmptyTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "123");
+
+            Assert.AreEqual(123, configuration.GetValue<int>(string.Empty));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue{T}(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetValueTWrongKeyTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "123");
+
+            Assert.AreEqual(123, configuration.GetValue<int>("i-do-not-exist"));
+        }
+
         #endregion
     }
 }
