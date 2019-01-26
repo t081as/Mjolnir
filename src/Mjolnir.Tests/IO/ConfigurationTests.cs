@@ -268,6 +268,45 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual(123, configuration.GetValue<int>("i-do-not-exist"));
         }
 
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue{T}(string, T)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void GetValueTDefaultTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "123");
+
+            Assert.AreEqual(123, configuration.GetValue<int>("test1", 456));
+            Assert.AreEqual(456, configuration.GetValue<int>("i-do-not-exist", 456));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue{T}(string, T)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetValueTDefaultKeyNullTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "123");
+
+            Assert.AreEqual(123, configuration.GetValue<int>(null, 456));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.GetValue{T}(string, T)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetValueTDefaultKeyEmptyTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "123");
+
+            Assert.AreEqual(123, configuration.GetValue<int>(string.Empty, 456));
+        }
+
         #endregion
     }
 }
