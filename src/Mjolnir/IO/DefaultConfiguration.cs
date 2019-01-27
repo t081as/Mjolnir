@@ -78,10 +78,7 @@ namespace Mjolnir.IO
 
         #region Properties
 
-        /// <summary>
-        /// Gets all configuration key-value-pairs.
-        /// </summary>
-        /// <value>A <see cref="IReadOnlyDictionary{TKey, TValue}"/> containing all configuration key-value-pairs.</value>
+        /// <inheritdoc />
         public IReadOnlyDictionary<string, string> Entries
         {
             get
@@ -97,14 +94,7 @@ namespace Mjolnir.IO
 
         #region Methods
 
-        /// <summary>
-        /// Sets the given <paramref name="key"/> to the given <paramref name="value"/>.
-        /// </summary>
-        /// <param name="key">The key that shall be used to store the value.</param>
-        /// <param name="value">The value that shall be stored.</param>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
-        /// <exception cref="ArgumentNullException"><c>value</c> is null.</exception>
-        /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
+        /// <inheritdoc />
         public void SetValue(string key, string value)
         {
             this.CheckKeyNullOrEmpty(key);
@@ -127,14 +117,7 @@ namespace Mjolnir.IO
             }
         }
 
-        /// <summary>
-        /// Gets the value associated with the given <paramref name="key"/>.
-        /// </summary>
-        /// <param name="key">The key that shall be used to retrieve the value.</param>
-        /// <returns>The value associated with the given key.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
-        /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
-        /// <exception cref="ArgumentException"><c>key</c> does not contain a value.</exception>
+        /// <inheritdoc />
         public string GetValue(string key)
         {
             this.CheckKeyNullOrEmpty(key);
@@ -150,15 +133,7 @@ namespace Mjolnir.IO
             }
         }
 
-        /// <summary>
-        /// Gets the value associated with the given <paramref name="key"/> or the given
-        /// <paramref name="defaultValue"/> if there is no value stored for the <paramref name="key"/>.
-        /// </summary>
-        /// <param name="key">The key that shall be used to retrieve the value.</param>
-        /// <param name="defaultValue">The value that shall be returned if there is no stored value for the given key.</param>
-        /// <returns>The value associated with the given key or the default value.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
-        /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
+        /// <inheritdoc />
         public string GetValue(string key, string defaultValue)
         {
             this.CheckKeyNullOrEmpty(key);
@@ -173,31 +148,14 @@ namespace Mjolnir.IO
             }
         }
 
-        /// <summary>
-        /// Gets the value associated with the given <paramref name="key"/>.
-        /// </summary>
-        /// <typeparam name="T">The <see cref="Type"/> of the value.</typeparam>
-        /// <param name="key">The key that shall be used to retrieve the value.</param>
-        /// <returns>The value associated with the given key.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
-        /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
-        /// <exception cref="ArgumentException"><c>key</c> does not contain a value.</exception>
+        /// <inheritdoc />
         public T GetValue<T>(string key)
         {
             this.CheckKeyNullOrEmpty(key);
             return (T)Convert.ChangeType(this.GetValue(key), typeof(T), CultureInfo.InvariantCulture);
         }
 
-        /// <summary>
-        /// Gets the value associated with the given <paramref name="key"/> or the given
-        /// <paramref name="defaultValue"/> if there is no value stored for the <paramref name="key"/>.
-        /// </summary>
-        /// <typeparam name="T">The <see cref="Type"/> of the value.</typeparam>
-        /// <param name="key">The key that shall be used to retrieve the value.</param>
-        /// <param name="defaultValue">The value that shall be returned if there is no stored value for the given key.</param>
-        /// <returns>The value associated with the given key or the default value.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
-        /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
+        /// <inheritdoc />
         public T GetValue<T>(string key, T defaultValue)
         {
             this.CheckKeyNullOrEmpty(key);
@@ -212,13 +170,7 @@ namespace Mjolnir.IO
             }
         }
 
-        /// <summary>
-        /// Tries to return a value for the given <paramref name="key"/>.
-        /// </summary>
-        /// <typeparam name="T">The <see cref="Type"/> of the value.</typeparam>
-        /// <param name="key">The key that shall be used to retrieve the value.</param>
-        /// <param name="value">The value associated with the given key if available.</param>
-        /// <returns><c>True</c> if the value is available, <c>false</c> otherwise.</returns>
+        /// <inheritdoc />
         public bool TryGetValue<T>(string key, out T value)
         {
             this.CheckKeyNullOrEmpty(key);
