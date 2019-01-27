@@ -37,6 +37,77 @@ namespace Mjolnir.IO
     /// </summary>
     public class ConfigurationFile : IConfigurationReader, IConfigurationWriter
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// The default marker for single line comments.
+        /// </summary>
+        public const string DefaultCommentMarker = "#";
+
+        /// <summary>
+        /// The default seperator for keys and values.
+        /// </summary>
+        public const string DefaultSeperator = "=";
+
+        /// <summary>
+        /// Represents the comment marker used by this instance.
+        /// </summary>
+        private string commentMarker;
+
+        /// <summary>
+        /// Represents the seperator used by this instance.
+        /// </summary>
+        private string seperator;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigurationFile"/> class.
+        /// </summary>
+        public ConfigurationFile()
+        {
+            this.commentMarker = DefaultCommentMarker;
+            this.seperator = DefaultSeperator;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigurationFile"/> class with the given
+        /// comment marker and seperator.
+        /// </summary>
+        /// <param name="commentMarker">The marker for single line comments.</param>
+        /// <param name="seperator">The seperator for keys and values.</param>
+        public ConfigurationFile(string commentMarker, string seperator)
+        {
+            this.commentMarker = commentMarker;
+            this.seperator = seperator;
+        }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets the comment marker used by this instance.
+        /// </summary>
+        /// <value>The comment marker used by this instance.</value>
+        public string CommentMarker
+        {
+            get => this.commentMarker;
+        }
+
+        /// <summary>
+        /// Gets the seperator used by this instance.
+        /// </summary>
+        /// <value>The seperator used by this instance.</value>
+        public string Seperator
+        {
+            get => seperator;
+        }
+
+        #endregion
+
         #region Methods
 
         /// <inheritdoc />
