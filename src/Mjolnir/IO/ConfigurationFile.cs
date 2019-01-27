@@ -28,6 +28,8 @@
 #region Namespaces
 using System;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 #endregion
 
 namespace Mjolnir.IO
@@ -103,7 +105,7 @@ namespace Mjolnir.IO
         /// <value>The seperator used by this instance.</value>
         public string Seperator
         {
-            get => seperator;
+            get => this.seperator;
         }
 
         #endregion
@@ -113,13 +115,46 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public IConfiguration Read(Stream stream)
         {
-            throw new NotImplementedException();
+            var result = this.ReadAsync(stream);
+            Task.WaitAll(result);
+
+            return result.Result;
+        }
+
+        /// <inheritdoc />
+        public async Task<IConfiguration> ReadAsync(Stream stream)
+        {
+            using (StreamReader reader = new StreamReader(stream, new UTF8Encoding(false)))
+            {
+                IConfiguration configuration = new DefaultConfiguration();
+                string line;
+
+                while ((line = await reader.ReadLineAsync().ConfigureAwait(false)) != null)
+                {
+                    throw new NotImplementedException();
+                }
+
+                return configuration;
+            }
         }
 
         /// <inheritdoc />
         public void Write(IConfiguration configuration, Stream stream)
         {
-            throw new NotImplementedException();
+            var result = this.WriteAsync(configuration, stream);
+            Task.WaitAll(result);
+        }
+
+        /// <inheritdoc />
+        public async Task WriteAsync(IConfiguration configuration, Stream stream)
+        {
+            using (StreamWriter writer = new StreamWriter(stream, new UTF8Encoding(false)))
+            {
+                foreach (var entry in configuration.Entries)
+                {
+                    await writer.WriteLineAsync($"").ConfigureAwait(false);
+                }
+            }
         }
 
         #endregion

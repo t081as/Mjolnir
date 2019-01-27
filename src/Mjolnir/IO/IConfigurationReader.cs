@@ -28,6 +28,7 @@
 #region Namespaces
 using System;
 using System.IO;
+using System.Threading.Tasks;
 #endregion
 
 namespace Mjolnir.IO
@@ -47,6 +48,19 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while reading the data.</exception>
         IConfiguration Read(Stream stream);
+
+        /// <summary>
+        /// Reads configuration data from the given <paramref name="stream"/>.
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream"/> containing the configuration data.</param>
+        /// <returns>
+        /// A <see cref="Task{TResult}"/> that represents the asynchronous write operation.
+        /// The <c>TResult</c> parameter contains an implementation of the <see cref="IConfiguration"/>
+        /// interface representing the configuration data.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
+        /// <exception cref="IOException">Error while reading the data.</exception>
+        Task<IConfiguration> ReadAsync(Stream stream);
 
         #endregion
     }
