@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.IO;
 #endregion
 
 namespace Mjolnir.IO
@@ -34,7 +35,22 @@ namespace Mjolnir.IO
     /// <summary>
     /// Provides methods to read and write configuration files in the default configuration file format.
     /// </summary>
-    public class ConfigurationFile
+    public class ConfigurationFile : IConfigurationReader, IConfigurationWriter
     {
+        #region Methods
+
+        /// <inheritdoc />
+        public IConfiguration Read(Stream stream)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void Write(IConfiguration configuration, Stream stream)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
