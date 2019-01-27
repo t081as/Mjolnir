@@ -335,6 +335,51 @@ namespace Mjolnir.Tests.IO
 
         #endregion
 
+        #region TryGetValue<T>(string, out T)
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.TryGetValue{T}(string, out T)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void TryGetValueTTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "123");
+
+            Assert.AreEqual(true, configuration.TryGetValue("test1", out int value1));
+            Assert.AreEqual(123, value1);
+
+            Assert.AreEqual(false, configuration.TryGetValue("i-do-not-exist", out int value2));
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.TryGetValue{T}(string, out T)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TryGetValueTKeyNullTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "123");
+
+            configuration.TryGetValue(null, out int value);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="IConfiguration.TryGetValue{T}(string, out T)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TryGetValueTKeyEmptyTest()
+        {
+            IConfiguration configuration = ConfigurationFactory.New();
+            configuration.SetValue("test1", "123");
+
+            configuration.TryGetValue(string.Empty, out int value);
+        }
+
+        #endregion
+
         #endregion
     }
 }
