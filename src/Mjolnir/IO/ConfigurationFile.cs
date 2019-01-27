@@ -152,9 +152,43 @@ namespace Mjolnir.IO
             {
                 foreach (var entry in configuration.Entries)
                 {
-                    await writer.WriteLineAsync($"").ConfigureAwait(false);
+                    if (this.ContainsInvalidSequences(entry.Key, out string keySequence))
+                    {
+                        throw new IOException($"Entry {entry.Key}: the key contains the following invalid sequence: {keySequence}");
+                    }
+
+                    if (this.ContainsInvalidSequences(entry.Value, out string valueSequence))
+                    {
+                        throw new IOException($"Entry {entry.Key}: the value contains the following invalid sequence: {valueSequence}");
+                    }
+
+                    await writer.WriteLineAsync($"{entry.Key}{this.seperator}{entry.Value}").ConfigureAwait(false);
                 }
             }
+        }
+
+        /// <summary>
+        /// Checks the given <paramref name="value"/> for invalid sequences that can not be stored using this
+        /// file format.
+        /// </summary>
+        /// <param name="value">The value that shall be checked.</param>
+        /// <param name="invalidSequence">The invalid sequence that has been detected.</param>
+        /// <returns><c>True</c> if the value contains an invalid sequence, <c>false</c> otherwise.</returns>
+        protected virtual bool ContainsInvalidSequences(string value, out string invalidSequence)
+        {
+            string[] invalidSequences = new string[] { this.commentMarker, this.seperator, "\n", "\r\n" };
+
+            foreach (var sequence in invalidSequences)
+            {
+                if (value.Contains(sequence))
+                {
+                    invalidSequence = sequence.Replace(@"\", @"\\");
+                    return true;
+                }
+            }
+
+            invalidSequence = string.Empty;
+            return false;
         }
 
         #endregion
