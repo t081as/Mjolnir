@@ -41,6 +41,8 @@ namespace Mjolnir.Tests.IO
     {
         #region Methods
 
+        #region SetValue
+
         /// <summary>
         /// Checks the <see cref="IConfiguration.SetValue(string, string)"/> method.
         /// </summary>
@@ -99,6 +101,10 @@ namespace Mjolnir.Tests.IO
             configuration.SetValue("test-2", null);
         }
 
+        #endregion
+
+        #region ctor(IConfiguration)
+
         /// <summary>
         /// Checks the <see cref="IConfiguration"/> copy constructor.
         /// </summary>
@@ -115,6 +121,10 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual("adgt-h", newConfiguration.GetValue("test2"));
         }
 
+        #endregion
+
+        #region Entries
+
         /// <summary>
         /// Checks the <see cref="IConfiguration.Entries"/> property.
         /// </summary>
@@ -126,6 +136,10 @@ namespace Mjolnir.Tests.IO
 
             Assert.AreEqual("ab-c", configuration.Entries["test1"]);
         }
+
+        #endregion
+
+        #region GetValue(string)
 
         /// <summary>
         /// Checks the <see cref="IConfiguration.GetValue(string)"/> method.
@@ -178,6 +192,10 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual("ab-c", configuration.GetValue("i-do-not-exist"));
         }
 
+        #endregion
+
+        #region GetValue(string string)
+
         /// <summary>
         /// Checks the <see cref="IConfiguration.GetValue(string, string)"/> method.
         /// </summary>
@@ -216,6 +234,10 @@ namespace Mjolnir.Tests.IO
 
             Assert.AreEqual("ab-c", configuration.GetValue(string.Empty, "de-f"));
         }
+
+        #endregion
+
+        #region GetValue<T>(string)
 
         /// <summary>
         /// Checks the <see cref="IConfiguration.GetValue{T}(string)"/> method.
@@ -268,6 +290,10 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual(123, configuration.GetValue<int>("i-do-not-exist"));
         }
 
+        #endregion
+
+        #region GetValue<T>(string, string)
+
         /// <summary>
         /// Checks the <see cref="IConfiguration.GetValue{T}(string, T)"/> method.
         /// </summary>
@@ -306,6 +332,8 @@ namespace Mjolnir.Tests.IO
 
             Assert.AreEqual(123, configuration.GetValue<int>(string.Empty, 456));
         }
+
+        #endregion
 
         #endregion
     }
