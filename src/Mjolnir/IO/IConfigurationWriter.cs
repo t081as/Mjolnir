@@ -40,7 +40,7 @@ namespace Mjolnir.IO
         #region Methods
 
         /// <summary>
-        /// Writes the given <paramref name="configuration"/> to the given <paramref name="stream"/>.
+        /// Writes the given <paramref name="configuration"/> data to the given <paramref name="stream"/>.
         /// </summary>
         /// <param name="configuration">The configuration data that shall be written.</param>
         /// <param name="stream">The <see cref="Stream"/> the configuration data shall be written to.</param>
