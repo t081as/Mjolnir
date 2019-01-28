@@ -148,22 +148,33 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public async Task WriteAsync(IConfiguration configuration, Stream stream)
         {
-            using (StreamWriter writer = new StreamWriter(stream, new UTF8Encoding(false)))
+            try
             {
-                foreach (var entry in configuration.Entries)
+                using (StreamWriter writer = new StreamWriter(stream, new UTF8Encoding(false)))
                 {
-                    if (this.ContainsInvalidSequences(entry.Key, out string keySequence))
+                    foreach (var entry in configuration.Entries)
                     {
-                        throw new IOException($"Entry {entry.Key}: the key contains the following invalid sequence: {keySequence}");
-                    }
+                        if (this.ContainsInvalidSequences(entry.Key, out string keySequence))
+                        {
+                            throw new IOException($"Entry {entry.Key}: the key contains the following invalid sequence: {keySequence}");
+                        }
 
-                    if (this.ContainsInvalidSequences(entry.Value, out string valueSequence))
-                    {
-                        throw new IOException($"Entry {entry.Key}: the value contains the following invalid sequence: {valueSequence}");
-                    }
+                        if (this.ContainsInvalidSequences(entry.Value, out string valueSequence))
+                        {
+                            throw new IOException($"Entry {entry.Key}: the value contains the following invalid sequence: {valueSequence}");
+                        }
 
-                    await writer.WriteLineAsync($"{entry.Key}{this.seperator}{entry.Value}").ConfigureAwait(false);
+                        await writer.WriteLineAsync($"{entry.Key}{this.seperator}{entry.Value}").ConfigureAwait(false);
+                    }
                 }
+            }
+            catch (IOException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new IOException("Error while reading the configuration data", ex);
             }
         }
 
