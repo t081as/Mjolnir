@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -128,9 +129,25 @@ namespace Mjolnir.IO
             {
                 IConfiguration configuration = new DefaultConfiguration();
                 string line;
+                ulong lineNumber = 0;
 
                 while ((line = await reader.ReadLineAsync().ConfigureAwait(false)) != null)
                 {
+                    lineNumber++;
+                    line = line.Trim();
+
+                    if (line.Contains(this.commentMarker))
+                    {
+                        line = line.Substring(0, line.IndexOf(this.commentMarker, 0, StringComparison.InvariantCulture));
+                    }
+
+                    string[] parts = line.Split(new string[] { this.seperator }, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (parts.Length != 2)
+                    {
+                        throw new IOException($"Error in line {lineNumber}; expecting format: key{this.seperator}value (but got {line})");
+                    }
+
                     throw new NotImplementedException();
                 }
 
