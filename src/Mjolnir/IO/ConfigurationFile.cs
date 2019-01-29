@@ -148,7 +148,12 @@ namespace Mjolnir.IO
                         throw new IOException($"Error in line {lineNumber}; expecting format: key{this.seperator}value (but got {line})");
                     }
 
-                    throw new NotImplementedException();
+                    if (configuration.Entries.ContainsKey(parts[0]))
+                    {
+                        throw new IOException($"Error in line {lineNumber}; key {parts[0]} not unique");
+                    }
+
+                    configuration.SetValue(parts[0], parts[1]);
                 }
 
                 return configuration;
