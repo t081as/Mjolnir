@@ -136,13 +136,13 @@ namespace Mjolnir.IO
                     lineNumber++;
                     line = line.Trim();
 
+                    if (line.Contains(this.commentMarker))
+                    {
+                        line = line.Substring(0, line.IndexOf(this.commentMarker, 0, StringComparison.InvariantCulture));
+                    }
+
                     if (!string.IsNullOrEmpty(line))
                     {
-                        if (line.Contains(this.commentMarker))
-                        {
-                            line = line.Substring(0, line.IndexOf(this.commentMarker, 0, StringComparison.InvariantCulture));
-                        }
-
                         string[] parts = line.Split(new string[] { this.seperator }, StringSplitOptions.RemoveEmptyEntries);
 
                         if (parts.Length != 2)
@@ -150,12 +150,15 @@ namespace Mjolnir.IO
                             throw new IOException($"Error in line {lineNumber}; expecting format: key{this.seperator}value (but got {line})");
                         }
 
-                        if (configuration.Entries.ContainsKey(parts[0]))
+                        string key = parts[0].Trim();
+                        string value = parts[1].Trim();
+
+                        if (configuration.Entries.ContainsKey(key))
                         {
-                            throw new IOException($"Error in line {lineNumber}; key {parts[0]} not unique");
+                            throw new IOException($"Error in line {lineNumber}; key {key} not unique");
                         }
 
-                        configuration.SetValue(parts[0], parts[1]);
+                        configuration.SetValue(key, value);
                     }
                 }
 

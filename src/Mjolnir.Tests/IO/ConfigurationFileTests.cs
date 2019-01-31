@@ -56,8 +56,8 @@ namespace Mjolnir.Tests.IO
                 IConfiguration configuration = new ConfigurationFile().Read(configStream);
 
                 Assert.AreEqual("value1", configuration.GetValue("key1"));
-                Assert.AreEqual("value2", configuration.GetValue("key2"));
-                Assert.AreEqual("value3", configuration.GetValue("key3"));
+                Assert.AreEqual("value 2", configuration.GetValue("key 2"));
+                Assert.AreEqual("value 3", configuration.GetValue("key3"));
                 Assert.AreEqual("value@value", configuration.GetValue("test.test:test"));
             }
         }
