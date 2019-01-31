@@ -1,0 +1,10 @@
+# Comment 1
+
+  # # Comment 2
+
+key1=value1
+key 2 = value 2
+
+test.test:test=value@value
+
+key3 = value 3 # Comment 3

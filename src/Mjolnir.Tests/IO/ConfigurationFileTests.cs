@@ -27,6 +27,8 @@
 
 #region Namespaces
 using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.IO;
 #endregion
@@ -39,5 +41,27 @@ namespace Mjolnir.Tests.IO
     [TestClass]
     public class ConfigurationFileTests
     {
+        #region Methods
+
+        /// <summary>
+        /// Checks the <see cref="ConfigurationFile.Read(System.IO.Stream)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void ReadTest()
+        {
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTest.Default.txt");
+
+            using (Stream configStream = File.OpenRead(fileName))
+            {
+                IConfiguration configuration = new ConfigurationFile().Read(configStream);
+
+                Assert.AreEqual("value1", configuration.GetValue("key1"));
+                Assert.AreEqual("value2", configuration.GetValue("key2"));
+                Assert.AreEqual("value3", configuration.GetValue("key3"));
+                Assert.AreEqual("value@value", configuration.GetValue("test.test:test"));
+            }
+        }
+
+        #endregion
     }
 }
