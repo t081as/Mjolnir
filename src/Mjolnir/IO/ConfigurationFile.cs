@@ -116,12 +116,12 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public IConfiguration Read(Stream stream)
         {
+            Task<IConfiguration> result = null;
+
             try
             {
-                var result = this.ReadAsync(stream);
+                result = this.ReadAsync(stream);
                 Task.WaitAll(result);
-
-                return result.Result;
             }
             catch (AggregateException aex)
             {
@@ -134,9 +134,9 @@ namespace Mjolnir.IO
 
                     return false;
                 });
-
-                throw;
             }
+
+            return result?.Result;
         }
 
         /// <inheritdoc />
