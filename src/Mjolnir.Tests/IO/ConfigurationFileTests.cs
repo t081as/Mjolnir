@@ -62,6 +62,21 @@ namespace Mjolnir.Tests.IO
             }
         }
 
+        /// <summary>
+        /// Checks the <see cref="ConfigurationFile.Read(System.IO.Stream)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(IOException))]
+        public void ReadTestWringFormat()
+        {
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTest.WrongFormat.txt");
+
+            using (Stream configStream = File.OpenRead(fileName))
+            {
+                IConfiguration configuration = new ConfigurationFile().Read(configStream);
+            }
+        }
+
         #endregion
     }
 }
