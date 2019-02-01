@@ -116,10 +116,27 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public IConfiguration Read(Stream stream)
         {
-            var result = this.ReadAsync(stream);
-            Task.WaitAll(result);
+            try
+            {
+                var result = this.ReadAsync(stream);
+                Task.WaitAll(result);
 
-            return result.Result;
+                return result.Result;
+            }
+            catch (AggregateException aex)
+            {
+                aex.Handle((exception) =>
+                {
+                    if (exception is IOException)
+                    {
+                        throw exception as IOException;
+                    }
+
+                    return false;
+                });
+
+                throw;
+            }
         }
 
         /// <inheritdoc />
