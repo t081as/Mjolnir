@@ -67,9 +67,24 @@ namespace Mjolnir.Tests.IO
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(IOException))]
-        public void ReadTestWringFormat()
+        public void ReadTestWrongFormat()
         {
             string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTest.WrongFormat.txt");
+
+            using (Stream configStream = File.OpenRead(fileName))
+            {
+                IConfiguration configuration = new ConfigurationFile().Read(configStream);
+            }
+        }
+
+        /// <summary>
+        /// Checks the <see cref="ConfigurationFile.Read(System.IO.Stream)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(IOException))]
+        public void ReadTestKeyMotUnique()
+        {
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTest.KeyNotUnique.txt");
 
             using (Stream configStream = File.OpenRead(fileName))
             {

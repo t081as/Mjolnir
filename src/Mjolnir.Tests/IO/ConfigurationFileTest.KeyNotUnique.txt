@@ -1,0 +1,6 @@
+key1=value1
+
+# This is a comment
+
+# This is another comment
+key1=value2
