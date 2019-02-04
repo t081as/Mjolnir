@@ -92,6 +92,21 @@ namespace Mjolnir.Tests.IO
             }
         }
 
+        /// <summary>
+        /// Checks the <see cref="ConfigurationFile.ConfigurationFile(string, string)"/> constructor.
+        /// </summary>
+        [TestMethod]
+        public void PropertiesTest()
+        {
+            string commentMarker = ";";
+            string seperator = ":";
+
+            ConfigurationFile configurationFile = new ConfigurationFile(commentMarker, seperator);
+
+            Assert.AreEqual(commentMarker, configurationFile.CommentMarker);
+            Assert.AreEqual(seperator, configurationFile.Seperator);
+        }
+
         #endregion
     }
 }
