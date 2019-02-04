@@ -185,8 +185,23 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public void Write(IConfiguration configuration, Stream stream)
         {
-            var result = this.WriteAsync(configuration, stream);
-            Task.WaitAll(result);
+            try
+            {
+                var result = this.WriteAsync(configuration, stream);
+                Task.WaitAll(result);
+            }
+            catch (AggregateException aex)
+            {
+                aex.Handle((exception) =>
+                {
+                    if (exception is IOException)
+                    {
+                        throw exception as IOException;
+                    }
+
+                    return false;
+                });
+            }
         }
 
         /// <inheritdoc />
