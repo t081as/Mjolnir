@@ -141,45 +141,44 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public async Task<IConfiguration> ReadAsync(Stream stream)
         {
-            using (StreamReader reader = new StreamReader(stream, new UTF8Encoding(false)))
+            StreamReader reader = new StreamReader(stream, new UTF8Encoding(false));
+
+            IConfiguration configuration = new DefaultConfiguration();
+            string line;
+            ulong lineNumber = 0;
+
+            while ((line = await reader.ReadLineAsync().ConfigureAwait(false)) != null)
             {
-                IConfiguration configuration = new DefaultConfiguration();
-                string line;
-                ulong lineNumber = 0;
+                lineNumber++;
+                line = line.Trim();
 
-                while ((line = await reader.ReadLineAsync().ConfigureAwait(false)) != null)
+                if (line.Contains(this.commentMarker))
                 {
-                    lineNumber++;
-                    line = line.Trim();
-
-                    if (line.Contains(this.commentMarker))
-                    {
-                        line = line.Substring(0, line.IndexOf(this.commentMarker, 0, StringComparison.InvariantCulture));
-                    }
-
-                    if (!string.IsNullOrEmpty(line))
-                    {
-                        string[] parts = line.Split(new string[] { this.seperator }, StringSplitOptions.RemoveEmptyEntries);
-
-                        if (parts.Length != 2)
-                        {
-                            throw new IOException($"Error in line {lineNumber}; expecting format: key{this.seperator}value (but got {line})");
-                        }
-
-                        string key = parts[0].Trim();
-                        string value = parts[1].Trim();
-
-                        if (configuration.Entries.ContainsKey(key))
-                        {
-                            throw new IOException($"Error in line {lineNumber}; key {key} not unique");
-                        }
-
-                        configuration.SetValue(key, value);
-                    }
+                    line = line.Substring(0, line.IndexOf(this.commentMarker, 0, StringComparison.InvariantCulture));
                 }
 
-                return configuration;
+                if (!string.IsNullOrEmpty(line))
+                {
+                    string[] parts = line.Split(new string[] { this.seperator }, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (parts.Length != 2)
+                    {
+                        throw new IOException($"Error in line {lineNumber}; expecting format: key{this.seperator}value (but got {line})");
+                    }
+
+                    string key = parts[0].Trim();
+                    string value = parts[1].Trim();
+
+                    if (configuration.Entries.ContainsKey(key))
+                    {
+                        throw new IOException($"Error in line {lineNumber}; key {key} not unique");
+                    }
+
+                    configuration.SetValue(key, value);
+                }
             }
+
+            return configuration;
         }
 
         /// <inheritdoc />
@@ -209,23 +208,24 @@ namespace Mjolnir.IO
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(stream, new UTF8Encoding(false)))
+                StreamWriter writer = new StreamWriter(stream, new UTF8Encoding(false));
+
+                foreach (var entry in configuration.Entries)
                 {
-                    foreach (var entry in configuration.Entries)
+                    if (this.ContainsInvalidSequences(entry.Key, out string keySequence))
                     {
-                        if (this.ContainsInvalidSequences(entry.Key, out string keySequence))
-                        {
-                            throw new IOException($"Entry {entry.Key}: the key contains the following invalid sequence: {keySequence}");
-                        }
-
-                        if (this.ContainsInvalidSequences(entry.Value, out string valueSequence))
-                        {
-                            throw new IOException($"Entry {entry.Key}: the value contains the following invalid sequence: {valueSequence}");
-                        }
-
-                        await writer.WriteLineAsync($"{entry.Key}{this.seperator}{entry.Value}").ConfigureAwait(false);
+                        throw new IOException($"Entry {entry.Key}: the key contains the following invalid sequence: {keySequence}");
                     }
+
+                    if (this.ContainsInvalidSequences(entry.Value, out string valueSequence))
+                    {
+                        throw new IOException($"Entry {entry.Key}: the value contains the following invalid sequence: {valueSequence}");
+                    }
+
+                    await writer.WriteLineAsync($"{entry.Key}{this.seperator}{entry.Value}").ConfigureAwait(false);
                 }
+
+                await writer.FlushAsync().ConfigureAwait(false);
             }
             catch (IOException)
             {
