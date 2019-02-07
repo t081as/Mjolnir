@@ -129,6 +129,38 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual(configuration.GetValue("Key:2"), configurationFromStream.GetValue("Key:2"));
         }
 
+        /// <summary>
+        /// Checks the <see cref="ConfigurationFile.Write(IConfiguration, Stream)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(IOException))]
+        public void WriteTestInvalidKey()
+        {
+            ConfigurationFile configurationFile = new ConfigurationFile();
+            MemoryStream configurationStream = new MemoryStream();
+            IConfiguration configuration = ConfigurationFactory.New();
+
+            configuration.SetValue($"My first {configurationFile.CommentMarker} key", "1");
+
+            configurationFile.Write(configuration, configurationStream);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="ConfigurationFile.Write(IConfiguration, Stream)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(IOException))]
+        public void WriteTestInvalidValue()
+        {
+            ConfigurationFile configurationFile = new ConfigurationFile();
+            MemoryStream configurationStream = new MemoryStream();
+            IConfiguration configuration = ConfigurationFactory.New();
+
+            configuration.SetValue("My first key", $"Test {configurationFile.Seperator} 1");
+
+            configurationFile.Write(configuration, configurationStream);
+        }
+
         #endregion
     }
 }
