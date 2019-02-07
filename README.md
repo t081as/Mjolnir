@@ -12,6 +12,41 @@
 ---
 This is the framework library I use in (most of) my projects.
 
+## Installation
+
+### Option 0: NuGet
+NuGet packages are available [here](https://www.nuget.org/packages/Mjolnir/).
+
+### Option 1: Source
+#### Requirements
+The following tools must be available:
+
+* [.NET Core SDK](https://dotnet.microsoft.com/download)
+* [.NET 4.7.2 Dev Pack](https://dotnet.microsoft.com/download)
+* [.NET 4.7.1 Dev Pack](https://dotnet.microsoft.com/download)
+* [.NET 4.7 Dev Pack](https://dotnet.microsoft.com/download)
+* [.NET 4.6.2 Dev Pack](https://dotnet.microsoft.com/download)
+* [.NET 4.6.1 Dev Pack](https://dotnet.microsoft.com/download)
+* [.NET 4.6 Dev Pack](https://dotnet.microsoft.com/download)
+
+#### Source code
+Get the source code using the following command:
+
+    > git clone https://gitlab.com/tobiaskoch/Mjolnir.git
+
+#### Test
+    > ./build.ps1
+
+The script will report if the tests succeeded; the coverage report will be located in the directory *./src/Mjolnir.Tests/bin/Debug/Coverage/*.
+
+#### Build
+    > ./build.ps1 --configuration=Release
+
+The libraries will be located in the directory *./src/Mjolnir/bin/Release* if the build succeeds.
+
+## Usage
+The documentation of this library can be found here: [https://tobiaskoch.gitlab.io/Mjolnir/](https://tobiaskoch.gitlab.io/Mjolnir/)
+
 ## Contributing
 see [CONTRIBUTING.md](https://gitlab.com/tobiaskoch/Mjolnir/blob/master/CONTRIBUTING.md)
 

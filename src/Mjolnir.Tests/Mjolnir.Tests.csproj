@@ -30,5 +30,17 @@
   <ItemGroup>
     <ProjectReference Include="..\Mjolnir\Mjolnir.csproj" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <None Update="IO\ConfigurationFileTest.Default.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\ConfigurationFileTest.KeyNotUnique.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\ConfigurationFileTest.WrongFormat.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>
