@@ -28,6 +28,9 @@
 #region Namespaces
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Threading.Tasks;
 #endregion
 
 namespace Mjolnir.IO
@@ -35,7 +38,61 @@ namespace Mjolnir.IO
     /// <summary>
     /// Provides methods to read and write configuration files in JSON format.
     /// </summary>
-    public class JsonConfigurationFile
+    public class JsonConfigurationFile : IConfigurationReader, IConfigurationWriter
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonConfigurationFile"/> class.
+        /// </summary>
+        public JsonConfigurationFile()
+        {
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <inheritdoc />
+        public IConfiguration Read(Stream stream)
+        {
+            try
+            {
+                IConfiguration configuration = ConfigurationFactory.New();
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
+                Dictionary<string, string> configurationValues = (Dictionary<string, string>)serializer.ReadObject(stream);
+
+                foreach (var key in configurationValues.Keys)
+                {
+                    configuration.SetValue(key, configurationValues[key]);
+                }
+
+                return configuration;
+            }
+            catch (Exception ex)
+            {
+                throw new IOException("Error while reading the configuration data", ex);
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task<IConfiguration> ReadAsync(Stream stream)
+        {
+            return await Task.Run(() => this.Read(stream)).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public void Write(IConfiguration configuration, Stream stream)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public async Task WriteAsync(IConfiguration configuration, Stream stream)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
