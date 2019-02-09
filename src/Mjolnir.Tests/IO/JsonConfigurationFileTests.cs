@@ -27,7 +27,7 @@
 
 #region Namespaces
 using System.IO;
-using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.IO;
 #endregion
@@ -40,5 +40,30 @@ namespace Mjolnir.Tests.IO
     [TestClass]
     public class JsonConfigurationFileTests
     {
+        #region Methods
+
+        /// <summary>
+        /// Checks the <see cref="JsonConfigurationFile.Write(IConfiguration, Stream)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void WriteTest()
+        {
+            JsonConfigurationFile configurationFile = new JsonConfigurationFile();
+            MemoryStream configurationStream = new MemoryStream();
+            IConfiguration configuration = ConfigurationFactory.New();
+
+            configuration.SetValue("My first key", "1");
+            configuration.SetValue("Key:2", "This is a test");
+
+            configurationFile.Write(configuration, configurationStream);
+
+            configurationStream.Seek(0, SeekOrigin.Begin);
+            IConfiguration configurationFromStream = configurationFile.Read(configurationStream);
+
+            Assert.AreEqual(configuration.GetValue("My first key"), configurationFromStream.GetValue("My first key"));
+            Assert.AreEqual(configuration.GetValue("Key:2"), configurationFromStream.GetValue("Key:2"));
+        }
+
+        #endregion
     }
 }
