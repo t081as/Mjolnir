@@ -84,13 +84,28 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public void Write(IConfiguration configuration, Stream stream)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
+                Dictionary<string, string> configurationValues = new Dictionary<string, string>();
+
+                foreach (var key in configuration.Entries.Keys)
+                {
+                    configurationValues.Add(key, configuration.Entries[key]);
+                }
+
+                serializer.WriteObject(stream, configurationValues);
+            }
+            catch (Exception ex)
+            {
+                throw new IOException("Error while writing the configuration data", ex);
+            }
         }
 
         /// <inheritdoc />
         public async Task WriteAsync(IConfiguration configuration, Stream stream)
         {
-            throw new NotImplementedException();
+            await Task.Run(() => this.Write(configuration, stream)).ConfigureAwait(false);
         }
 
         #endregion
