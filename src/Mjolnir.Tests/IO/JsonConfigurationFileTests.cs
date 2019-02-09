@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.IO;
@@ -41,6 +42,23 @@ namespace Mjolnir.Tests.IO
     public class JsonConfigurationFileTests
     {
         #region Methods
+
+        /// <summary>
+        /// Checks the <see cref="JsonConfigurationFile.Read(System.IO.Stream)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void ReadTest()
+        {
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "JsonConfigurationFileTest.Default.json");
+
+            using (Stream configStream = File.OpenRead(fileName))
+            {
+                IConfiguration configuration = new JsonConfigurationFile().Read(configStream);
+
+                Assert.AreEqual("1", configuration.GetValue("My first key"));
+                Assert.AreEqual("This is a test", configuration.GetValue("Key:2"));
+            }
+        }
 
         /// <summary>
         /// Checks the <see cref="JsonConfigurationFile.Write(IConfiguration, Stream)"/> method.
