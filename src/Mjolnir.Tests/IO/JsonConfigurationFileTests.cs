@@ -85,7 +85,7 @@ namespace Mjolnir.Tests.IO
 
             using (Stream configStream = File.OpenRead(fileName))
             {
-                IConfiguration configuration = new ConfigurationFile().Read(configStream);
+                IConfiguration configuration = new JsonConfigurationFile().Read(configStream);
             }
         }
 
