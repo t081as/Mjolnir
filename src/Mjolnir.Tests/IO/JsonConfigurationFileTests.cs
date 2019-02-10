@@ -61,6 +61,21 @@ namespace Mjolnir.Tests.IO
         }
 
         /// <summary>
+        /// Checks the <see cref="JsonConfigurationFile.Read(System.IO.Stream)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(IOException))]
+        public void ReadWrongFormatTest()
+        {
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "JsonConfigurationFileTest.WrongFormat.json");
+
+            using (Stream configStream = File.OpenRead(fileName))
+            {
+                IConfiguration configuration = new JsonConfigurationFile().Read(configStream);
+            }
+        }
+
+        /// <summary>
         /// Checks the <see cref="JsonConfigurationFile.Write(IConfiguration, Stream)"/> method.
         /// </summary>
         [TestMethod]
