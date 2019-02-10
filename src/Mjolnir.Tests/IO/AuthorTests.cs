@@ -26,7 +26,9 @@
 #endregion
 
 #region Namespaces
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.IO;
@@ -48,7 +50,10 @@ namespace Mjolnir.Tests.IO
         [TestMethod]
         public void ReadTest()
         {
-            // TODO: Add test
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "AuthorTests.Default.txt");
+            IEnumerable<Author> authors = Author.From(File.Open(fileName, FileMode.Open));
+
+            Assert.AreEqual(3, authors.Count());
         }
 
         #endregion
