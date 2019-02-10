@@ -28,7 +28,6 @@
 #region Namespaces
 using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.IO;
 #endregion
@@ -65,13 +64,28 @@ namespace Mjolnir.Tests.IO
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(IOException))]
-        public void ReadWrongFormatTest()
+        public void ReadTestWrongFormat()
         {
             string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "JsonConfigurationFileTest.WrongFormat.json");
 
             using (Stream configStream = File.OpenRead(fileName))
             {
                 IConfiguration configuration = new JsonConfigurationFile().Read(configStream);
+            }
+        }
+
+        /// <summary>
+        /// Checks the <see cref="JsonConfigurationFile.Read(System.IO.Stream)"/> method.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(IOException))]
+        public void ReadTestKeyNotUnique()
+        {
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "JsonConfigurationFileTest.KeyNotUnique.json");
+
+            using (Stream configStream = File.OpenRead(fileName))
+            {
+                IConfiguration configuration = new ConfigurationFile().Read(configStream);
             }
         }
 
