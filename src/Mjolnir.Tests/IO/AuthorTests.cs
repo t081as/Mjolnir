@@ -53,7 +53,11 @@ namespace Mjolnir.Tests.IO
             string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "AuthorTests.Default.txt");
             IEnumerable<Author> authors = Author.From(File.Open(fileName, FileMode.Open));
 
-            Assert.AreEqual(3, authors.Count());
+            Assert.AreEqual(4, authors.Count());
+            Assert.AreEqual("t.koch@tk-software.de", authors.Where(a => a.Name == "Tobias Koch").FirstOrDefault().EMailAddress);
+            Assert.AreEqual("toni@test.de", authors.Where(a => a.Name == "Tony Test").FirstOrDefault().EMailAddress);
+            Assert.AreEqual("berta-beta@testmail.org", authors.Where(a => a.Name == "Berta Beta").FirstOrDefault().EMailAddress);
+            Assert.AreEqual("master@anton_alpha.de", authors.Where(a => a.Name == "Anton Alpha").FirstOrDefault().EMailAddress);
         }
 
         #endregion
