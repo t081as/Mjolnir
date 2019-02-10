@@ -2,6 +2,7 @@
 
 - FEATURE: ControlExtensions added
 - FEATURE: Configuration file serializer (text format) added
+- FEATURE: Configuration file serializer (json format) added
 
 ## 0.1.0 (2019-01-13)
 

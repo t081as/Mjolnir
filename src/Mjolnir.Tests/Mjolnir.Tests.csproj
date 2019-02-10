@@ -41,6 +41,15 @@
     <None Update="IO\ConfigurationFileTest.WrongFormat.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="IO\JSonConfigurationFileTest.Default.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\JSonConfigurationFileTest.KeyNotUnique.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\JSonConfigurationFileTest.WrongFormat.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -26,7 +26,6 @@
 #endregion
 
 #region Namespaces
-using System;
 using System.IO;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -82,7 +81,7 @@ namespace Mjolnir.Tests.IO
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(IOException))]
-        public void ReadTestKeyMotUnique()
+        public void ReadTestKeyNotUnique()
         {
             string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTest.KeyNotUnique.txt");
 
