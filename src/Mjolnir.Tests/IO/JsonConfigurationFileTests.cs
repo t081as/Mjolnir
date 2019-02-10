@@ -48,7 +48,7 @@ namespace Mjolnir.Tests.IO
         [TestMethod]
         public void ReadTest()
         {
-            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "JsonConfigurationFileTest.Default.json");
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "JsonConfigurationFileTests.Default.json");
 
             using (Stream configStream = File.OpenRead(fileName))
             {
@@ -66,7 +66,7 @@ namespace Mjolnir.Tests.IO
         [ExpectedException(typeof(IOException))]
         public void ReadTestWrongFormat()
         {
-            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "JsonConfigurationFileTest.WrongFormat.json");
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "JsonConfigurationFileTests.WrongFormat.json");
 
             using (Stream configStream = File.OpenRead(fileName))
             {
@@ -81,7 +81,7 @@ namespace Mjolnir.Tests.IO
         [ExpectedException(typeof(IOException))]
         public void ReadTestKeyNotUnique()
         {
-            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "JsonConfigurationFileTest.KeyNotUnique.json");
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "JsonConfigurationFileTests.KeyNotUnique.json");
 
             using (Stream configStream = File.OpenRead(fileName))
             {
