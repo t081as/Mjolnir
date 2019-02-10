@@ -81,7 +81,7 @@ namespace Mjolnir.IO
         #region Methods
 
         /// <summary>
-        /// Reads a list of authros from the given <paramref name="stream"/>.
+        /// Reads a list of authors from the given <paramref name="stream"/>.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> containing the author list.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> containing the authors.</returns>
@@ -113,7 +113,7 @@ namespace Mjolnir.IO
         }
 
         /// <summary>
-        /// Reads a list of authros from the given <paramref name="stream"/>.
+        /// Reads a list of authors from the given <paramref name="stream"/>.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> containing the author list.</param>
         /// <returns>
