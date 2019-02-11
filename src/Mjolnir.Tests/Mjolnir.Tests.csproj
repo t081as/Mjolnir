@@ -32,6 +32,9 @@
   </ItemGroup>
     
   <ItemGroup>
+    <None Update="IO\AuthorTests.Default.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="IO\ConfigurationFileTest.Default.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
