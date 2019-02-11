@@ -48,7 +48,7 @@ namespace Mjolnir.Tests.IO
         [TestMethod]
         public void ReadTest()
         {
-            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTest.Default.txt");
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTests.Default.txt");
 
             using (Stream configStream = File.OpenRead(fileName))
             {
@@ -68,7 +68,7 @@ namespace Mjolnir.Tests.IO
         [ExpectedException(typeof(IOException))]
         public void ReadTestWrongFormat()
         {
-            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTest.WrongFormat.txt");
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTests.WrongFormat.txt");
 
             using (Stream configStream = File.OpenRead(fileName))
             {
@@ -83,7 +83,7 @@ namespace Mjolnir.Tests.IO
         [ExpectedException(typeof(IOException))]
         public void ReadTestKeyNotUnique()
         {
-            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTest.KeyNotUnique.txt");
+            string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "ConfigurationFileTests.KeyNotUnique.txt");
 
             using (Stream configStream = File.OpenRead(fileName))
             {
