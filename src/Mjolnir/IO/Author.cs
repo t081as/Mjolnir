@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 #endregion
 
@@ -135,7 +136,12 @@ namespace Mjolnir.IO
 
                 while ((line = await reader.ReadLineAsync().ConfigureAwait(false)) != null)
                 {
-                    // TODO: Implement RegEx to read the authors
+                    var matches = Regex.Matches(line.Trim(), @"^(?<name>.+?)\<(?<mail>.+?)\>$");
+
+                    foreach (Match match in matches)
+                    {
+                        authors.Add(new Author(match.Groups["name"].Value.Trim(), match.Groups["mail"].Value.Trim()));
+                    }
                 }
 
                 return authors;
