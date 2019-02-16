@@ -15,6 +15,7 @@
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
+
 // THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,6 +38,19 @@ namespace Mjolnir.Extensions
     public static class DateTimeExtensions
     {
         #region Methods
+
+        /// <summary>
+        /// Converts the given date and time to an unix timestamp.
+        /// </summary>
+        /// <param name="dateTime">The date and time that shall be converted.</param>
+        /// <returns>A <see cref="long"/> representing an unix timestamp.</returns>
+        public static long ToUnixTimestamp(this DateTime dateTime)
+        {
+            DateTime theEpoch = new DateTime(1970, 1, 1, 0, 0, 0);
+            DateTime.SpecifyKind(theEpoch, DateTimeKind.Utc);
+
+            return (long)dateTime.Subtract(theEpoch).TotalSeconds;
+        }
 
         #endregion
     }
