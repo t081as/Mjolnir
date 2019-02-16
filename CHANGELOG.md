@@ -1,4 +1,4 @@
-## 0.2.0 (YYYY-MM-DD)
+## 0.2.0 (2019-02-16)
 
 - FEATURE: ControlExtensions added
 - FEATURE: DateTimeExtensions added
