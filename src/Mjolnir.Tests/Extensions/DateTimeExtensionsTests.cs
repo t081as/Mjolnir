@@ -41,6 +41,18 @@ namespace Mjolnir.Tests.Extensions
     {
         #region Methods
 
+        /// <summary>
+        /// Checks the <see cref="DateTimeExtensions.ToUnixTimestamp(DateTime)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void ToUnixTimestampTest()
+        {
+            DateTime reference = new DateTime(1984, 11, 27, 1, 0, 0);
+            DateTime.SpecifyKind(reference, DateTimeKind.Utc);
+
+            Assert.AreEqual(470365200, reference.ToUnixTimestamp());
+        }
+
         #endregion
     }
 }
