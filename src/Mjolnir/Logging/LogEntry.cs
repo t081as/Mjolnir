@@ -36,6 +36,34 @@ namespace Mjolnir.Logging
     /// </summary>
     public class LogEntry
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogEntry"/> class.
+        /// </summary>
+        public LogEntry()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogEntry"/> class with the given values.
+        /// </summary>
+        /// <param name="timeStamp">The timestamp of this log entry.</param>
+        /// <param name="logger">The name of the logger that recorded this entry.</param>
+        /// <param name="level">The level of this log message.</param>
+        /// <param name="thread">The name of the thread that emitted this entry.</param>
+        /// <param name="message">The log message.</param>
+        public LogEntry(DateTime timeStamp, string logger, LogLevel level, string thread, string message)
+        {
+            this.TimeStamp = timeStamp;
+            this.Logger = logger;
+            this.Level = level;
+            this.Thread = thread;
+            this.Message = message;
+        }
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -48,7 +76,7 @@ namespace Mjolnir.Logging
         /// Gets or sets the name of the logger that recorded this entry.
         /// </summary>
         /// <value>The name of the logger that recorded this entry.</value>
-        public string LoggerName { get; set; } = string.Empty;
+        public string Logger { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the level of this log message.
@@ -60,7 +88,7 @@ namespace Mjolnir.Logging
         /// Gets or sets the name of the thread that emitted this entry.
         /// </summary>
         /// <value>The name of the thread that emitted this entry.</value>
-        public string ThreadName { get; set; } = string.Empty;
+        public string Thread { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the log message.
