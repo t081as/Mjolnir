@@ -25,10 +25,6 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#region Namespaces
-using System;
-#endregion
-
 namespace Mjolnir.Logging
 {
     /// <summary>
