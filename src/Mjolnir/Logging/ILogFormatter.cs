@@ -27,32 +27,24 @@
 
 #region Namespaces
 using System;
-using System.Threading.Tasks;
 #endregion
 
 namespace Mjolnir.Logging
 {
     /// <summary>
-    /// Describes objects allowing to emit log entries to a specific sink.
+    /// Describes objects allowing to format log entries.
     /// </summary>
-    public interface ILogAppender
+    public interface ILogFormatter
     {
-        #region Method
+        #region Methods
 
         /// <summary>
-        /// Appends the given <paramref name="entry"/> to the specific sink.
+        /// Formats the given <paramref name="entry"/>.
         /// </summary>
-        /// <param name="entry">The <see cref="LogEntry"/> that shall be appended.</param>
+        /// <param name="entry">The <see cref="LogEntry"/> that shall be formatted.</param>
+        /// <returns>An array of <see cref="byte"/> containing the formatted log entry.</returns>
         /// <exception cref="ArgumentNullException"><c>entry</c> is <c>null</c>.</exception>
-        void Append(LogEntry entry);
-
-        /// <summary>
-        /// Appends the given <paramref name="entry"/> to the specific sink.
-        /// </summary>
-        /// <param name="entry">The <see cref="LogEntry"/> that shall be appended.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException"><c>entry</c> is <c>null</c>.</exception>
-        Task AppendAsync(LogEntry entry);
+        byte[] Format(LogEntry entry);
 
         #endregion
     }
