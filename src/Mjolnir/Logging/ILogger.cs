@@ -63,16 +63,37 @@ namespace Mjolnir.Logging
         void Warning(string message);
 
         /// <summary>
+        /// Emits a log entry with the given <paramref name="message"/> appending the given <paramref name="exception"/>.
+        /// </summary>
+        /// <param name="message">The message that shall be emitted.</param>
+        /// <param name="exception">The <see cref="Exception"/> that shall be appended.</param>
+        void Warning(string message, Exception exception);
+
+        /// <summary>
         /// Emits a log entry with the given <paramref name="message"/>.
         /// </summary>
         /// <param name="message">The message that shall be emitted.</param>
         void Error(string message);
 
         /// <summary>
+        /// Emits a log entry with the given <paramref name="message"/> appending the given <paramref name="exception"/>.
+        /// </summary>
+        /// <param name="message">The message that shall be emitted.</param>
+        /// <param name="exception">The <see cref="Exception"/> that shall be appended.</param>
+        void Error(string message, Exception exception);
+
+        /// <summary>
         /// Emits a log entry with the given <paramref name="message"/>.
         /// </summary>
         /// <param name="message">The message that shall be emitted.</param>
         void Fatal(string message);
+
+        /// <summary>
+        /// Emits a log entry with the given <paramref name="message"/> appending the given <paramref name="exception"/>.
+        /// </summary>
+        /// <param name="message">The message that shall be emitted.</param>
+        /// <param name="exception">The <see cref="Exception"/> that shall be appended.</param>
+        void Fatal(string message, Exception exception);
 
         /// <summary>
         /// Emits the given <paramref name="entry"/>.

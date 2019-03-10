@@ -31,3 +31,4 @@
 // a specific target and scoped to a namespace, type, member, etc.
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2225:Operator overloads have named alternates", Justification = "Value property can be accessed directly", Scope = "member", Target = "~M:Mjolnir.Synchronizable`1.op_Implicit(Mjolnir.Synchronizable`1)~`0")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "Logger interface shall contain this method", Scope = "member", Target = "~M:Mjolnir.Logging.ILogger.Error(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "Logger interface shall contain this method", Scope = "member", Target = "~M:Mjolnir.Logging.ILogger.Error(System.String,System.Exception)")]
