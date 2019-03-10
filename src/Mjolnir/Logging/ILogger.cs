@@ -39,6 +39,42 @@ namespace Mjolnir.Logging
         #region Methods
 
         /// <summary>
+        /// Emits a log entry with the given <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">The message that shall be emitted.</param>
+        void Trace(string message);
+
+        /// <summary>
+        /// Emits a log entry with the given <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">The message that shall be emitted.</param>
+        void Debug(string message);
+
+        /// <summary>
+        /// Emits a log entry with the given <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">The message that shall be emitted.</param>
+        void Info(string message);
+
+        /// <summary>
+        /// Emits a log entry with the given <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">The message that shall be emitted.</param>
+        void Warning(string message);
+
+        /// <summary>
+        /// Emits a log entry with the given <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">The message that shall be emitted.</param>
+        void Error(string message);
+
+        /// <summary>
+        /// Emits a log entry with the given <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">The message that shall be emitted.</param>
+        void Fatal(string message);
+
+        /// <summary>
         /// Emits the given <paramref name="entry"/>.
         /// </summary>
         /// <param name="entry">The entry that shall be emitted.</param>
