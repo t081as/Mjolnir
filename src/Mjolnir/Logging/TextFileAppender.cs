@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.IO;
 #endregion
 
 namespace Mjolnir.Logging
@@ -37,5 +38,31 @@ namespace Mjolnir.Logging
     /// </summary>
     public class TextFileAppender
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// The <see cref="StreamWriter"/> pointing to the log file.
+        /// </summary>
+        private StreamWriter logWriter;
+
+        /// <summary>
+        /// The implementation of the <see cref="ILogFormatter"/> that shall be used
+        /// to format the log messages.
+        /// </summary>
+        private ILogFormatter logFormatter;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Methods
+
+        #endregion
     }
 }
