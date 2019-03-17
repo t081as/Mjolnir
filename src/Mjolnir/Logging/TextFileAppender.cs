@@ -92,12 +92,22 @@ namespace Mjolnir.Logging
         /// <inheritdoc />
         public void Append(LogEntry entry)
         {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().FullName);
+            }
+
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
         public Task AppendAsync(LogEntry entry)
         {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().FullName);
+            }
+
             throw new NotImplementedException();
         }
 
