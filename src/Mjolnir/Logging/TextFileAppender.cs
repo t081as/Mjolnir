@@ -89,22 +89,13 @@ namespace Mjolnir.Logging
 
         #region Methods
 
-        /// <summary>
-        /// Appends the given <paramref name="entry"/> to the specific sink.
-        /// </summary>
-        /// <param name="entry">The <see cref="LogEntry"/> that shall be appended.</param>
-        /// <exception cref="ArgumentNullException"><c>entry</c> is <c>null</c>.</exception>
+        /// <inheritdoc />
         public void Append(LogEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Appends the given <paramref name="entry"/> to the specific sink.
-        /// </summary>
-        /// <param name="entry">The <see cref="LogEntry"/> that shall be appended.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException"><c>entry</c> is <c>null</c>.</exception>
+        /// <inheritdoc />
         public Task AppendAsync(LogEntry entry)
         {
             throw new NotImplementedException();
