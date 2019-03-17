@@ -28,15 +28,16 @@
 #region Namespaces
 using System;
 using System.IO;
+using System.Text;
 #endregion
 
 namespace Mjolnir.Logging
 {
     /// <summary>
     /// Represents an implementation of the <see cref="ILogAppender"/> interface writing
-    /// to a simple text file
+    /// to a simple text file.
     /// </summary>
-    public class TextFileAppender
+    public class TextFileAppender : IDisposable
     {
         #region Constants and Fields
 
@@ -51,9 +52,33 @@ namespace Mjolnir.Logging
         /// </summary>
         private ILogFormatter logFormatter;
 
+        /// <summary>
+        /// Indicates if the class has already been disposed.
+        /// </summary>
+        private bool disposed = false;
+
         #endregion
 
         #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TextFileAppender"/> class.
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream"/> that shall be written to.</param>
+        /// <param name="formatter">The formatter that shall be unsed to format the log entries.</param>
+        public TextFileAppender(Stream stream, ILogFormatter formatter)
+        {
+            this.logWriter = new StreamWriter(stream, new UTF8Encoding(false));
+            this.logFormatter = formatter;
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="TextFileAppender"/> class.
+        /// </summary>
+        ~TextFileAppender()
+        {
+            this.Dispose(false);
+        }
 
         #endregion
 
@@ -62,6 +87,39 @@ namespace Mjolnir.Logging
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">Indicates whether managed resources shall also be disposed.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    try
+                    {
+                        this.logWriter.Dispose();
+                    }
+                    catch
+                    {
+                        // The Dispose method must never throw exceptions
+                    }
+                }
+
+                this.disposed = true;
+            }
+        }
 
         #endregion
     }
