@@ -29,6 +29,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 #endregion
 
 namespace Mjolnir.Logging
@@ -37,7 +38,7 @@ namespace Mjolnir.Logging
     /// Represents an implementation of the <see cref="ILogAppender"/> interface writing
     /// to a simple text file.
     /// </summary>
-    public class TextFileAppender : IDisposable
+    public class TextFileAppender : IDisposable, ILogAppender
     {
         #region Constants and Fields
 
@@ -87,6 +88,27 @@ namespace Mjolnir.Logging
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Appends the given <paramref name="entry"/> to the specific sink.
+        /// </summary>
+        /// <param name="entry">The <see cref="LogEntry"/> that shall be appended.</param>
+        /// <exception cref="ArgumentNullException"><c>entry</c> is <c>null</c>.</exception>
+        public void Append(LogEntry entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Appends the given <paramref name="entry"/> to the specific sink.
+        /// </summary>
+        /// <param name="entry">The <see cref="LogEntry"/> that shall be appended.</param>
+        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException"><c>entry</c> is <c>null</c>.</exception>
+        public Task AppendAsync(LogEntry entry)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
