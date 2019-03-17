@@ -2,11 +2,6 @@
 
 # ᛗᛁᚮᛚᚾᛁᚱ
 
-[![pipeline status](https://gitlab.com/tobiaskoch/Mjolnir/badges/master/pipeline.svg)](https://gitlab.com/tobiaskoch/Mjolnir/commits/master)
-[![coverage report](https://gitlab.com/tobiaskoch/Mjolnir/badges/master/coverage.svg)](https://gitlab.com/tobiaskoch/Mjolnir/commits/master)
-[![maintained: yes](https://tobiaskoch.gitlab.io/badges/maintained-yes.svg)](https://gitlab.com/tobiaskoch/Mjolnir/commits/master)
-[![donate: paypal](https://tobiaskoch.gitlab.io/badges/donate-paypal.svg)](https://www.tk-software.de/donate)
-
 *One of the most fearsome and powerful tools in existence, capable of leveling mountains*
 
 ---
