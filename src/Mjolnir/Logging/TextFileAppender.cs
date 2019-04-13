@@ -43,9 +43,14 @@ namespace Mjolnir.Logging
         #region Constants and Fields
 
         /// <summary>
-        /// The <see cref="StreamWriter"/> pointing to the log file.
+        /// The <see cref="Stream"/> used for logging.
         /// </summary>
-        private StreamWriter logWriter;
+        private Stream logStream;
+
+        /// <summary>
+        /// The synchonization lock object for the <see cref="logStream"/>.
+        /// </summary>
+        private object logStreamLock = new object();
 
         /// <summary>
         /// The implementation of the <see cref="ILogFormatter"/> that shall be used
@@ -69,7 +74,7 @@ namespace Mjolnir.Logging
         /// <param name="formatter">The formatter that shall be unsed to format the log entries.</param>
         public TextFileAppender(Stream stream, ILogFormatter formatter)
         {
-            this.logWriter = new StreamWriter(stream, new UTF8Encoding(false));
+            this.logStream = stream;
             this.logFormatter = formatter;
         }
 
@@ -97,7 +102,12 @@ namespace Mjolnir.Logging
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
 
-            throw new NotImplementedException();
+            byte[] formattedEntry = this.logFormatter.Format(entry);
+
+            lock (this.logStreamLock)
+            {
+                this.logStream.Write(formattedEntry, 0, formattedEntry.Length);
+            }
         }
 
         /// <inheritdoc />
@@ -108,7 +118,12 @@ namespace Mjolnir.Logging
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
 
-            throw new NotImplementedException();
+            byte[] formattedEntry = this.logFormatter.Format(entry);
+
+            lock (this.logStreamLock)
+            {
+                return this.logStream.WriteAsync(formattedEntry, 0, formattedEntry.Length);
+            }
         }
 
         /// <summary>
@@ -132,7 +147,7 @@ namespace Mjolnir.Logging
                 {
                     try
                     {
-                        this.logWriter.Dispose();
+                        this.logStream.Dispose();
                     }
                     catch
                     {
