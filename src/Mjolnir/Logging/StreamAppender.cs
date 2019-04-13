@@ -36,9 +36,9 @@ namespace Mjolnir.Logging
 {
     /// <summary>
     /// Represents an implementation of the <see cref="ILogAppender"/> interface writing
-    /// to a simple text file.
+    /// to a <see cref="Stream"/>.
     /// </summary>
-    public class TextFileAppender : IDisposable, ILogAppender
+    public class StreamAppender : IDisposable, ILogAppender
     {
         #region Constants and Fields
 
@@ -68,20 +68,20 @@ namespace Mjolnir.Logging
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TextFileAppender"/> class.
+        /// Initializes a new instance of the <see cref="StreamAppender"/> class.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> that shall be written to.</param>
         /// <param name="formatter">The formatter that shall be unsed to format the log entries.</param>
-        public TextFileAppender(Stream stream, ILogFormatter formatter)
+        public StreamAppender(Stream stream, ILogFormatter formatter)
         {
             this.logStream = stream;
             this.logFormatter = formatter;
         }
 
         /// <summary>
-        /// Finalizes an instance of the <see cref="TextFileAppender"/> class.
+        /// Finalizes an instance of the <see cref="StreamAppender"/> class.
         /// </summary>
-        ~TextFileAppender()
+        ~StreamAppender()
         {
             this.Dispose(false);
         }
