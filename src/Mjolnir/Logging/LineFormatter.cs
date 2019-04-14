@@ -27,7 +27,7 @@
 
 #region Namespaces
 using System;
-using System.IO;
+using System.Globalization;
 using System.Text;
 #endregion
 
@@ -77,6 +77,31 @@ namespace Mjolnir.Logging
             if (entry == null)
             {
                 throw new ArgumentNullException(nameof(entry));
+            }
+
+            StringBuilder logMessageBuilder = new StringBuilder();
+            StringBuilder exceptionBuilder = new StringBuilder();
+            StringBuilder logLineBuilder = new StringBuilder();
+
+            logMessageBuilder.Append(entry.Message ?? string.Empty);
+
+            if (entry.Exception != null)
+            {
+                Exception currentException = entry.Exception;
+
+                while (currentException != null)
+                {
+                    exceptionBuilder.AppendLine($"{currentException.GetType().ToString()}: {currentException.Message}");
+                    exceptionBuilder.AppendLine(currentException.StackTrace);
+                    currentException = currentException.InnerException;
+                }
+
+                logMessageBuilder.AppendLine(exceptionBuilder.ToString());
+            }
+
+            foreach (string line in logMessageBuilder.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+            {
+                logLineBuilder.Append(entry.TimeStamp.ToString("yyyy-MM-dd HH:mm:ss.ffff", CultureInfo.InvariantCulture));
             }
 
             throw new NotImplementedException();
