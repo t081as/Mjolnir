@@ -96,6 +96,12 @@ namespace Mjolnir.Logging
         /// <value>The log message.</value>
         public string Message { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the <see cref="Exception"/> associated with this entry.
+        /// </summary>
+        /// <value>The <see cref="Exception"/> associated with this entry.</value>
+        public Exception Exception { get; set; } = null;
+
         #endregion
     }
 }
