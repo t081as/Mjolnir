@@ -46,14 +46,6 @@ namespace Mjolnir.Logging
         /// <exception cref="ArgumentNullException"><c>entry</c> is <c>null</c>.</exception>
         void Append(LogEntry entry);
 
-        /// <summary>
-        /// Appends the given <paramref name="entry"/> to the specific sink.
-        /// </summary>
-        /// <param name="entry">The <see cref="LogEntry"/> that shall be appended.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
-        /// <exception cref="ArgumentNullException"><c>entry</c> is <c>null</c>.</exception>
-        Task AppendAsync(LogEntry entry);
-
         #endregion
     }
 }

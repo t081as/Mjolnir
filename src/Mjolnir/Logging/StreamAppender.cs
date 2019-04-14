@@ -105,22 +105,6 @@ namespace Mjolnir.Logging
             }
         }
 
-        /// <inheritdoc />
-        public Task AppendAsync(LogEntry entry)
-        {
-            if (this.disposed)
-            {
-                throw new ObjectDisposedException(this.GetType().FullName);
-            }
-
-            byte[] formattedEntry = this.logFormatter.Format(entry);
-
-            lock (this.logStreamLock)
-            {
-                return this.logStream.WriteAsync(formattedEntry, 0, formattedEntry.Length);
-            }
-        }
-
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
