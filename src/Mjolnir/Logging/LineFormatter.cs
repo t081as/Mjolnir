@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.Text;
 #endregion
 
 namespace Mjolnir.Logging
@@ -37,5 +38,38 @@ namespace Mjolnir.Logging
     /// </summary>
     public class LineFormatter
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// The encoding used for writing the entries.
+        /// </summary>
+        private Encoding encoding;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LineFormatter"/> class.
+        /// </summary>
+        public LineFormatter()
+            : this(new UTF8Encoding(false))
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LineFormatter"/> class with the given encoding.
+        /// </summary>
+        /// <param name="encoding">The encoding used for writing the entries.</param>
+        public LineFormatter(Encoding encoding)
+        {
+            this.encoding = encoding;
+        }
+
+        #endregion
+
+        #region Methods
+
+        #endregion
     }
 }
