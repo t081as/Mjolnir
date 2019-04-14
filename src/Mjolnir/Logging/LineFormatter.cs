@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.IO;
 using System.Text;
 #endregion
 
@@ -36,7 +37,7 @@ namespace Mjolnir.Logging
     /// Represents an implementation of the <see cref="ILogFormatter"/> interface writing
     /// log entries to single lines.
     /// </summary>
-    public class LineFormatter
+    public class LineFormatter : ILogFormatter
     {
         #region Constants and Fields
 
@@ -69,6 +70,17 @@ namespace Mjolnir.Logging
         #endregion
 
         #region Methods
+
+        /// <inheritdoc />
+        public byte[] Format(LogEntry entry)
+        {
+            if (entry == null)
+            {
+                throw new ArgumentNullException(nameof(entry));
+            }
+
+            throw new NotImplementedException();
+        }
 
         #endregion
     }
