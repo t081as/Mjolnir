@@ -29,6 +29,7 @@
 using System;
 using System.Globalization;
 using System.Text;
+using Mjolnir.Extensions;
 #endregion
 
 namespace Mjolnir.Logging
@@ -83,6 +84,7 @@ namespace Mjolnir.Logging
             StringBuilder exceptionBuilder = new StringBuilder();
             StringBuilder logLineBuilder = new StringBuilder();
 
+            logMessageBuilder.Append($"{entry.Logger}: ");
             logMessageBuilder.Append(entry.Message ?? string.Empty);
 
             if (entry.Exception != null)
@@ -101,10 +103,69 @@ namespace Mjolnir.Logging
 
             foreach (string line in logMessageBuilder.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
             {
+                // Date and time
                 logLineBuilder.Append(entry.TimeStamp.ToString("yyyy-MM-dd HH:mm:ss.ffff", CultureInfo.InvariantCulture));
+                logLineBuilder.Append(' '.Repeat(2));
+
+                // Severity
+                switch (entry.Level)
+                {
+                    case LogLevel.Trace:
+                        logLineBuilder.Append("TRACE");
+                        break;
+
+                    case LogLevel.Debug:
+                        logLineBuilder.Append("DEBUG");
+                        break;
+
+                    case LogLevel.Info:
+                        logLineBuilder.Append("INFO ");
+                        break;
+
+                    case LogLevel.Warning:
+                        logLineBuilder.Append("WARN ");
+                        break;
+
+                    case LogLevel.Error:
+                        logLineBuilder.Append("ERROR");
+                        break;
+
+                    case LogLevel.Fatal:
+                        logLineBuilder.Append("FATAL");
+                        break;
+
+                    default:
+                        throw new NotImplementedException();
+                }
+
+                logLineBuilder.Append(' '.Repeat(2));
+
+                // Thread
+                string threadName = entry.Thread;
+
+                if (string.IsNullOrEmpty(threadName))
+                {
+                    threadName = "UNKN";
+                }
+
+                if (threadName.Length > 4)
+                {
+                    threadName = threadName.Substring(0, 4);
+                }
+                else if (threadName.Length < 4)
+                {
+                    threadName += ' '.Repeat(4 - threadName.Length);
+                }
+
+                logLineBuilder.Append(threadName);
+                logLineBuilder.Append(' '.Repeat(2));
+
+                // Message
+                logLineBuilder.Append(' '.Repeat(2));
+                logLineBuilder.Append(line);
             }
 
-            throw new NotImplementedException();
+            return this.encoding.GetBytes(logLineBuilder.ToString());
         }
 
         #endregion
