@@ -50,11 +50,12 @@ namespace Mjolnir.Tests.Logging
             byte[] data = new byte[] { 1, 2, 3 };
             MemoryStream memory = new MemoryStream();
             ILogFormatter formatter = new LogFormatterMock(data);
-            StreamAppender appender = new StreamAppender(memory, formatter);
+            using (StreamAppender appender = new StreamAppender(memory, formatter))
+            {
+                appender.Append(new LogEntry());
 
-            appender.Append(new LogEntry());
-
-            CollectionAssert.AreEqual(data, memory.ToArray());
+                CollectionAssert.AreEqual(data, memory.ToArray());
+            }
         }
 
         #endregion
