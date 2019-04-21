@@ -26,6 +26,7 @@
 #endregion
 
 #region Namespaces
+using System;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.Logging;
@@ -55,6 +56,22 @@ namespace Mjolnir.Tests.Logging
                 appender.Append(new LogEntry());
 
                 CollectionAssert.AreEqual(data, memory.ToArray());
+            }
+        }
+
+        /// <summary>
+        /// Checks the <see cref="StreamAppender.Append(LogEntry)"/> method using
+        /// an empty reference (null).
+        /// </summary>
+        [TestMethod]
+        public void AppendNullTest()
+        {
+            byte[] data = new byte[] { 1, 2, 3 };
+            MemoryStream memory = new MemoryStream();
+            ILogFormatter formatter = new LogFormatterMock(data);
+            using (StreamAppender appender = new StreamAppender(memory, formatter))
+            {
+                Assert.ThrowsException<ArgumentNullException>(() => appender.Append(null));
             }
         }
 

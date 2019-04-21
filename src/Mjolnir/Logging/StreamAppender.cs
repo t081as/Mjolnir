@@ -96,6 +96,11 @@ namespace Mjolnir.Logging
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
 
+            if (entry == null)
+            {
+                throw new ArgumentNullException(nameof(entry));
+            }
+
             byte[] formattedEntry = this.logFormatter.Format(entry);
 
             lock (this.logStreamLock)
