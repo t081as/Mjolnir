@@ -28,7 +28,6 @@
 #region Namespaces
 using System;
 using System.IO;
-using System.Threading.Tasks;
 #endregion
 
 namespace Mjolnir.Logging
