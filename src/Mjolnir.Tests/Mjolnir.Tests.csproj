@@ -72,5 +72,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+    
+  <ItemGroup>
+    <None Include="..\Mjolnir.ruleset" Link="Mjolnir.ruleset" />
+  </ItemGroup>
 
 </Project>
