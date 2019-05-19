@@ -114,6 +114,45 @@ namespace Mjolnir.Tests.Logging
         }
 
         /// <summary>
+        /// Checks if the <see cref="LineFormatter.Format(LogEntry)"/> method can handle an empty message.
+        /// </summary>
+        [TestMethod]
+        public void FormatMessageNullTest()
+        {
+            LineFormatter formatter = new LineFormatter();
+            LogEntry entry = new LogEntry();
+            entry.Message = null;
+
+            byte[] unusedResult = formatter.Format(entry);
+        }
+
+        /// <summary>
+        /// Checks if the <see cref="LineFormatter.Format(LogEntry)"/> method can handle an empty thread name.
+        /// </summary>
+        [TestMethod]
+        public void FormatThreadNullTest()
+        {
+            LineFormatter formatter = new LineFormatter();
+            LogEntry entry = new LogEntry();
+            entry.Thread = null;
+
+            byte[] unusedResult = formatter.Format(entry);
+        }
+
+        /// <summary>
+        /// Checks if the <see cref="LineFormatter.Format(LogEntry)"/> method can handle an entry without exception.
+        /// </summary>
+        [TestMethod]
+        public void FormatExceptionNullTest()
+        {
+            LineFormatter formatter = new LineFormatter();
+            LogEntry entry = new LogEntry();
+            entry.Exception = null;
+
+            byte[] unusedResult = formatter.Format(entry);
+        }
+
+        /// <summary>
         /// Formats a test log entry with the given <paramref name="level"/>.
         /// </summary>
         /// <param name="level">The desired log level.</param>
