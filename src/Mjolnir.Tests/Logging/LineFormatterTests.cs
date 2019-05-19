@@ -44,13 +44,63 @@ namespace Mjolnir.Tests.Logging
         #region Methods
 
         /// <summary>
-        /// Checks the <see cref="LineFormatter.Format(LogEntry)"/> method.
+        /// Checks the <see cref="LineFormatter.Format(LogEntry)"/> method using the log level <c>Trace</c>.
         /// </summary>
         [TestMethod]
         public void FormatTraceTest()
         {
             string formattedText = FormatTest(LogLevel.Trace);
             StringAssert.Contains(formattedText, "TRACE");
+        }
+
+        /// <summary>
+        /// Checks the <see cref="LineFormatter.Format(LogEntry)"/> method using the log level <c>Debug</c>.
+        /// </summary>
+        [TestMethod]
+        public void FormatDebugTest()
+        {
+            string formattedText = FormatTest(LogLevel.Debug);
+            StringAssert.Contains(formattedText, "DEBUG");
+        }
+
+        /// <summary>
+        /// Checks the <see cref="LineFormatter.Format(LogEntry)"/> method using the log level <c>Info</c>.
+        /// </summary>
+        [TestMethod]
+        public void FormatInfoTest()
+        {
+            string formattedText = FormatTest(LogLevel.Info);
+            StringAssert.Contains(formattedText, "INFO");
+        }
+
+        /// <summary>
+        /// Checks the <see cref="LineFormatter.Format(LogEntry)"/> method using the log level <c>Warning</c>.
+        /// </summary>
+        [TestMethod]
+        public void FormatWarningTest()
+        {
+            string formattedText = FormatTest(LogLevel.Warning);
+            StringAssert.Contains(formattedText, "WARN");
+        }
+
+        /// <summary>
+        /// Checks the <see cref="LineFormatter.Format(LogEntry)"/> method using the log level <c>Error</c>.
+        /// </summary>
+        [TestMethod]
+        public void FormatErrorTest()
+        {
+            string formattedText = FormatTest(LogLevel.Error);
+            StringAssert.Contains(formattedText, "ERROR");
+        }
+
+        /// <summary>
+        /// Checks the <see cref="LineFormatter.Format(LogEntry)"/> method using the log level <c>Fatal</c>.
+        /// </summary>
+        [TestMethod]
+        public void FormatFatalTest()
+        {
+            string formattedText = FormatTest(LogLevel.Fatal);
+            StringAssert.Contains(formattedText, "FATAL");
         }
 
         /// <summary>
