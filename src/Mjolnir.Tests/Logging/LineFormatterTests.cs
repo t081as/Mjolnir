@@ -28,6 +28,7 @@
 #region Namespaces
 using System;
 using System.IO;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.Logging;
 #endregion
@@ -37,9 +38,50 @@ namespace Mjolnir.Tests.Logging
     /// <summary>
     /// Contains unit tests for the <see cref="LineFormatter"/> class.
     /// </summary>
+    [TestClass]
     public class LineFormatterTests
     {
         #region Methods
+
+        /// <summary>
+        /// Checks the <see cref="LineFormatter.Format(LogEntry)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void FormatTraceTest()
+        {
+            string formattedText = FormatTest(LogLevel.Trace);
+            StringAssert.Contains(formattedText, "TRACE");
+        }
+
+        /// <summary>
+        /// Formats a test log entry with the given <paramref name="level"/>.
+        /// </summary>
+        /// <param name="level">The desired log level.</param>
+        /// <returns>A <see cref="string"/> containing the formatted log message.</returns>
+        private static string FormatTest(LogLevel level)
+        {
+            ApplicationException e1 = new ApplicationException("ApplicationException-Message");
+            Exception e2 = new Exception("Exception-Message", e1);
+
+            LogEntry entry = new LogEntry();
+            entry.Level = level;
+            entry.Thread = "TH1";
+            entry.Logger = "Mjolnir.Tests.Logging.LineFormatterTests";
+            entry.Message = "This is a simple test message\nwith a line break";
+            entry.Exception = e2;
+
+            LineFormatter formatter = new LineFormatter();
+            string formattedText = new UTF8Encoding(false).GetString(formatter.Format(entry));
+
+            StringAssert.Contains(formattedText, "TH1");
+            StringAssert.Contains(formattedText, "Mjolnir.Tests.Logging.LineFormatterTests");
+            StringAssert.Contains(formattedText, "This is a simple test message");
+            StringAssert.Contains(formattedText, "with a line break");
+            StringAssert.Contains(formattedText, "Exception-Message");
+            StringAssert.Contains(formattedText, "ApplicationException-Message");
+
+            return formattedText;
+        }
 
         #endregion
     }
