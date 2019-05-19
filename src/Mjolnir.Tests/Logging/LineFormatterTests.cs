@@ -104,6 +104,16 @@ namespace Mjolnir.Tests.Logging
         }
 
         /// <summary>
+        /// Checks the <see cref="LineFormatter.Format(LogEntry)"/> method using an empty reference.
+        /// </summary>
+        [TestMethod]
+        public void FormatNullTest()
+        {
+            LineFormatter formatter = new LineFormatter();
+            Assert.ThrowsException<ArgumentNullException>(() => formatter.Format(null));
+        }
+
+        /// <summary>
         /// Formats a test log entry with the given <paramref name="level"/>.
         /// </summary>
         /// <param name="level">The desired log level.</param>
