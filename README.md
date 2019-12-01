@@ -20,9 +20,6 @@ The following tools must be available:
 * [.NET 4.7.2 Dev Pack](https://dotnet.microsoft.com/download)
 * [.NET 4.7.1 Dev Pack](https://dotnet.microsoft.com/download)
 * [.NET 4.7 Dev Pack](https://dotnet.microsoft.com/download)
-* [.NET 4.6.2 Dev Pack](https://dotnet.microsoft.com/download)
-* [.NET 4.6.1 Dev Pack](https://dotnet.microsoft.com/download)
-* [.NET 4.6 Dev Pack](https://dotnet.microsoft.com/download)
 
 #### Source code
 Get the source code using the following command:
