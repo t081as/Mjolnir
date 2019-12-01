@@ -29,6 +29,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.Logging;
+using Moq;
 #endregion
 
 namespace Mjolnir.Tests.Logging
@@ -40,6 +41,25 @@ namespace Mjolnir.Tests.Logging
     public class LoggerTests
     {
         #region Methods
+
+        /// <summary>
+        /// Checks the <see cref="Logger.Trace(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void TraceTest()
+        {
+            LogEntry lastEntry = null;
+            var logWriterMock = new Mock<ILogEntryWriter>();
+            logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
+                .Callback((LogEntry e) => lastEntry = e);
+
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            logger.Trace("Test");
+
+            Assert.IsNotNull(lastEntry);
+            Assert.AreEqual(LogLevel.Trace, lastEntry.Level);
+            Assert.AreEqual("Test", lastEntry.Message);
+        }
 
         #endregion
     }

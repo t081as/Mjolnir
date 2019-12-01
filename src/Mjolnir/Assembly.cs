@@ -30,3 +30,4 @@ using System.Runtime.CompilerServices;
 #endregion
 
 [assembly: InternalsVisibleTo("Mjolnir.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")] // Moq library
