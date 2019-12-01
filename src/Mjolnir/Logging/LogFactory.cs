@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.Collections.Generic;
 #endregion
 
 namespace Mjolnir.Logging
@@ -34,21 +35,80 @@ namespace Mjolnir.Logging
     /// <summary>
     /// Produces instances of <see cref="ILogger"/> classes.
     /// </summary>
-    public static class LogFactory
+    public class LogFactory : ILogFactory
     {
         #region Constants and Fields
+
+        /// <summary>
+        /// The configured log appenders.
+        /// </summary>
+        private Synchronizable<IEnumerable<ILogAppender>> appenders;
+
+        /// <summary>
+        /// The list of produced loggers.
+        /// </summary>
+        private Synchronizable<Dictionary<string, ILogger>> loggers;
 
         #endregion
 
         #region Constructors and Destructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogFactory"/> class with the given log <paramref name="appenders"/>.
+        /// </summary>
+        /// <param name="appenders">The configured log appenders.</param>
+        public LogFactory(IEnumerable<ILogAppender> appenders)
+        {
+            this.loggers = new Synchronizable<Dictionary<string, ILogger>>(new Dictionary<string, ILogger>());
+            this.appenders = new Synchronizable<IEnumerable<ILogAppender>>(appenders);
+        }
+
         #endregion
 
         #region Properties
 
+        /// <inheritdoc />
+        public IEnumerable<ILogAppender> Appenders
+        {
+            get
+            {
+                lock (this.appenders.SyncRoot)
+                {
+                    return this.appenders.Value;
+                }
+            }
+        }
+
         #endregion
 
         #region Methods
+
+        /// <inheritdoc />
+        public ILogger GetLogger<T>()
+        {
+            return this.GetLogger(typeof(T));
+        }
+
+        /// <inheritdoc />
+        public ILogger GetLogger(Type type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            string typeName = type.FullName;
+
+            lock (this.loggers.SyncRoot)
+            {
+                if (!this.loggers.Value.ContainsKey(typeName))
+                {
+                    this.loggers.Value.Add(typeName, null);
+                }
+
+                return this.loggers.Value[typeName];
+            }
+        }
 
         #endregion
     }
