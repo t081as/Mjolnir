@@ -30,6 +30,7 @@ using System;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.Logging;
+using Moq;
 #endregion
 
 namespace Mjolnir.Tests.Logging
@@ -50,8 +51,11 @@ namespace Mjolnir.Tests.Logging
         {
             byte[] data = new byte[] { 1, 2, 3 };
             MemoryStream memory = new MemoryStream();
-            ILogFormatter formatter = new LogFormatterMock(data);
-            using (StreamAppender appender = new StreamAppender(memory, formatter))
+
+            var formatterMock = new Mock<ILogFormatter>();
+            formatterMock.Setup(f => f.Format(It.IsAny<LogEntry>())).Returns(data);
+
+            using (StreamAppender appender = new StreamAppender(memory, formatterMock.Object))
             {
                 appender.Append(new LogEntry());
 
@@ -68,8 +72,11 @@ namespace Mjolnir.Tests.Logging
         {
             byte[] data = new byte[] { 1, 2, 3 };
             MemoryStream memory = new MemoryStream();
-            ILogFormatter formatter = new LogFormatterMock(data);
-            using (StreamAppender appender = new StreamAppender(memory, formatter))
+
+            var formatterMock = new Mock<ILogFormatter>();
+            formatterMock.Setup(f => f.Format(It.IsAny<LogEntry>())).Returns(data);
+
+            using (StreamAppender appender = new StreamAppender(memory, formatterMock.Object))
             {
                 Assert.ThrowsException<ArgumentNullException>(() => appender.Append(null));
             }
