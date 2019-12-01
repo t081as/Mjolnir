@@ -28,6 +28,7 @@
 #region Namespaces
 using System;
 using System.Collections.Generic;
+using System.Threading;
 #endregion
 
 namespace Mjolnir.Logging
@@ -54,6 +55,11 @@ namespace Mjolnir.Logging
         /// </summary>
         private Synchronizable<Queue<LogEntry>> entries;
 
+        /// <summary>
+        /// The <see cref="Thread"/> used to write the log entries to the <see cref="appenders"/>.
+        /// </summary>
+        private Thread logEntryWriterThread;
+
         #endregion
 
         #region Constructors and Destructors
@@ -67,6 +73,11 @@ namespace Mjolnir.Logging
             this.loggers = new Synchronizable<Dictionary<string, ILogger>>(new Dictionary<string, ILogger>());
             this.entries = new Synchronizable<Queue<LogEntry>>(new Queue<LogEntry>());
             this.appenders = new Synchronizable<IEnumerable<ILogAppender>>(appenders);
+
+            this.logEntryWriterThread = new Thread(new ThreadStart(this.LogWriterThread));
+            this.logEntryWriterThread.Name = "Logging";
+            this.logEntryWriterThread.IsBackground = true;
+            this.logEntryWriterThread.Start();
         }
 
         #endregion
@@ -125,6 +136,56 @@ namespace Mjolnir.Logging
                 {
                     this.entries.Value.Enqueue(entry);
                 }
+
+                this.logEntryWriterThread.Interrupt();
+            }
+        }
+
+        /// <summary>
+        /// Executed in a background thread to write the log <see cref="entries"/> to the <see cref="appenders"/>.
+        /// </summary>
+        private void LogWriterThread()
+        {
+            try
+            {
+                while (true)
+                {
+                    LogEntry currentEntry = null;
+
+                    lock (this.entries.SyncRoot)
+                    {
+                        if (this.entries.Value.Count > 0)
+                        {
+                            currentEntry = this.entries.Value.Dequeue();
+                        }
+                    }
+
+                    if (currentEntry != null)
+                    {
+                        lock (this.appenders.SyncRoot)
+                        {
+                            foreach (var appender in this.appenders.Value)
+                            {
+                                try
+                                {
+                                    appender.Append(currentEntry);
+                                }
+                                catch
+                                {
+                                    // Ignore exceptions
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Thread.CurrentThread.Join();
+                    }
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                Thread.ResetAbort();
             }
         }
 
