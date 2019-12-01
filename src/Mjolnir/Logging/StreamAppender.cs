@@ -111,11 +111,14 @@ namespace Mjolnir.Logging
                 throw new ArgumentNullException(nameof(entry));
             }
 
-            byte[] formattedEntry = this.logFormatter.Format(entry);
-
-            lock (this.logStreamLock)
+            if (entry.Level >= this.MinLevel && entry.Level <= this.MaxLevel)
             {
-                this.logStream.Write(formattedEntry, 0, formattedEntry.Length);
+                byte[] formattedEntry = this.logFormatter.Format(entry);
+
+                lock (this.logStreamLock)
+                {
+                    this.logStream.Write(formattedEntry, 0, formattedEntry.Length);
+                }
             }
         }
 
