@@ -26,18 +26,7 @@
 #endregion
 
 #region Namespaces
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mjolnir.Logging;
+using System.Runtime.CompilerServices;
 #endregion
 
-namespace Mjolnir.Tests.Logging
-{
-    /// <summary>
-    /// Contains unit tests for the <see cref="LogFactory"/> class.
-    /// </summary>
-    [TestClass]
-    public class LogFactoryTests
-    {
-    }
-}
+[assembly: InternalsVisibleTo("Mjolnir.Tests")]
