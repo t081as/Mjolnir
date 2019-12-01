@@ -86,6 +86,16 @@ namespace Mjolnir.Logging
 
         #endregion
 
+        #region Properties
+
+        /// <inheritdoc />
+        public LogLevel MinLevel { get; set; } = LogLevel.Trace;
+
+        /// <inheritdoc />
+        public LogLevel MaxLevel { get; set; } = LogLevel.Fatal;
+
+        #endregion
+
         #region Methods
 
         /// <inheritdoc />

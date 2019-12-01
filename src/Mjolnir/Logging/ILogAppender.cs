@@ -37,6 +37,22 @@ namespace Mjolnir.Logging
     /// </summary>
     public interface ILogAppender
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the minimum log level processed by this log appender.
+        /// </summary>
+        /// <value>The minimum log level processed by this log appender.</value>
+        LogLevel MinLevel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum log level processed by this log appender.
+        /// </summary>
+        /// <value>The maximum log level processed by this log appender.</value>
+        LogLevel MaxLevel { get; set; }
+
+        #endregion
+
         #region Method
 
         /// <summary>
