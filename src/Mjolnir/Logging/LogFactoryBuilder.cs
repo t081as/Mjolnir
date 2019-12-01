@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.Collections.Generic;
 #endregion
 
 namespace Mjolnir.Logging
@@ -36,5 +37,59 @@ namespace Mjolnir.Logging
     /// </summary>
     public class LogFactoryBuilder
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// The log appenders used to produce an instance of the <see cref="ILogFactory"/> class.
+        /// </summary>
+        private List<ILogAppender> appenders;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogFactoryBuilder"/> class.
+        /// </summary>
+        private LogFactoryBuilder()
+        {
+            this.appenders = new List<ILogAppender>();
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogFactoryBuilder"/> class.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="LogFactoryBuilder"/> class.</returns>
+        public static LogFactoryBuilder New()
+        {
+            return new LogFactoryBuilder();
+        }
+
+        /// <summary>
+        /// Adds the given log <paramref name="appender"/>.
+        /// </summary>
+        /// <param name="appender">An instance of the <see cref="ILogAppender"/> interface.</param>
+        /// <returns>The current <see cref="LogFactoryBuilder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><c>appender</c> is <c>null</c>.</exception>
+        public LogFactoryBuilder WithAppender(ILogAppender appender)
+        {
+            this.appenders.Add(appender);
+            return this;
+        }
+
+        /// <summary>
+        /// Produces an instance of the <see cref="ILogFactory"/> class.
+        /// </summary>
+        /// <returns>An instance of the <see cref="ILogFactory"/> class.</returns>
+        public ILogFactory Build()
+        {
+            return new LogFactory(this.appenders);
+        }
+
+        #endregion
     }
 }
