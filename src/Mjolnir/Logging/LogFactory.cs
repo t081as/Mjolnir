@@ -35,7 +35,7 @@ namespace Mjolnir.Logging
     /// <summary>
     /// Produces instances of <see cref="ILogger"/> classes.
     /// </summary>
-    public class LogFactory : ILogFactory
+    internal class LogFactory : ILogFactory, ILogEntryWriter
     {
         #region Constants and Fields
 
@@ -49,6 +49,11 @@ namespace Mjolnir.Logging
         /// </summary>
         private Synchronizable<Dictionary<string, ILogger>> loggers;
 
+        /// <summary>
+        /// The list of log entries that shall be written to all appenders.
+        /// </summary>
+        private Synchronizable<Queue<LogEntry>> entries;
+
         #endregion
 
         #region Constructors and Destructors
@@ -60,6 +65,7 @@ namespace Mjolnir.Logging
         public LogFactory(IEnumerable<ILogAppender> appenders)
         {
             this.loggers = new Synchronizable<Dictionary<string, ILogger>>(new Dictionary<string, ILogger>());
+            this.entries = new Synchronizable<Queue<LogEntry>>(new Queue<LogEntry>());
             this.appenders = new Synchronizable<IEnumerable<ILogAppender>>(appenders);
         }
 
@@ -107,6 +113,18 @@ namespace Mjolnir.Logging
                 }
 
                 return this.loggers.Value[typeName];
+            }
+        }
+
+        /// <inheritdoc />
+        public void Write(LogEntry entry)
+        {
+            if (entry != null)
+            {
+                lock (this.entries.SyncRoot)
+                {
+                    this.entries.Value.Enqueue(entry);
+                }
             }
         }
 
