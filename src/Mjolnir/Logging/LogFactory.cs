@@ -139,7 +139,7 @@ namespace Mjolnir.Logging
             {
                 if (!this.loggers.Value.ContainsKey(typeName))
                 {
-                    this.loggers.Value.Add(typeName, null);
+                    this.loggers.Value.Add(typeName, new Logger(this, typeName));
                 }
 
                 return this.loggers.Value[typeName];

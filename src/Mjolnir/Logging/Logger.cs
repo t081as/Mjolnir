@@ -27,6 +27,7 @@
 
 #region Namespaces
 using System;
+using System.Threading;
 #endregion
 
 namespace Mjolnir.Logging
@@ -34,7 +35,171 @@ namespace Mjolnir.Logging
     /// <summary>
     /// The default implementation of the <see cref="ILogger"/> interface.
     /// </summary>
-    public class Logger
+    internal class Logger : ILogger
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// The reference to the log entry writer.
+        /// </summary>
+        private ILogEntryWriter writer;
+
+        /// <summary>
+        /// The name of the type this logger is used for.
+        /// </summary>
+        private string typeName;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Logger"/> class.
+        /// </summary>
+        /// <param name="writer">The reference to the log entry writer.</param>
+        /// <param name="typeName">The name of the type this logger is used for.</param>
+        public Logger(ILogEntryWriter writer, string typeName)
+        {
+            this.writer = writer;
+            this.typeName = typeName;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <inheritdoc />
+        public void Trace(string message)
+        {
+            this.Log(new LogEntry
+            {
+                TimeStamp = DateTime.UtcNow,
+                Thread = Thread.CurrentThread.Name,
+                Level = LogLevel.Trace,
+                Logger = this.typeName,
+                Message = message,
+                Exception = null,
+            });
+        }
+
+        /// <inheritdoc />
+        public void Debug(string message)
+        {
+            this.Log(new LogEntry
+            {
+                TimeStamp = DateTime.UtcNow,
+                Thread = Thread.CurrentThread.Name,
+                Level = LogLevel.Debug,
+                Logger = this.typeName,
+                Message = message,
+                Exception = null,
+            });
+        }
+
+        /// <inheritdoc />
+        public void Info(string message)
+        {
+            this.Log(new LogEntry
+            {
+                TimeStamp = DateTime.UtcNow,
+                Thread = Thread.CurrentThread.Name,
+                Level = LogLevel.Info,
+                Logger = this.typeName,
+                Message = message,
+                Exception = null,
+            });
+        }
+
+        /// <inheritdoc />
+        public void Warning(string message)
+        {
+            this.Log(new LogEntry
+            {
+                TimeStamp = DateTime.UtcNow,
+                Thread = Thread.CurrentThread.Name,
+                Level = LogLevel.Warning,
+                Logger = this.typeName,
+                Message = message,
+                Exception = null,
+            });
+        }
+
+        /// <inheritdoc />
+        public void Warning(string message, Exception exception)
+        {
+            this.Log(new LogEntry
+            {
+                TimeStamp = DateTime.UtcNow,
+                Thread = Thread.CurrentThread.Name,
+                Level = LogLevel.Warning,
+                Logger = this.typeName,
+                Message = message,
+                Exception = exception,
+            });
+        }
+
+        /// <inheritdoc />
+        public void Error(string message)
+        {
+            this.Log(new LogEntry
+            {
+                TimeStamp = DateTime.UtcNow,
+                Thread = Thread.CurrentThread.Name,
+                Level = LogLevel.Error,
+                Logger = this.typeName,
+                Message = message,
+                Exception = null,
+            });
+        }
+
+        /// <inheritdoc />
+        public void Error(string message, Exception exception)
+        {
+            this.Log(new LogEntry
+            {
+                TimeStamp = DateTime.UtcNow,
+                Thread = Thread.CurrentThread.Name,
+                Level = LogLevel.Error,
+                Logger = this.typeName,
+                Message = message,
+                Exception = exception,
+            });
+        }
+
+        /// <inheritdoc />
+        public void Fatal(string message)
+        {
+            this.Log(new LogEntry
+            {
+                TimeStamp = DateTime.UtcNow,
+                Thread = Thread.CurrentThread.Name,
+                Level = LogLevel.Fatal,
+                Logger = this.typeName,
+                Message = message,
+                Exception = null,
+            });
+        }
+
+        /// <inheritdoc />
+        public void Fatal(string message, Exception exception)
+        {
+            this.Log(new LogEntry
+            {
+                TimeStamp = DateTime.UtcNow,
+                Thread = Thread.CurrentThread.Name,
+                Level = LogLevel.Fatal,
+                Logger = this.typeName,
+                Message = message,
+                Exception = exception,
+            });
+        }
+
+        /// <inheritdoc />
+        public void Log(LogEntry entry)
+        {
+            this.writer.Write(entry);
+        }
+
+        #endregion
     }
 }
