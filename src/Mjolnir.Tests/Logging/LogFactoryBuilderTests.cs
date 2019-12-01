@@ -27,8 +27,10 @@
 
 #region Namespaces
 using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.Logging;
+using Moq;
 #endregion
 
 namespace Mjolnir.Tests.Logging
@@ -39,5 +41,23 @@ namespace Mjolnir.Tests.Logging
     [TestClass]
     public class LogFactoryBuilderTests
     {
+        #region Methods
+
+        /// <summary>
+        /// Checks the <see cref="LogFactoryBuilder.Build"/> method.
+        /// </summary>
+        [TestMethod]
+        public void TestBuild()
+        {
+            var appenderMock = new Mock<ILogAppender>();
+            var logFactory = LogFactoryBuilder
+                                .New()
+                                .WithAppender(appenderMock.Object)
+                                .Build();
+
+            Assert.AreEqual(1, logFactory.Appenders.Count());
+        }
+
+        #endregion
     }
 }
