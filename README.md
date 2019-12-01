@@ -16,7 +16,7 @@ NuGet packages are available [here](https://www.nuget.org/packages/Mjolnir/).
 #### Requirements
 The following tools must be available:
 
-* [.NET Core SDK](https://dotnet.microsoft.com/download)
+* [.NET Core SDK 3.0](https://dotnet.microsoft.com/download)
 * [.NET 4.7.2 Dev Pack](https://dotnet.microsoft.com/download)
 * [.NET 4.7.1 Dev Pack](https://dotnet.microsoft.com/download)
 * [.NET 4.7 Dev Pack](https://dotnet.microsoft.com/download)
