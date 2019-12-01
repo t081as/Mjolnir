@@ -36,7 +36,7 @@ namespace Mjolnir.Logging
     /// <summary>
     /// Produces instances of <see cref="ILogger"/> classes.
     /// </summary>
-    internal class LogFactory : ILogFactory, ILogEntryWriter
+    internal class LogFactory : ILogFactory, ILogEntryWriter, IDisposable
     {
         #region Constants and Fields
 
@@ -65,6 +65,11 @@ namespace Mjolnir.Logging
         /// </summary>
         private ManualResetEvent logThreadresetEvent;
 
+        /// <summary>
+        /// Indicates if the class has already been disposed.
+        /// </summary>
+        private bool disposed = false;
+
         #endregion
 
         #region Constructors and Destructors
@@ -84,6 +89,14 @@ namespace Mjolnir.Logging
             this.logEntryWriterThread.Name = "Logging";
             this.logEntryWriterThread.IsBackground = true;
             this.logEntryWriterThread.Start();
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="LogFactory"/> class.
+        /// </summary>
+        ~LogFactory()
+        {
+            this.Dispose(false);
         }
 
         #endregion
@@ -144,6 +157,49 @@ namespace Mjolnir.Logging
                 }
 
                 this.logThreadresetEvent.Set();
+            }
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">Indicates whether managed resources shall also be disposed.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    try
+                    {
+                        if (this.logThreadresetEvent != null)
+                        {
+                            this.logThreadresetEvent.Dispose();
+                            this.logThreadresetEvent = null;
+                        }
+
+                        if (this.logEntryWriterThread != null)
+                        {
+                            this.logEntryWriterThread.Abort();
+                            this.logEntryWriterThread = null;
+                        }
+                    }
+                    catch
+                    {
+                        // The Dispose method must never throw exceptions
+                    }
+                }
+
+                this.disposed = true;
             }
         }
 
