@@ -27,8 +27,10 @@
 
 #region Namespaces
 using System;
+using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.Logging;
+using Moq;
 #endregion
 
 namespace Mjolnir.Tests.Logging
@@ -39,5 +41,38 @@ namespace Mjolnir.Tests.Logging
     [TestClass]
     public class LogFactoryTests
     {
+        #region Methods
+
+        /// <summary>
+        /// Checks the <see cref="LogFactory.GetLogger{T}"/> method.
+        /// </summary>
+        [TestMethod]
+        public void GetLoggerTest()
+        {
+            LogEntry lastWrittenEntry = null;
+            LogEntry testEntry = new LogEntry(DateTime.UtcNow, this.GetType().FullName, LogLevel.Info, "TEST", "This is a test!");
+
+            var appenderMock = new Mock<ILogAppender>();
+            appenderMock.Setup(a => a.Append(It.IsAny<LogEntry>()))
+                .Callback((LogEntry e) => lastWrittenEntry = e);
+
+            using (LogFactory logFactory = new LogFactory(new ILogAppender[] { appenderMock.Object }))
+            {
+                Thread.Sleep(150);
+                var logger = logFactory.GetLogger<LogFactoryTests>();
+                logger.Log(testEntry);
+                Thread.Sleep(150);
+
+                var nextLogger = logFactory.GetLogger<LogFactoryTests>();
+            }
+
+            Assert.AreEqual(testEntry.TimeStamp, lastWrittenEntry.TimeStamp);
+            Assert.AreEqual(testEntry.Logger, lastWrittenEntry.Logger);
+            Assert.AreEqual(testEntry.Level, lastWrittenEntry.Level);
+            Assert.AreEqual(testEntry.Thread, lastWrittenEntry.Thread);
+            Assert.AreEqual(testEntry.Message, lastWrittenEntry.Message);
+        }
+
+        #endregion
     }
 }

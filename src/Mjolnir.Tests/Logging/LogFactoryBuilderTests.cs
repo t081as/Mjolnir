@@ -47,7 +47,7 @@ namespace Mjolnir.Tests.Logging
         /// Checks the <see cref="LogFactoryBuilder.Build"/> method.
         /// </summary>
         [TestMethod]
-        public void TestBuild()
+        public void BuildTest()
         {
             var appenderMock = new Mock<ILogAppender>();
             var logFactory = LogFactoryBuilder
