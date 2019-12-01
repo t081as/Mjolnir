@@ -60,6 +60,11 @@ namespace Mjolnir.Logging
         /// </summary>
         private Thread logEntryWriterThread;
 
+        /// <summary>
+        /// The reset event used to trigger the <see cref="logEntryWriterThread"/>.
+        /// </summary>
+        private ManualResetEvent logThreadresetEvent;
+
         #endregion
 
         #region Constructors and Destructors
@@ -74,6 +79,7 @@ namespace Mjolnir.Logging
             this.entries = new Synchronizable<Queue<LogEntry>>(new Queue<LogEntry>());
             this.appenders = new Synchronizable<IEnumerable<ILogAppender>>(appenders);
 
+            this.logThreadresetEvent = new ManualResetEvent(false);
             this.logEntryWriterThread = new Thread(new ThreadStart(this.LogWriterThread));
             this.logEntryWriterThread.Name = "Logging";
             this.logEntryWriterThread.IsBackground = true;
@@ -137,7 +143,7 @@ namespace Mjolnir.Logging
                     this.entries.Value.Enqueue(entry);
                 }
 
-                this.logEntryWriterThread.Interrupt();
+                this.logThreadresetEvent.Set();
             }
         }
 
@@ -176,10 +182,12 @@ namespace Mjolnir.Logging
                                 }
                             }
                         }
+
+                        this.logThreadresetEvent.Reset();
                     }
                     else
                     {
-                        Thread.CurrentThread.Join();
+                        this.logThreadresetEvent.WaitOne();
                     }
                 }
             }
