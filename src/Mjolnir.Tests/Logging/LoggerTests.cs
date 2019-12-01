@@ -61,6 +61,161 @@ namespace Mjolnir.Tests.Logging
             Assert.AreEqual("Test", lastEntry.Message);
         }
 
+        /// <summary>
+        /// Checks the <see cref="Logger.Debug(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void DebugTest()
+        {
+            LogEntry lastEntry = null;
+            var logWriterMock = new Mock<ILogEntryWriter>();
+            logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
+                .Callback((LogEntry e) => lastEntry = e);
+
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            logger.Debug("Test");
+
+            Assert.IsNotNull(lastEntry);
+            Assert.AreEqual(LogLevel.Debug, lastEntry.Level);
+            Assert.AreEqual("Test", lastEntry.Message);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="Logger.Info(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void InfoTest()
+        {
+            LogEntry lastEntry = null;
+            var logWriterMock = new Mock<ILogEntryWriter>();
+            logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
+                .Callback((LogEntry e) => lastEntry = e);
+
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            logger.Info("Test");
+
+            Assert.IsNotNull(lastEntry);
+            Assert.AreEqual(LogLevel.Info, lastEntry.Level);
+            Assert.AreEqual("Test", lastEntry.Message);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="Logger.Warning(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void WarningTest()
+        {
+            LogEntry lastEntry = null;
+            var logWriterMock = new Mock<ILogEntryWriter>();
+            logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
+                .Callback((LogEntry e) => lastEntry = e);
+
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            logger.Warning("Test");
+
+            Assert.IsNotNull(lastEntry);
+            Assert.AreEqual(LogLevel.Warning, lastEntry.Level);
+            Assert.AreEqual("Test", lastEntry.Message);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="Logger.Warning(string, Exception)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void WarningExceptionTest()
+        {
+            LogEntry lastEntry = null;
+            var logWriterMock = new Mock<ILogEntryWriter>();
+            logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
+                .Callback((LogEntry e) => lastEntry = e);
+
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            logger.Warning("Test", new Exception());
+
+            Assert.IsNotNull(lastEntry);
+            Assert.IsNotNull(lastEntry.Exception);
+            Assert.AreEqual(LogLevel.Warning, lastEntry.Level);
+            Assert.AreEqual("Test", lastEntry.Message);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="Logger.Error(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void ErrorTest()
+        {
+            LogEntry lastEntry = null;
+            var logWriterMock = new Mock<ILogEntryWriter>();
+            logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
+                .Callback((LogEntry e) => lastEntry = e);
+
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            logger.Error("Test");
+
+            Assert.IsNotNull(lastEntry);
+            Assert.AreEqual(LogLevel.Error, lastEntry.Level);
+            Assert.AreEqual("Test", lastEntry.Message);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="Logger.Error(string, Exception)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void ErrorExceptionTest()
+        {
+            LogEntry lastEntry = null;
+            var logWriterMock = new Mock<ILogEntryWriter>();
+            logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
+                .Callback((LogEntry e) => lastEntry = e);
+
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            logger.Error("Test", new Exception());
+
+            Assert.IsNotNull(lastEntry);
+            Assert.IsNotNull(lastEntry.Exception);
+            Assert.AreEqual(LogLevel.Error, lastEntry.Level);
+            Assert.AreEqual("Test", lastEntry.Message);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="Logger.Fatal(string)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void FatalTest()
+        {
+            LogEntry lastEntry = null;
+            var logWriterMock = new Mock<ILogEntryWriter>();
+            logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
+                .Callback((LogEntry e) => lastEntry = e);
+
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            logger.Fatal("Test");
+
+            Assert.IsNotNull(lastEntry);
+            Assert.AreEqual(LogLevel.Fatal, lastEntry.Level);
+            Assert.AreEqual("Test", lastEntry.Message);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="Logger.Fatal(string, Exception)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void FatalExceptionTest()
+        {
+            LogEntry lastEntry = null;
+            var logWriterMock = new Mock<ILogEntryWriter>();
+            logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
+                .Callback((LogEntry e) => lastEntry = e);
+
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            logger.Fatal("Test", new Exception());
+
+            Assert.IsNotNull(lastEntry);
+            Assert.IsNotNull(lastEntry.Exception);
+            Assert.AreEqual(LogLevel.Fatal, lastEntry.Level);
+            Assert.AreEqual("Test", lastEntry.Message);
+        }
+
         #endregion
     }
 }
