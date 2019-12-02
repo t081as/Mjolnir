@@ -1,7 +1,7 @@
 <Project>
 
   <ItemGroup>
-    <None Include="..\Mjolnir.ruleset" Link="Mjolnir.ruleset" />
+    <None Include="..\..\Mjolnir.ruleset" Link="Mjolnir.ruleset" />
     <None Include="..\..\LICENSE.md" Pack="true" PackagePath="" />
     <None Include="..\..\README.md" Pack="true" PackagePath="" />
     <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath="" />

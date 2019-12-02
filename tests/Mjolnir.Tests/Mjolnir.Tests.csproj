@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <CodeAnalysisRuleSet>..\Mjolnir.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\Mjolnir.ruleset</CodeAnalysisRuleSet>
     <NoWarn>1701;1702;1705;NU1701</NoWarn>
     <WarningsAsErrors />
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Mjolnir.Tests.xml</DocumentationFile>
@@ -29,7 +29,7 @@
   </ItemGroup>
     
   <ItemGroup>
-    <ProjectReference Include="..\Mjolnir\Mjolnir.csproj" />
+    <ProjectReference Include="..\..\src\Mjolnir\Mjolnir.csproj" />
   </ItemGroup>
     
   <ItemGroup>
@@ -75,7 +75,7 @@
   </ItemGroup>
     
   <ItemGroup>
-    <None Include="..\Mjolnir.ruleset" Link="Mjolnir.ruleset" />
+    <None Include="..\..\Mjolnir.ruleset" Link="Mjolnir.ruleset" />
   </ItemGroup>
 
 </Project>

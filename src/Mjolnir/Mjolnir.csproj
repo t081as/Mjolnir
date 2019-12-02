@@ -6,7 +6,7 @@
 
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <CodeAnalysisRuleSet>..\Mjolnir.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\Mjolnir.ruleset</CodeAnalysisRuleSet>
     <WarningsAsErrors />
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Mjolnir.xml</DocumentationFile>
   </PropertyGroup>

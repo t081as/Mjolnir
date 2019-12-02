@@ -93,12 +93,12 @@ Task("test")
     {
         CollectCoverage = true,
         CoverletOutputFormat = CoverletOutputFormat.opencover,
-        CoverletOutputDirectory = Directory(@"./src/Mjolnir.Tests/bin/Debug/"),
+        CoverletOutputDirectory = Directory(@"./tests/Mjolnir.Tests/bin/Debug/"),
         CoverletOutputName = $"coverage"
     };
 
-    DotNetCoreTest("./src/Mjolnir.Tests/Mjolnir.Tests.csproj", testSettings, coverletSettings);
-    ReportGenerator("./src/Mjolnir.Tests/bin/Debug/coverage*.*", "./src/Mjolnir.Tests/bin/Debug/coverage/");
+    DotNetCoreTest("./tests/Mjolnir.Tests/Mjolnir.Tests.csproj", testSettings, coverletSettings);
+    ReportGenerator("./tests/Mjolnir.Tests/bin/Debug/coverage*.*", "./tests/Mjolnir.Tests/bin/Debug/coverage/");
 });
 
 Task("pack")
