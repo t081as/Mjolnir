@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net472;net471;net47</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\Mjolnir.ruleset</CodeAnalysisRuleSet>
     <WarningsAsErrors />
@@ -11,22 +10,6 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>None</DebugType>
     <DebugSymbols>false</DebugSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-	  <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net472'">
-	  <DefineConstants>$(DefineConstants);NETFULL</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net471' ">
-	  <DefineConstants>$(DefineConstants);NETFULL</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net47' ">
-	  <DefineConstants>$(DefineConstants);NETFULL</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
@@ -40,13 +23,6 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'net47'">
     <Reference Include="System.Windows.Forms.dll" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\Mjolnir.ruleset" Link="Mjolnir.ruleset" />
-    <None Include="..\..\LICENSE.md" Pack="true" PackagePath="" />
-    <None Include="..\..\README.md" Pack="true" PackagePath="" />
-    <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath="" />
-  </ItemGroup>
     
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.0">
@@ -59,5 +35,7 @@
   
   <Import Project="..\AssemblyInfo.props" />
   <Import Project="..\Version.props" />
+  <Import Project="..\TargetFrameworks.props" />
+  <Import Project="..\Files.props" />
 
 </Project>
