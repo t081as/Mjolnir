@@ -1,3 +1,8 @@
+## 0.3.0 (YYYY-MM-DD)
+
+- FEATURE: Logging added
+- FEATURE: CharExtensions added
+
 ## 0.2.0 (2019-02-16)
 
 - FEATURE: ControlExtensions added

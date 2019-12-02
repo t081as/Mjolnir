@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
-MinimumVisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mjolnir", "src\Mjolnir\Mjolnir.csproj", "{34A32B9D-0751-4D5F-99C6-1858E9690FF6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mjolnir.Tests", "src\Mjolnir.Tests\Mjolnir.Tests.csproj", "{A6F137D2-F37B-491F-8890-B00F1E10B2D9}"

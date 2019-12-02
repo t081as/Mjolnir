@@ -1,4 +1,4 @@
-#region MIT License
+﻿#region MIT License
 // The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
@@ -25,8 +25,25 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-// This file is used by Code Analysis to maintain SuppressMessage
-// attributes that are applied to this project.
-// Project-level suppressions either have no target or are given
-// a specific target and scoped to a namespace, type, member, etc.
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2225:Operator overloads have named alternates", Justification = "Value property can be accessed directly", Scope = "member", Target = "~M:Mjolnir.Synchronizable`1.op_Implicit(Mjolnir.Synchronizable`1)~`0")]
+#region Namespaces
+using System;
+#endregion
+
+namespace Mjolnir.Logging
+{
+    /// <summary>
+    /// Describes objects able to write log entries.
+    /// </summary>
+    internal interface ILogEntryWriter
+    {
+        #region Methods
+
+        /// <summary>
+        /// Writes the given <paramref name="entry"/>.
+        /// </summary>
+        /// <param name="entry">The <see cref="LogEntry"/> that shall be appended.</param>
+        void Write(LogEntry entry);
+
+        #endregion
+    }
+}
