@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net48;net472;net471;net47</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net48;net472;net471</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
@@ -21,10 +21,6 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net471' ">
-	  <DefineConstants>$(DefineConstants);NETFULL</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net47' ">
 	  <DefineConstants>$(DefineConstants);NETFULL</DefineConstants>
   </PropertyGroup>
   

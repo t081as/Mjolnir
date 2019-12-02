@@ -27,10 +27,6 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'net471'">
     <Reference Include="System.Windows.Forms.dll" />
   </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net47'">
-    <Reference Include="System.Windows.Forms.dll" />
-  </ItemGroup>
     
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.0">
