@@ -1,7 +1,6 @@
 <Project>
 
   <PropertyGroup>
-    <PackageId>Mjolnir</PackageId>
     <Authors>Tobias Koch</Authors>
     <Company>Tobias Koch</Company>
     <Product>Mjolnir</Product>

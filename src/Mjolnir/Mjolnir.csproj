@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>Mjolnir</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\Mjolnir.ruleset</CodeAnalysisRuleSet>
     <WarningsAsErrors />
