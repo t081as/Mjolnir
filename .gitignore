@@ -214,6 +214,10 @@ ModelManifest.xml
 # StyleCop
 StyleCop.Cache
 
+# vs code
+.vscode/
+!.vscode/extensions.json
+
 # Persistent cache (gitlab ci)
 .cache/
 

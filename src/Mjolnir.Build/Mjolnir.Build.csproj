@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Mjolnir</PackageId>
+    <PackageId>Mjolnir.Build</PackageId>
     <TargetFrameworks>netcoreapp3.0;netstandard2.1;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
@@ -9,7 +9,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\..\Mjolnir.ruleset</CodeAnalysisRuleSet>
     <WarningsAsErrors />
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Mjolnir.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Mjolnir.Build.xml</DocumentationFile>
   </PropertyGroup>
   
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

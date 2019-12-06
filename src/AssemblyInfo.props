@@ -11,7 +11,7 @@
     <RepositoryUrl>https://gitlab.com/tobiaskoch/Mjolnir.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageIconUrl>https://gitlab.com/tobiaskoch/Mjolnir/raw/master/img/Mjolnir.png</PackageIconUrl>
+    <PackageIcon>Mjolnir.png</PackageIcon>
     <PackageTags>framework library core</PackageTags>
   </PropertyGroup>
   

@@ -1,6 +1,6 @@
 Authors ordered by first contribution.
 
-Tobias Koch <t.koch@tk-software.de>
+Tobias Koch <tobias@test.com>
 Tony Test <toni@test.de>
 Berta Beta <berta-beta@testmail.org>
 

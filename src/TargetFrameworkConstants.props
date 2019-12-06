@@ -1,0 +1,15 @@
+<Project>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
+	  <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.1'">
+	  <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+	  <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+  
+</Project>

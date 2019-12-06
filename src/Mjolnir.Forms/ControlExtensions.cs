@@ -1,7 +1,7 @@
 ﻿#region MIT License
 // The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2019 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -24,8 +24,6 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
-
-#if NETFULL
 
 #region Namespaces
 using System.Reflection;
@@ -61,5 +59,3 @@ namespace Mjolnir.Extensions
         #endregion
     }
 }
-
-#endif
