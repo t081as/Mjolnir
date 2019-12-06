@@ -97,29 +97,6 @@ namespace Mjolnir.Tests.Logging
         }
 
         /// <summary>
-        /// Checks the <see cref="LineFormatter.Format(LogEntry)"/> method using an empty reference.
-        /// </summary>
-        [TestMethod]
-        public void FormatNullTest()
-        {
-            LineFormatter formatter = new LineFormatter();
-            Assert.ThrowsException<ArgumentNullException>(() => formatter.Format(null));
-        }
-
-        /// <summary>
-        /// Checks if the <see cref="LineFormatter.Format(LogEntry)"/> method can handle an empty message.
-        /// </summary>
-        [TestMethod]
-        public void FormatMessageNullTest()
-        {
-            LineFormatter formatter = new LineFormatter();
-            LogEntry entry = new LogEntry();
-            entry.Message = null;
-
-            byte[] unusedResult = formatter.Format(entry);
-        }
-
-        /// <summary>
         /// Checks if the <see cref="LineFormatter.Format(LogEntry)"/> method can handle an empty thread name.
         /// </summary>
         [TestMethod]

@@ -47,7 +47,7 @@ namespace Mjolnir.Logging
         /// <param name="level">The level of this log message.</param>
         /// <param name="thread">The name of the thread that emitted this entry.</param>
         /// <param name="message">The log message.</param>
-        public LogEntry(DateTime timeStamp, string logger, LogLevel level, string thread, string message)
+        public LogEntry(DateTime timeStamp, string logger, LogLevel level, string? thread, string message)
         {
             this.TimeStamp = timeStamp;
             this.Logger = logger;
@@ -78,7 +78,7 @@ namespace Mjolnir.Logging
         /// Gets or sets the name of the thread that emitted this entry.
         /// </summary>
         /// <value>The name of the thread that emitted this entry.</value>
-        public string Thread { get; set; } = string.Empty;
+        public string? Thread { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the log message.
@@ -90,6 +90,6 @@ namespace Mjolnir.Logging
         /// Gets or sets the <see cref="Exception"/> associated with this entry.
         /// </summary>
         /// <value>The <see cref="Exception"/> associated with this entry.</value>
-        public Exception Exception { get; set; } = null;
+        public Exception? Exception { get; set; } = null;
     }
 }

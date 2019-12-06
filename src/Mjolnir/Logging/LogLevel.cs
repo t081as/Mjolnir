@@ -58,6 +58,6 @@ namespace Mjolnir.Logging
         /// <summary>
         /// Fatal log level.
         /// </summary>
-        Fatal = 60
+        Fatal = 60,
     }
 }

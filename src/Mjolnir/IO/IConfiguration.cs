@@ -44,8 +44,6 @@ namespace Mjolnir.IO
         /// </summary>
         /// <param name="key">The key that shall be used to store the value.</param>
         /// <param name="value">The value that shall be stored.</param>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
-        /// <exception cref="ArgumentNullException"><c>value</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         void SetValue(string key, string value);
 
@@ -54,7 +52,6 @@ namespace Mjolnir.IO
         /// </summary>
         /// <param name="key">The key that shall be used to retrieve the value.</param>
         /// <returns>The value associated with the given key.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         /// <exception cref="ArgumentException"><c>key</c> does not contain a value.</exception>
         string GetValue(string key);
@@ -66,7 +63,6 @@ namespace Mjolnir.IO
         /// <param name="key">The key that shall be used to retrieve the value.</param>
         /// <param name="defaultValue">The value that shall be returned if there is no stored value for the given key.</param>
         /// <returns>The value associated with the given key or the default value.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         string GetValue(string key, string defaultValue);
 
@@ -76,7 +72,6 @@ namespace Mjolnir.IO
         /// <typeparam name="T">The <see cref="Type"/> of the value.</typeparam>
         /// <param name="key">The key that shall be used to retrieve the value.</param>
         /// <returns>The value associated with the given key.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         /// <exception cref="ArgumentException"><c>key</c> does not contain a value.</exception>
         T GetValue<T>(string key);
@@ -89,7 +84,6 @@ namespace Mjolnir.IO
         /// <param name="key">The key that shall be used to retrieve the value.</param>
         /// <param name="defaultValue">The value that shall be returned if there is no stored value for the given key.</param>
         /// <returns>The value associated with the given key or the default value.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         T GetValue<T>(string key, T defaultValue);
 

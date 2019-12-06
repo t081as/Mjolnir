@@ -56,24 +56,5 @@ namespace Mjolnir.Tests.Logging
                 CollectionAssert.AreEqual(data, memory.ToArray());
             }
         }
-
-        /// <summary>
-        /// Checks the <see cref="StreamAppender.Append(LogEntry)"/> method using
-        /// an empty reference (null).
-        /// </summary>
-        [TestMethod]
-        public void AppendNullTest()
-        {
-            byte[] data = new byte[] { 1, 2, 3 };
-            MemoryStream memory = new MemoryStream();
-
-            var formatterMock = new Mock<ILogFormatter>();
-            formatterMock.Setup(f => f.Format(It.IsAny<LogEntry>())).Returns(data);
-
-            using (StreamAppender appender = new StreamAppender(memory, formatterMock.Object))
-            {
-                Assert.ThrowsException<ArgumentNullException>(() => appender.Append(null));
-            }
-        }
     }
 }

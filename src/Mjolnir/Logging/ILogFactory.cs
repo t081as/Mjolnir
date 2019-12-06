@@ -51,7 +51,6 @@ namespace Mjolnir.Logging
         /// </summary>
         /// <param name="type">The type the logger shall be produced for.</param>
         /// <returns>An instances of an <see cref="ILogger"/> class.</returns>
-        /// <exception cref="ArgumentNullException"><c>type</c> is <c>null</c>.</exception>
         ILogger GetLogger(Type type);
     }
 }

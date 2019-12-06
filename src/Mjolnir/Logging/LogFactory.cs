@@ -110,12 +110,7 @@ namespace Mjolnir.Logging
         /// <inheritdoc />
         public ILogger GetLogger(Type type)
         {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            string typeName = type.FullName;
+            string typeName = type.FullName ?? string.Empty;
 
             lock (this.loggers.SyncRoot)
             {

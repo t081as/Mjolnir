@@ -79,12 +79,7 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public void SetValue(string key, string value)
         {
-            this.CheckKeyNullOrEmpty(key);
-
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            this.CheckKeyEmpty(key);
 
             lock (this.configurationValues.SyncRoot)
             {
@@ -102,7 +97,7 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public string GetValue(string key)
         {
-            this.CheckKeyNullOrEmpty(key);
+            this.CheckKeyEmpty(key);
 
             lock (this.configurationValues.SyncRoot)
             {
@@ -118,7 +113,7 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public string GetValue(string key, string defaultValue)
         {
-            this.CheckKeyNullOrEmpty(key);
+            this.CheckKeyEmpty(key);
 
             try
             {
@@ -133,14 +128,14 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public T GetValue<T>(string key)
         {
-            this.CheckKeyNullOrEmpty(key);
+            this.CheckKeyEmpty(key);
             return (T)Convert.ChangeType(this.GetValue(key), typeof(T), CultureInfo.InvariantCulture);
         }
 
         /// <inheritdoc />
         public T GetValue<T>(string key, T defaultValue)
         {
-            this.CheckKeyNullOrEmpty(key);
+            this.CheckKeyEmpty(key);
 
             try
             {
@@ -155,7 +150,7 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public bool TryGetValue<T>(string key, out T value)
         {
-            this.CheckKeyNullOrEmpty(key);
+            this.CheckKeyEmpty(key);
 
             try
             {
@@ -173,15 +168,9 @@ namespace Mjolnir.IO
         /// Checks the <paramref name="key"/> parameter.
         /// </summary>
         /// <param name="key">The key that shall be checked.</param>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
-        protected virtual void CheckKeyNullOrEmpty(string key)
+        protected virtual void CheckKeyEmpty(string key)
         {
-            if (key is null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentException("The key must not be empty", nameof(key));

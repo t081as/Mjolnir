@@ -39,8 +39,6 @@ namespace Mjolnir.IO
         /// </summary>
         /// <param name="configuration">The configuration data that shall be written.</param>
         /// <param name="stream">The <see cref="Stream"/> the configuration data shall be written to.</param>
-        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while writing the data.</exception>
         void Write(IConfiguration configuration, Stream stream);
 
@@ -49,8 +47,6 @@ namespace Mjolnir.IO
         /// </summary>
         /// <param name="configuration">The configuration data that shall be written.</param>
         /// <param name="stream">The <see cref="Stream"/> the configuration data shall be written to.</param>
-        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while writing the data.</exception>
         /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
         Task WriteAsync(IConfiguration configuration, Stream stream);

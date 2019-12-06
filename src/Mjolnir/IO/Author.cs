@@ -71,11 +71,10 @@ namespace Mjolnir.IO
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> containing the author list.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> containing the authors.</returns>
-        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while reading the stream.</exception>
         public static IEnumerable<Author> From(Stream stream)
         {
-            Task<IEnumerable<Author>> result = null;
+            Task<IEnumerable<Author>>? result = null;
 
             try
             {
@@ -86,16 +85,16 @@ namespace Mjolnir.IO
             {
                 aex.Handle((exception) =>
                 {
-                    if (exception is IOException)
+                    if (exception is IOException ioex)
                     {
-                        throw exception as IOException;
+                        throw ioex;
                     }
 
                     return false;
                 });
             }
 
-            return result?.Result;
+            return result?.Result ?? new List<Author>();
         }
 
         /// <summary>
@@ -107,7 +106,6 @@ namespace Mjolnir.IO
         /// The <c>TResult</c> parameter contains an <see cref="IEnumerable{T}"/>
         /// containing the authors.
         /// </returns>
-        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while reading the stream.</exception>
         public static async Task<IEnumerable<Author>> FromAsync(Stream stream)
         {
@@ -117,15 +115,18 @@ namespace Mjolnir.IO
                 StreamReader reader = new StreamReader(stream);
 
                 IConfiguration configuration = new DefaultConfiguration();
-                string line;
+                string? line;
 
                 while ((line = await reader.ReadLineAsync().ConfigureAwait(false)) != null)
                 {
                     var matches = Regex.Matches(line.Trim(), @"^(?<name>.+?)\<(?<mail>.+?)\>$");
 
-                    foreach (Match match in matches)
+                    foreach (Match? match in matches)
                     {
-                        authors.Add(new Author(match.Groups["name"].Value.Trim(), match.Groups["mail"].Value.Trim()));
+                        if (match != null)
+                        {
+                            authors.Add(new Author(match.Groups["name"].Value.Trim(), match.Groups["mail"].Value.Trim()));
+                        }
                     }
                 }
 

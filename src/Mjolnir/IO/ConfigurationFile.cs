@@ -97,7 +97,7 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public IConfiguration Read(Stream stream)
         {
-            Task<IConfiguration> result = null;
+            Task<IConfiguration>? result = null;
 
             try
             {
@@ -108,9 +108,9 @@ namespace Mjolnir.IO
             {
                 aex.Handle((exception) =>
                 {
-                    if (exception is IOException)
+                    if (exception is IOException ioex)
                     {
-                        throw exception as IOException;
+                        throw ioex;
                     }
 
                     return false;
@@ -126,7 +126,7 @@ namespace Mjolnir.IO
             StreamReader reader = new StreamReader(stream, new UTF8Encoding(false));
 
             IConfiguration configuration = new DefaultConfiguration();
-            string line;
+            string? line;
             ulong lineNumber = 0;
 
             while ((line = await reader.ReadLineAsync().ConfigureAwait(false)) != null)
@@ -175,9 +175,9 @@ namespace Mjolnir.IO
             {
                 aex.Handle((exception) =>
                 {
-                    if (exception is IOException)
+                    if (exception is IOException ioex)
                     {
-                        throw exception as IOException;
+                        throw ioex;
                     }
 
                     return false;

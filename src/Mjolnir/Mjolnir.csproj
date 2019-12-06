@@ -30,5 +30,6 @@
   <Import Project="..\Version.props" />
   <Import Project="..\TargetFrameworkConstants.props" />
   <Import Project="..\Files.props" />
+  <Import Project="..\Misc.props" />
 
 </Project>

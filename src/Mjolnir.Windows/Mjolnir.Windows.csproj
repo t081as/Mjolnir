@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageId>Mjolnir.Windows</PackageId>
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -34,5 +35,6 @@
   <Import Project="..\Version.props" />
   <Import Project="..\TargetFrameworkConstants.props" />
   <Import Project="..\Files.props" />
+  <Import Project="..\Misc.props" />
 
 </Project>

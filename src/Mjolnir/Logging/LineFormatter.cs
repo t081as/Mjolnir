@@ -60,11 +60,6 @@ namespace Mjolnir.Logging
         /// <inheritdoc />
         public byte[] Format(LogEntry entry)
         {
-            if (entry == null)
-            {
-                throw new ArgumentNullException(nameof(entry));
-            }
-
             StringBuilder logMessageBuilder = new StringBuilder();
             StringBuilder exceptionBuilder = new StringBuilder();
             StringBuilder logLineBuilder = new StringBuilder();
@@ -74,7 +69,7 @@ namespace Mjolnir.Logging
 
             if (entry.Exception != null)
             {
-                Exception currentException = entry.Exception;
+                Exception? currentException = entry.Exception;
 
                 while (currentException != null)
                 {
@@ -126,7 +121,7 @@ namespace Mjolnir.Logging
                 logLineBuilder.Append(' '.Repeat(2));
 
                 // Thread
-                string threadName = entry.Thread;
+                string? threadName = entry.Thread;
 
                 if (string.IsNullOrEmpty(threadName))
                 {

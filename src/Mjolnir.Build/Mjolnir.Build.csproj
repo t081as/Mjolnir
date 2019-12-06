@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageId>Mjolnir.Build</PackageId>
     <TargetFrameworks>netcoreapp3.0;netstandard2.1;netstandard2.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -30,5 +31,6 @@
   <Import Project="..\Version.props" />
   <Import Project="..\TargetFrameworkConstants.props" />
   <Import Project="..\Files.props" />
+  <Import Project="..\Misc.props" />
 
 </Project>

@@ -43,8 +43,13 @@ namespace Mjolnir.Tests.Logging
         [TestMethod]
         public void GetLoggerTest()
         {
-            LogEntry lastWrittenEntry = null;
-            LogEntry testEntry = new LogEntry(DateTime.UtcNow, this.GetType().FullName, LogLevel.Info, "TEST", "This is a test!");
+            LogEntry lastWrittenEntry = new LogEntry();
+            LogEntry testEntry = new LogEntry(
+                DateTime.UtcNow,
+                this.GetType().FullName ?? string.Empty,
+                LogLevel.Info,
+                "TEST",
+                "This is a test!");
 
             var appenderMock = new Mock<ILogAppender>();
             appenderMock.Setup(a => a.Append(It.IsAny<LogEntry>()))
@@ -66,22 +71,6 @@ namespace Mjolnir.Tests.Logging
             Assert.AreEqual(testEntry.Level, lastWrittenEntry.Level);
             Assert.AreEqual(testEntry.Thread, lastWrittenEntry.Thread);
             Assert.AreEqual(testEntry.Message, lastWrittenEntry.Message);
-        }
-
-        /// <summary>
-        /// Checks the <see cref="LogFactory.GetLogger(Type)"/> method using an empty reference.
-        /// </summary>
-        [TestMethod]
-        public void GetLoggerNullTest()
-        {
-            var appenderMock = new Mock<ILogAppender>();
-            appenderMock.Setup(a => a.Append(It.IsAny<LogEntry>()));
-
-            using (LogFactory logFactory = new LogFactory(new ILogAppender[] { appenderMock.Object }))
-            {
-                Thread.Sleep(150);
-                Assert.ThrowsException<ArgumentNullException>(() => logFactory.GetLogger(null));
-            }
         }
     }
 }

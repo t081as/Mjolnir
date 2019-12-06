@@ -47,7 +47,7 @@ namespace Mjolnir.Forms
         /// </example>
         public static void EnableDoubleBuffering(this Control control)
         {
-            typeof(Control).GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(control, true, null);
+            typeof(Control).GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance)?.SetValue(control, true, null);
         }
     }
 }

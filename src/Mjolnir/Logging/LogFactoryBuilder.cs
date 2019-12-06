@@ -60,7 +60,6 @@ namespace Mjolnir.Logging
         /// </summary>
         /// <param name="appender">An instance of the <see cref="ILogAppender"/> interface.</param>
         /// <returns>The current <see cref="LogFactoryBuilder"/>.</returns>
-        /// <exception cref="ArgumentNullException"><c>appender</c> is <c>null</c>.</exception>
         public LogFactoryBuilder WithAppender(ILogAppender appender)
         {
             this.appenders.Add(appender);
