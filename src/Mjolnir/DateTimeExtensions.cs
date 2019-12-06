@@ -30,24 +30,26 @@
 using System;
 #endregion
 
-namespace Mjolnir.Extensions
+namespace Mjolnir
 {
     /// <summary>
-    /// Contains extension methods for the <see cref="char"/> class.
+    /// Contains extension methods for the <see cref="DateTime"/> class.
     /// </summary>
-    public static class CharExtensions
+    public static class DateTimeExtensions
     {
         #region Methods
 
         /// <summary>
-        /// Returns a <see cref="string"/> containing the given <paramref name="character"/> <paramref name="count"/> times.
+        /// Converts the given date and time to an unix timestamp.
         /// </summary>
-        /// <param name="character">The character that shall be repeated.</param>
-        /// <param name="count">The number of repetitions.</param>
-        /// <returns>A <see cref="string"/> containing the given characters.</returns>
-        public static string Repeat(this char character, int count)
+        /// <param name="dateTime">The date and time that shall be converted.</param>
+        /// <returns>A <see cref="long"/> representing an unix timestamp.</returns>
+        public static long ToUnixTimestamp(this DateTime dateTime)
         {
-            return new string(character, count);
+            DateTime theEpoch = new DateTime(1970, 1, 1, 0, 0, 0);
+            DateTime.SpecifyKind(theEpoch, DateTimeKind.Utc);
+
+            return (long)dateTime.Subtract(theEpoch).TotalSeconds;
         }
 
         #endregion

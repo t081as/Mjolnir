@@ -15,7 +15,6 @@
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
-
 // THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,31 +26,8 @@
 #endregion
 
 #region Namespaces
-using System;
+using System.Runtime.CompilerServices;
 #endregion
 
-namespace Mjolnir.Extensions
-{
-    /// <summary>
-    /// Contains extension methods for the <see cref="DateTime"/> class.
-    /// </summary>
-    public static class DateTimeExtensions
-    {
-        #region Methods
-
-        /// <summary>
-        /// Converts the given date and time to an unix timestamp.
-        /// </summary>
-        /// <param name="dateTime">The date and time that shall be converted.</param>
-        /// <returns>A <see cref="long"/> representing an unix timestamp.</returns>
-        public static long ToUnixTimestamp(this DateTime dateTime)
-        {
-            DateTime theEpoch = new DateTime(1970, 1, 1, 0, 0, 0);
-            DateTime.SpecifyKind(theEpoch, DateTimeKind.Utc);
-
-            return (long)dateTime.Subtract(theEpoch).TotalSeconds;
-        }
-
-        #endregion
-    }
-}
+[assembly: InternalsVisibleTo("Mjolnir.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")] // Moq library

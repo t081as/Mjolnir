@@ -15,6 +15,7 @@
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
+
 // THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 // OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,34 +27,27 @@
 #endregion
 
 #region Namespaces
-using System.Reflection;
-using System.Windows.Forms;
+using System;
 #endregion
 
-namespace Mjolnir.Forms
+namespace Mjolnir
 {
     /// <summary>
-    /// Contains extension methods for the <see cref="Control"/> class.
+    /// Contains extension methods for the <see cref="char"/> class.
     /// </summary>
-    public static class ControlExtensions
+    public static class CharExtensions
     {
         #region Methods
 
         /// <summary>
-        /// Enables double buffering of a <see cref="Control"/>.
+        /// Returns a <see cref="string"/> containing the given <paramref name="character"/> <paramref name="count"/> times.
         /// </summary>
-        /// <param name="control">The <see cref="Control"/> that shall be double buffered.</param>
-        /// <example>
-        /// The following example demonstrates how to use the <see cref="ControlExtensions.EnableDoubleBuffering(Control)"/>
-        /// method to enable double buffering:
-        /// <code>
-        /// Control doubleBufferedControl = new Control();
-        /// doubleBufferedControl.EnableDoubleBuffering();
-        /// </code>
-        /// </example>
-        public static void EnableDoubleBuffering(this Control control)
+        /// <param name="character">The character that shall be repeated.</param>
+        /// <param name="count">The number of repetitions.</param>
+        /// <returns>A <see cref="string"/> containing the given characters.</returns>
+        public static string Repeat(this char character, int count)
         {
-            typeof(Control).GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(control, true, null);
+            return new string(character, count);
         }
 
         #endregion
