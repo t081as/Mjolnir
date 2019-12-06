@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,11 +22,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System.Runtime.CompilerServices;
-#endregion
 
 [assembly: InternalsVisibleTo("Mjolnir.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")] // Moq library

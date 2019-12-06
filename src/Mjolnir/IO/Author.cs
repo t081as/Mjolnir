@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,15 +22,12 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -40,8 +36,6 @@ namespace Mjolnir.IO
     /// </summary>
     public class Author
     {
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Author"/> class.
         /// </summary>
@@ -60,10 +54,6 @@ namespace Mjolnir.IO
             this.EMailAddress = eMailAddress;
         }
 
-        #endregion
-
-        #region Properties
-
         /// <summary>
         /// Gets or sets the name of the author.
         /// </summary>
@@ -75,10 +65,6 @@ namespace Mjolnir.IO
         /// </summary>
         /// <value>The email address of the author.</value>
         public string EMailAddress { get; set; } = string.Empty;
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Reads a list of authors from the given <paramref name="stream"/>.
@@ -150,7 +136,5 @@ namespace Mjolnir.IO
                 throw new IOException("Error while reading the stream", ex);
             }
         }
-
-        #endregion
     }
 }

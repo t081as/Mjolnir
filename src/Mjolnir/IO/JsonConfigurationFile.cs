@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,15 +22,12 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -40,18 +36,12 @@ namespace Mjolnir.IO
     /// </summary>
     public class JsonConfigurationFile : IConfigurationReader, IConfigurationWriter
     {
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonConfigurationFile"/> class.
         /// </summary>
         public JsonConfigurationFile()
         {
         }
-
-        #endregion
-
-        #region Methods
 
         /// <inheritdoc />
         public IConfiguration Read(Stream stream)
@@ -107,7 +97,5 @@ namespace Mjolnir.IO
         {
             await Task.Run(() => this.Write(configuration, stream)).ConfigureAwait(false);
         }
-
-        #endregion
     }
 }

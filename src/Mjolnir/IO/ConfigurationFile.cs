@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,14 +22,11 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -39,8 +35,6 @@ namespace Mjolnir.IO
     /// </summary>
     public class ConfigurationFile : IConfigurationReader, IConfigurationWriter
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The default marker for single line comments.
         /// </summary>
@@ -60,10 +54,6 @@ namespace Mjolnir.IO
         /// Represents the seperator used by this instance.
         /// </summary>
         private string seperator;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfigurationFile"/> class.
@@ -86,10 +76,6 @@ namespace Mjolnir.IO
             this.seperator = seperator;
         }
 
-        #endregion
-
-        #region Properties
-
         /// <summary>
         /// Gets the comment marker used by this instance.
         /// </summary>
@@ -107,10 +93,6 @@ namespace Mjolnir.IO
         {
             get => this.seperator;
         }
-
-        #endregion
-
-        #region Methods
 
         /// <inheritdoc />
         public IConfiguration Read(Stream stream)
@@ -260,7 +242,5 @@ namespace Mjolnir.IO
             invalidSequence = string.Empty;
             return false;
         }
-
-        #endregion
     }
 }

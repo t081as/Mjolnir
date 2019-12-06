@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,12 +22,9 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-#endregion
 
 namespace Mjolnir.Tests
 {
@@ -38,8 +34,6 @@ namespace Mjolnir.Tests
     [TestClass]
     public class SynchronizableTests
     {
-        #region Methods
-
         /// <summary>
         /// Checks the <see cref="Synchronizable{T}"/> class.
         /// </summary>
@@ -58,7 +52,5 @@ namespace Mjolnir.Tests
 
             Assert.AreEqual(3, synchronizable.Value.Count);
         }
-
-        #endregion
     }
 }

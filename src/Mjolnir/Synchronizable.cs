@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,11 +22,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
-#endregion
 
 namespace Mjolnir
 {
@@ -49,8 +45,6 @@ namespace Mjolnir
     /// </example>
     public class Synchronizable<T>
     {
-        #region Constrcutors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Synchronizable{T}"/> class.
         /// </summary>
@@ -59,10 +53,6 @@ namespace Mjolnir
         {
             this.Value = value;
         }
-
-        #endregion
-
-        #region Properties
 
         /// <summary>
         /// Gets the encapsulated value.
@@ -76,10 +66,6 @@ namespace Mjolnir
         /// <value>The synchonization lock object.</value>
         public object SyncRoot { get; private set; } = new object();
 
-        #endregion
-
-        #region Methods
-
         /// <summary>
         /// Returns the value of a <see cref="Synchronizable{T}"/>.
         /// </summary>
@@ -88,7 +74,5 @@ namespace Mjolnir
         {
             return synchronizable.Value;
         }
-
-        #endregion
     }
 }

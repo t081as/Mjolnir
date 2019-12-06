@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,14 +22,11 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System.IO;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.IO;
-#endregion
 
 namespace Mjolnir.Tests.IO
 {
@@ -40,8 +36,6 @@ namespace Mjolnir.Tests.IO
     [TestClass]
     public class JsonConfigurationFileTests
     {
-        #region Methods
-
         /// <summary>
         /// Checks the <see cref="JsonConfigurationFile.Read(System.IO.Stream)"/> method.
         /// </summary>
@@ -110,7 +104,5 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual(configuration.GetValue("My first key"), configurationFromStream.GetValue("My first key"));
             Assert.AreEqual(configuration.GetValue("Key:2"), configurationFromStream.GetValue("Key:2"));
         }
-
-        #endregion
     }
 }

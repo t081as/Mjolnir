@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,13 +22,10 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -38,17 +34,11 @@ namespace Mjolnir.IO
     /// </summary>
     internal class DefaultConfiguration : IConfiguration
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The synchronizable dictionary storing the actual configuration.
         /// </summary>
         private Synchronizable<Dictionary<string, string>> configurationValues =
             new Synchronizable<Dictionary<string, string>>(new Dictionary<string, string>());
-
-        #endregion
-
-        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultConfiguration"/> class.
@@ -74,10 +64,6 @@ namespace Mjolnir.IO
             }
         }
 
-        #endregion
-
-        #region Properties
-
         /// <inheritdoc />
         public IReadOnlyDictionary<string, string> Entries
         {
@@ -89,10 +75,6 @@ namespace Mjolnir.IO
                 }
             }
         }
-
-        #endregion
-
-        #region Methods
 
         /// <inheritdoc />
         public void SetValue(string key, string value)
@@ -205,7 +187,5 @@ namespace Mjolnir.IO
                 throw new ArgumentException("The key must not be empty", nameof(key));
             }
         }
-
-        #endregion
     }
 }

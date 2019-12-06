@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,12 +22,9 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System.Reflection;
 using System.Windows.Forms;
-#endregion
 
 namespace Mjolnir.Forms
 {
@@ -37,8 +33,6 @@ namespace Mjolnir.Forms
     /// </summary>
     public static class ControlExtensions
     {
-        #region Methods
-
         /// <summary>
         /// Enables double buffering of a <see cref="Control"/>.
         /// </summary>
@@ -55,7 +49,5 @@ namespace Mjolnir.Forms
         {
             typeof(Control).GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(control, true, null);
         }
-
-        #endregion
     }
 }

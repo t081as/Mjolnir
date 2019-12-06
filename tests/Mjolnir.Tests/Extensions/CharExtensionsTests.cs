@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,12 +22,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mjolnir.Extensions;
-#endregion
 
 namespace Mjolnir.Tests.Extensions
 {
@@ -38,8 +33,6 @@ namespace Mjolnir.Tests.Extensions
     [TestClass]
     public class CharExtensionsTests
     {
-        #region Methods
-
         /// <summary>
         /// Checks the <see cref="CharExtensions.Repeat(char, int)"/> method.
         /// </summary>
@@ -49,7 +42,5 @@ namespace Mjolnir.Tests.Extensions
             string test = 'a'.Repeat(4);
             Assert.AreEqual("aaaa", test);
         }
-
-        #endregion
     }
 }

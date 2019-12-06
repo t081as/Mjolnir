@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,13 +22,10 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
 using System.Threading;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -38,8 +34,6 @@ namespace Mjolnir.Logging
     /// </summary>
     internal class LogFactory : ILogFactory, ILogEntryWriter, IDisposable
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The configured log appenders.
         /// </summary>
@@ -70,10 +64,6 @@ namespace Mjolnir.Logging
         /// </summary>
         private bool disposed = false;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="LogFactory"/> class with the given log <paramref name="appenders"/>.
         /// </summary>
@@ -99,10 +89,6 @@ namespace Mjolnir.Logging
             this.Dispose(false);
         }
 
-        #endregion
-
-        #region Properties
-
         /// <inheritdoc />
         public IEnumerable<ILogAppender> Appenders
         {
@@ -114,10 +100,6 @@ namespace Mjolnir.Logging
                 }
             }
         }
-
-        #endregion
-
-        #region Methods
 
         /// <inheritdoc />
         public ILogger GetLogger<T>()
@@ -252,7 +234,5 @@ namespace Mjolnir.Logging
                 Thread.ResetAbort();
             }
         }
-
-        #endregion
     }
 }

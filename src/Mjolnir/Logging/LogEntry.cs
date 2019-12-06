@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,11 +22,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -36,8 +32,6 @@ namespace Mjolnir.Logging
     /// </summary>
     public class LogEntry
     {
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="LogEntry"/> class.
         /// </summary>
@@ -61,10 +55,6 @@ namespace Mjolnir.Logging
             this.Thread = thread;
             this.Message = message;
         }
-
-        #endregion
-
-        #region Properties
 
         /// <summary>
         /// Gets or sets the timestamp of this log entry.
@@ -101,7 +91,5 @@ namespace Mjolnir.Logging
         /// </summary>
         /// <value>The <see cref="Exception"/> associated with this entry.</value>
         public Exception Exception { get; set; } = null;
-
-        #endregion
     }
 }

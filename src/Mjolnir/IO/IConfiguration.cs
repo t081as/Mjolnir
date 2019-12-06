@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,12 +22,9 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -37,17 +33,11 @@ namespace Mjolnir.IO
     /// </summary>
     public interface IConfiguration
     {
-        #region Properties
-
         /// <summary>
         /// Gets all configuration key-value-pairs.
         /// </summary>
         /// <value>A <see cref="IReadOnlyDictionary{TKey, TValue}"/> containing all configuration key-value-pairs.</value>
         IReadOnlyDictionary<string, string> Entries { get; }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Sets the given <paramref name="key"/> to the given <paramref name="value"/>.
@@ -111,7 +101,5 @@ namespace Mjolnir.IO
         /// <param name="value">The value associated with the given key if available.</param>
         /// <returns><c>True</c> if the value is available, <c>false</c> otherwise.</returns>
         bool TryGetValue<T>(string key, out T value);
-
-        #endregion
     }
 }

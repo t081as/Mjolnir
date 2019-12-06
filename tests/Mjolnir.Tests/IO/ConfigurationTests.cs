@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,13 +22,10 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.IO;
-#endregion
 
 namespace Mjolnir.Tests.IO
 {
@@ -39,10 +35,6 @@ namespace Mjolnir.Tests.IO
     [TestClass]
     public class ConfigurationTests
     {
-        #region Methods
-
-        #region SetValue
-
         /// <summary>
         /// Checks the <see cref="IConfiguration.SetValue(string, string)"/> method.
         /// </summary>
@@ -101,10 +93,6 @@ namespace Mjolnir.Tests.IO
             configuration.SetValue("test-2", null);
         }
 
-        #endregion
-
-        #region ctor(IConfiguration)
-
         /// <summary>
         /// Checks the <see cref="IConfiguration"/> copy constructor.
         /// </summary>
@@ -121,10 +109,6 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual("adgt-h", newConfiguration.GetValue("test2"));
         }
 
-        #endregion
-
-        #region Entries
-
         /// <summary>
         /// Checks the <see cref="IConfiguration.Entries"/> property.
         /// </summary>
@@ -136,10 +120,6 @@ namespace Mjolnir.Tests.IO
 
             Assert.AreEqual("ab-c", configuration.Entries["test1"]);
         }
-
-        #endregion
-
-        #region GetValue(string)
 
         /// <summary>
         /// Checks the <see cref="IConfiguration.GetValue(string)"/> method.
@@ -192,10 +172,6 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual("ab-c", configuration.GetValue("i-do-not-exist"));
         }
 
-        #endregion
-
-        #region GetValue(string string)
-
         /// <summary>
         /// Checks the <see cref="IConfiguration.GetValue(string, string)"/> method.
         /// </summary>
@@ -234,10 +210,6 @@ namespace Mjolnir.Tests.IO
 
             Assert.AreEqual("ab-c", configuration.GetValue(string.Empty, "de-f"));
         }
-
-        #endregion
-
-        #region GetValue<T>(string)
 
         /// <summary>
         /// Checks the <see cref="IConfiguration.GetValue{T}(string)"/> method.
@@ -290,10 +262,6 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual(123, configuration.GetValue<int>("i-do-not-exist"));
         }
 
-        #endregion
-
-        #region GetValue<T>(string, string)
-
         /// <summary>
         /// Checks the <see cref="IConfiguration.GetValue{T}(string, T)"/> method.
         /// </summary>
@@ -332,10 +300,6 @@ namespace Mjolnir.Tests.IO
 
             Assert.AreEqual(123, configuration.GetValue<int>(string.Empty, 456));
         }
-
-        #endregion
-
-        #region TryGetValue<T>(string, out T)
 
         /// <summary>
         /// Checks the <see cref="IConfiguration.TryGetValue{T}(string, out T)"/> method.
@@ -377,9 +341,5 @@ namespace Mjolnir.Tests.IO
 
             configuration.TryGetValue(string.Empty, out int value);
         }
-
-        #endregion
-
-        #endregion
     }
 }

@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,12 +22,9 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.IO;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -38,8 +34,6 @@ namespace Mjolnir.Logging
     /// </summary>
     public class StreamAppender : IDisposable, ILogAppender
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The <see cref="Stream"/> used for logging.
         /// </summary>
@@ -61,10 +55,6 @@ namespace Mjolnir.Logging
         /// </summary>
         private bool disposed = false;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StreamAppender"/> class.
         /// </summary>
@@ -84,19 +74,11 @@ namespace Mjolnir.Logging
             this.Dispose(false);
         }
 
-        #endregion
-
-        #region Properties
-
         /// <inheritdoc />
         public LogLevel MinLevel { get; set; } = LogLevel.Trace;
 
         /// <inheritdoc />
         public LogLevel MaxLevel { get; set; } = LogLevel.Fatal;
-
-        #endregion
-
-        #region Methods
 
         /// <inheritdoc />
         public void Append(LogEntry entry)
@@ -154,7 +136,5 @@ namespace Mjolnir.Logging
                 this.disposed = true;
             }
         }
-
-        #endregion
     }
 }

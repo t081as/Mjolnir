@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,15 +22,11 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
-using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.Logging;
 using Moq;
-#endregion
 
 namespace Mjolnir.Tests.Logging
 {
@@ -41,8 +36,6 @@ namespace Mjolnir.Tests.Logging
     [TestClass]
     public class LogFactoryBuilderTests
     {
-        #region Methods
-
         /// <summary>
         /// Checks the <see cref="LogFactoryBuilder.Build"/> method.
         /// </summary>
@@ -57,7 +50,5 @@ namespace Mjolnir.Tests.Logging
 
             Assert.AreEqual(1, logFactory.Appenders.Count());
         }
-
-        #endregion
     }
 }

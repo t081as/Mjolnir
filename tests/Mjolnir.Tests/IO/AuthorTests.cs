@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,16 +22,13 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.IO;
-#endregion
 
 namespace Mjolnir.Tests.IO
 {
@@ -42,8 +38,6 @@ namespace Mjolnir.Tests.IO
     [TestClass]
     public class AuthorTests
     {
-        #region Methods
-
         /// <summary>
         /// Checks the <see cref="Author.From(Stream)"/> method
         /// </summary>
@@ -59,7 +53,5 @@ namespace Mjolnir.Tests.IO
             Assert.AreEqual("berta-beta@testmail.org", authors.Where(a => a.Name == "Berta Beta").FirstOrDefault().EMailAddress);
             Assert.AreEqual("master@anton_alpha.de", authors.Where(a => a.Name == "Anton Alpha").FirstOrDefault().EMailAddress);
         }
-
-        #endregion
     }
 }

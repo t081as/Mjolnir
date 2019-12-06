@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,13 +22,10 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.IO;
 using System.Threading.Tasks;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -38,8 +34,6 @@ namespace Mjolnir.IO
     /// </summary>
     public interface IConfigurationReader
     {
-        #region Methods
-
         /// <summary>
         /// Reads configuration data from the given <paramref name="stream"/>.
         /// </summary>
@@ -61,7 +55,5 @@ namespace Mjolnir.IO
         /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while reading the data.</exception>
         Task<IConfiguration> ReadAsync(Stream stream);
-
-        #endregion
     }
 }

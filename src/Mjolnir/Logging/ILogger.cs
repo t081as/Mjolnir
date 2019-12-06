@@ -1,5 +1,4 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright © 2017-2019 Tobias Koch
 //
@@ -23,11 +22,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -36,8 +32,6 @@ namespace Mjolnir.Logging
     /// </summary>
     public interface ILogger
     {
-        #region Methods
-
         /// <summary>
         /// Emits a log entry with the given <paramref name="message"/>.
         /// </summary>
@@ -100,7 +94,5 @@ namespace Mjolnir.Logging
         /// </summary>
         /// <param name="entry">The entry that shall be emitted.</param>
         void Log(LogEntry entry);
-
-        #endregion
     }
 }
