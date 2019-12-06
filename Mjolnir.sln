@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mjolnir.Tests", "tests\Mjol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.Forms", "src\Mjolnir.Forms\Mjolnir.Forms.csproj", "{E159A166-F54A-4E9C-8F7E-EEB80BCDDAA9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CD03D808-11D1-4A0E-9869-722E724D2DC4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.Windows", "src\Mjolnir.Windows\Mjolnir.Windows.csproj", "{BD32A8AE-8A44-41AA-B556-C78573C22345}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.Build", "src\Mjolnir.Build\Mjolnir.Build.csproj", "{71A653BF-E646-48F8-A9F7-72C4C53F6EC1}"
