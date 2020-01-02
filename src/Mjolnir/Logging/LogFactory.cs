@@ -1,6 +1,6 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -52,12 +52,12 @@ namespace Mjolnir.Logging
         /// <summary>
         /// The <see cref="Thread"/> used to write the log entries to the <see cref="appenders"/>.
         /// </summary>
-        private Thread logEntryWriterThread;
+        private Thread? logEntryWriterThread;
 
         /// <summary>
         /// The reset event used to trigger the <see cref="logEntryWriterThread"/>.
         /// </summary>
-        private ManualResetEvent logThreadresetEvent;
+        private ManualResetEvent? logThreadresetEvent;
 
         /// <summary>
         /// Indicates if the class has already been disposed.
@@ -133,7 +133,7 @@ namespace Mjolnir.Logging
                     this.entries.Value.Enqueue(entry);
                 }
 
-                this.logThreadresetEvent.Set();
+                this.logThreadresetEvent?.Set();
             }
         }
 
@@ -189,7 +189,7 @@ namespace Mjolnir.Logging
             {
                 while (true)
                 {
-                    LogEntry currentEntry = null;
+                    LogEntry? currentEntry = null;
 
                     lock (this.entries.SyncRoot)
                     {
@@ -216,11 +216,11 @@ namespace Mjolnir.Logging
                             }
                         }
 
-                        this.logThreadresetEvent.Reset();
+                        this.logThreadresetEvent?.Reset();
                     }
                     else
                     {
-                        this.logThreadresetEvent.WaitOne();
+                        this.logThreadresetEvent?.WaitOne();
                     }
                 }
             }

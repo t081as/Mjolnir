@@ -1,6 +1,6 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -47,8 +47,14 @@ namespace Mjolnir.IO
         /// </summary>
         /// <param name="configuration">The <see cref="IConfiguration"/> that shall be copied.</param>
         /// <returns>A new implementation of the <see cref="IConfiguration"/> interface.</returns>
+        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
         public static IConfiguration Copy(IConfiguration configuration)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
             return new DefaultConfiguration(configuration);
         }
     }

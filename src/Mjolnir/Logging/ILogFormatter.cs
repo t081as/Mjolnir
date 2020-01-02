@@ -1,6 +1,6 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -37,6 +37,7 @@ namespace Mjolnir.Logging
         /// </summary>
         /// <param name="entry">The <see cref="LogEntry"/> that shall be formatted.</param>
         /// <returns>An array of <see cref="byte"/> containing the formatted log entry.</returns>
+        /// <exception cref="ArgumentNullException"><c>entry</c> is <c>null</c>.</exception>
         byte[] Format(LogEntry entry);
     }
 }

@@ -1,6 +1,6 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -74,6 +74,16 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public void Write(IConfiguration configuration, Stream stream)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             try
             {
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
@@ -95,6 +105,16 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public async Task WriteAsync(IConfiguration configuration, Stream stream)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             await Task.Run(() => this.Write(configuration, stream)).ConfigureAwait(false);
         }
     }

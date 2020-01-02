@@ -1,6 +1,6 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -94,6 +94,6 @@ namespace Mjolnir.IO
         /// <param name="key">The key that shall be used to retrieve the value.</param>
         /// <param name="value">The value associated with the given key if available.</param>
         /// <returns><c>True</c> if the value is available, <c>false</c> otherwise.</returns>
-        bool TryGetValue<T>(string key, out T value);
+        bool TryGetValue<T>(string key, ref T value);
     }
 }

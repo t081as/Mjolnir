@@ -1,6 +1,6 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -40,6 +40,8 @@ namespace Mjolnir.IO
         /// <param name="configuration">The configuration data that shall be written.</param>
         /// <param name="stream">The <see cref="Stream"/> the configuration data shall be written to.</param>
         /// <exception cref="IOException">Error while writing the data.</exception>
+        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         void Write(IConfiguration configuration, Stream stream);
 
         /// <summary>
@@ -49,6 +51,8 @@ namespace Mjolnir.IO
         /// <param name="stream">The <see cref="Stream"/> the configuration data shall be written to.</param>
         /// <exception cref="IOException">Error while writing the data.</exception>
         /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
+        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         Task WriteAsync(IConfiguration configuration, Stream stream);
     }
 }

@@ -1,6 +1,6 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -44,6 +44,7 @@ namespace Mjolnir
     /// </code>
     /// </example>
     public class Synchronizable<T>
+        where T : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Synchronizable{T}"/> class.
@@ -58,7 +59,7 @@ namespace Mjolnir
         /// Gets the encapsulated value.
         /// </summary>
         /// <value>The encapsulated value.</value>
-        public T Value { get; private set; } = default(T);
+        public T Value { get; private set; }
 
         /// <summary>
         /// Gets the synchonization lock object.

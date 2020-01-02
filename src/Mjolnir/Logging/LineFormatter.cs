@@ -1,6 +1,6 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -60,6 +60,11 @@ namespace Mjolnir.Logging
         /// <inheritdoc />
         public byte[] Format(LogEntry entry)
         {
+            if (entry == null)
+            {
+                throw new ArgumentNullException(nameof(entry));
+            }
+
             StringBuilder logMessageBuilder = new StringBuilder();
             StringBuilder exceptionBuilder = new StringBuilder();
             StringBuilder logLineBuilder = new StringBuilder();
@@ -121,11 +126,15 @@ namespace Mjolnir.Logging
                 logLineBuilder.Append(' '.Repeat(2));
 
                 // Thread
-                string? threadName = entry.Thread;
+                string threadName;
 
-                if (string.IsNullOrEmpty(threadName))
+                if (string.IsNullOrEmpty(entry.Thread))
                 {
                     threadName = "UNKN";
+                }
+                else
+                {
+                    threadName = entry.Thread;
                 }
 
                 if (threadName.Length > 4)

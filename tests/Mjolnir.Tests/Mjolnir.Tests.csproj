@@ -10,7 +10,7 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Mjolnir.Tests.xml</DocumentationFile>
   </PropertyGroup>
 
-  <Import Project="..\Misc.props" />
+  <Import Project="..\..\src\Misc.props" />
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>None</DebugType>

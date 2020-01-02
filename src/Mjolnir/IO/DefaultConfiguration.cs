@@ -1,6 +1,6 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace Mjolnir.IO
@@ -37,7 +38,7 @@ namespace Mjolnir.IO
         /// <summary>
         /// The synchronizable dictionary storing the actual configuration.
         /// </summary>
-        private Synchronizable<Dictionary<string, string>> configurationValues =
+        private readonly Synchronizable<Dictionary<string, string>> configurationValues =
             new Synchronizable<Dictionary<string, string>>(new Dictionary<string, string>());
 
         /// <summary>
@@ -148,7 +149,7 @@ namespace Mjolnir.IO
         }
 
         /// <inheritdoc />
-        public bool TryGetValue<T>(string key, out T value)
+        public bool TryGetValue<T>(string key, ref T value)
         {
             this.CheckKeyEmpty(key);
 
@@ -159,7 +160,6 @@ namespace Mjolnir.IO
             }
             catch
             {
-                value = default(T);
                 return false;
             }
         }
