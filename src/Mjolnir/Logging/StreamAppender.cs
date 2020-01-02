@@ -88,6 +88,11 @@ namespace Mjolnir.Logging
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
 
+            if (entry == null)
+            {
+                throw new ArgumentNullException(nameof(entry));
+            }
+
             if (entry.Level >= this.MinLevel && entry.Level <= this.MaxLevel)
             {
                 byte[] formattedEntry = this.logFormatter.Format(entry);

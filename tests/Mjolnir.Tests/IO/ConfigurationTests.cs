@@ -228,7 +228,7 @@ namespace Mjolnir.Tests.IO
         }
 
         /// <summary>
-        /// Checks the <see cref="IConfiguration.TryGetValue{T}(string, out T)"/> method.
+        /// Checks the <see cref="IConfiguration.TryGetValue{T}(string, ref T)"/> method.
         /// </summary>
         [TestMethod]
         public void TryGetValueTTest()
@@ -236,14 +236,16 @@ namespace Mjolnir.Tests.IO
             IConfiguration configuration = ConfigurationFactory.New();
             configuration.SetValue("test1", "123");
 
-            Assert.AreEqual(true, configuration.TryGetValue("test1", out int value1));
+            int value1 = 0;
+            Assert.AreEqual(true, configuration.TryGetValue("test1", ref value1));
             Assert.AreEqual(123, value1);
 
-            Assert.AreEqual(false, configuration.TryGetValue("i-do-not-exist", out int value2));
+            int value2 = 0;
+            Assert.AreEqual(false, configuration.TryGetValue("i-do-not-exist", ref value2));
         }
 
         /// <summary>
-        /// Checks the <see cref="IConfiguration.TryGetValue{T}(string, out T)"/> method.
+        /// Checks the <see cref="IConfiguration.TryGetValue{T}(string, ref T)"/> method.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -252,7 +254,8 @@ namespace Mjolnir.Tests.IO
             IConfiguration configuration = ConfigurationFactory.New();
             configuration.SetValue("test1", "123");
 
-            configuration.TryGetValue(string.Empty, out int value);
+            int value = 0;
+            configuration.TryGetValue(string.Empty, ref value);
         }
     }
 }

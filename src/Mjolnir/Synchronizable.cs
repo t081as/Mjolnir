@@ -66,14 +66,5 @@ namespace Mjolnir
         /// </summary>
         /// <value>The synchonization lock object.</value>
         public object SyncRoot { get; private set; } = new object();
-
-        /// <summary>
-        /// Returns the value of a <see cref="Synchronizable{T}"/>.
-        /// </summary>
-        /// <param name="synchronizable">The <see cref="Synchronizable{T}.Value"/> of a <see cref="Synchronizable{T}"/>.</param>
-        public static implicit operator T(Synchronizable<T> synchronizable)
-        {
-            return synchronizable.Value;
-        }
     }
 }

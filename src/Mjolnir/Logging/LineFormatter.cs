@@ -128,7 +128,7 @@ namespace Mjolnir.Logging
                 // Thread
                 string threadName;
 
-                if (string.IsNullOrEmpty(entry.Thread))
+                if (entry.Thread == null || entry.Thread.Length == 0)
                 {
                     threadName = "UNKN";
                 }

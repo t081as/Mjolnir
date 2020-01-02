@@ -90,7 +90,7 @@ namespace Mjolnir.Tests.IO
         public void WriteTest()
         {
             JsonConfigurationFile configurationFile = new JsonConfigurationFile();
-            MemoryStream configurationStream = new MemoryStream();
+            using MemoryStream configurationStream = new MemoryStream();
             IConfiguration configuration = ConfigurationFactory.New();
 
             configuration.SetValue("My first key", "1");

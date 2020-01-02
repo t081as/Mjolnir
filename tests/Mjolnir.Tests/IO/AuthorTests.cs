@@ -39,13 +39,14 @@ namespace Mjolnir.Tests.IO
     public class AuthorTests
     {
         /// <summary>
-        /// Checks the <see cref="Author.From(Stream)"/> method
+        /// Checks the <see cref="Author.From(Stream)"/> method.
         /// </summary>
         [TestMethod]
         public void ReadTest()
         {
             string fileName = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "IO", "AuthorTests.Default.txt");
-            IEnumerable<Author> authors = Author.From(File.Open(fileName, FileMode.Open));
+            using Stream authorStream = File.Open(fileName, FileMode.Open);
+            IEnumerable<Author> authors = Author.From(authorStream);
 
             Assert.AreEqual(4, authors.Count());
             Assert.AreEqual("t.koch@tk-software.de", authors.Where(a => a.Name == "Tobias Koch").FirstOrDefault().EMailAddress);

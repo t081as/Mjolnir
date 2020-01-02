@@ -107,7 +107,7 @@ namespace Mjolnir.Tests.IO
         public void WriteTest()
         {
             ConfigurationFile configurationFile = new ConfigurationFile();
-            MemoryStream configurationStream = new MemoryStream();
+            using MemoryStream configurationStream = new MemoryStream();
             IConfiguration configuration = ConfigurationFactory.New();
 
             configuration.SetValue("My first key", "1");
@@ -130,7 +130,7 @@ namespace Mjolnir.Tests.IO
         public void WriteTestInvalidKey()
         {
             ConfigurationFile configurationFile = new ConfigurationFile();
-            MemoryStream configurationStream = new MemoryStream();
+            using MemoryStream configurationStream = new MemoryStream();
             IConfiguration configuration = ConfigurationFactory.New();
 
             configuration.SetValue($"My first {configurationFile.CommentMarker} key", "1");
@@ -146,7 +146,7 @@ namespace Mjolnir.Tests.IO
         public void WriteTestInvalidValue()
         {
             ConfigurationFile configurationFile = new ConfigurationFile();
-            MemoryStream configurationStream = new MemoryStream();
+            using MemoryStream configurationStream = new MemoryStream();
             IConfiguration configuration = ConfigurationFactory.New();
 
             configuration.SetValue("My first key", $"Test {configurationFile.Seperator} 1");

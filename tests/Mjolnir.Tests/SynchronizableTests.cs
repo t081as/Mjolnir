@@ -47,7 +47,7 @@ namespace Mjolnir.Tests
 
             lock (synchronizable.SyncRoot)
             {
-                ((List<int>)synchronizable).Add(500);
+                synchronizable.Value.Add(500);
             }
 
             Assert.AreEqual(3, synchronizable.Value.Count);

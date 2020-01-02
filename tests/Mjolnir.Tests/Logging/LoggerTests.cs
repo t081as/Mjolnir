@@ -42,17 +42,17 @@ namespace Mjolnir.Tests.Logging
         [TestMethod]
         public void TraceTest()
         {
-            LogEntry lastEntry = null;
+            LogEntry? lastEntry = null;
             var logWriterMock = new Mock<ILogEntryWriter>();
             logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
                 .Callback((LogEntry e) => lastEntry = e);
 
-            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName ?? string.Empty);
             logger.Trace("Test");
 
             Assert.IsNotNull(lastEntry);
-            Assert.AreEqual(LogLevel.Trace, lastEntry.Level);
-            Assert.AreEqual("Test", lastEntry.Message);
+            Assert.AreEqual(LogLevel.Trace, lastEntry?.Level);
+            Assert.AreEqual("Test", lastEntry?.Message);
         }
 
         /// <summary>
@@ -61,17 +61,17 @@ namespace Mjolnir.Tests.Logging
         [TestMethod]
         public void DebugTest()
         {
-            LogEntry lastEntry = null;
+            LogEntry? lastEntry = null;
             var logWriterMock = new Mock<ILogEntryWriter>();
             logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
                 .Callback((LogEntry e) => lastEntry = e);
 
-            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName ?? string.Empty);
             logger.Debug("Test");
 
             Assert.IsNotNull(lastEntry);
-            Assert.AreEqual(LogLevel.Debug, lastEntry.Level);
-            Assert.AreEqual("Test", lastEntry.Message);
+            Assert.AreEqual(LogLevel.Debug, lastEntry?.Level);
+            Assert.AreEqual("Test", lastEntry?.Message);
         }
 
         /// <summary>
@@ -80,17 +80,17 @@ namespace Mjolnir.Tests.Logging
         [TestMethod]
         public void InfoTest()
         {
-            LogEntry lastEntry = null;
+            LogEntry? lastEntry = null;
             var logWriterMock = new Mock<ILogEntryWriter>();
             logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
                 .Callback((LogEntry e) => lastEntry = e);
 
-            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName ?? string.Empty);
             logger.Info("Test");
 
             Assert.IsNotNull(lastEntry);
-            Assert.AreEqual(LogLevel.Info, lastEntry.Level);
-            Assert.AreEqual("Test", lastEntry.Message);
+            Assert.AreEqual(LogLevel.Info, lastEntry?.Level);
+            Assert.AreEqual("Test", lastEntry?.Message);
         }
 
         /// <summary>
@@ -99,17 +99,17 @@ namespace Mjolnir.Tests.Logging
         [TestMethod]
         public void WarningTest()
         {
-            LogEntry lastEntry = null;
+            LogEntry? lastEntry = null;
             var logWriterMock = new Mock<ILogEntryWriter>();
             logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
                 .Callback((LogEntry e) => lastEntry = e);
 
-            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName ?? string.Empty);
             logger.Warning("Test");
 
             Assert.IsNotNull(lastEntry);
-            Assert.AreEqual(LogLevel.Warning, lastEntry.Level);
-            Assert.AreEqual("Test", lastEntry.Message);
+            Assert.AreEqual(LogLevel.Warning, lastEntry?.Level);
+            Assert.AreEqual("Test", lastEntry?.Message);
         }
 
         /// <summary>
@@ -118,18 +118,18 @@ namespace Mjolnir.Tests.Logging
         [TestMethod]
         public void WarningExceptionTest()
         {
-            LogEntry lastEntry = null;
+            LogEntry? lastEntry = null;
             var logWriterMock = new Mock<ILogEntryWriter>();
             logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
                 .Callback((LogEntry e) => lastEntry = e);
 
-            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName ?? string.Empty);
             logger.Warning("Test", new Exception());
 
             Assert.IsNotNull(lastEntry);
-            Assert.IsNotNull(lastEntry.Exception);
-            Assert.AreEqual(LogLevel.Warning, lastEntry.Level);
-            Assert.AreEqual("Test", lastEntry.Message);
+            Assert.IsNotNull(lastEntry?.Exception);
+            Assert.AreEqual(LogLevel.Warning, lastEntry?.Level);
+            Assert.AreEqual("Test", lastEntry?.Message);
         }
 
         /// <summary>
@@ -138,17 +138,17 @@ namespace Mjolnir.Tests.Logging
         [TestMethod]
         public void ErrorTest()
         {
-            LogEntry lastEntry = null;
+            LogEntry? lastEntry = null;
             var logWriterMock = new Mock<ILogEntryWriter>();
             logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
                 .Callback((LogEntry e) => lastEntry = e);
 
-            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName ?? string.Empty);
             logger.Error("Test");
 
             Assert.IsNotNull(lastEntry);
-            Assert.AreEqual(LogLevel.Error, lastEntry.Level);
-            Assert.AreEqual("Test", lastEntry.Message);
+            Assert.AreEqual(LogLevel.Error, lastEntry?.Level);
+            Assert.AreEqual("Test", lastEntry?.Message);
         }
 
         /// <summary>
@@ -157,18 +157,18 @@ namespace Mjolnir.Tests.Logging
         [TestMethod]
         public void ErrorExceptionTest()
         {
-            LogEntry lastEntry = null;
+            LogEntry? lastEntry = null;
             var logWriterMock = new Mock<ILogEntryWriter>();
             logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
                 .Callback((LogEntry e) => lastEntry = e);
 
-            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName ?? string.Empty);
             logger.Error("Test", new Exception());
 
             Assert.IsNotNull(lastEntry);
-            Assert.IsNotNull(lastEntry.Exception);
-            Assert.AreEqual(LogLevel.Error, lastEntry.Level);
-            Assert.AreEqual("Test", lastEntry.Message);
+            Assert.IsNotNull(lastEntry?.Exception);
+            Assert.AreEqual(LogLevel.Error, lastEntry?.Level);
+            Assert.AreEqual("Test", lastEntry?.Message);
         }
 
         /// <summary>
@@ -177,17 +177,17 @@ namespace Mjolnir.Tests.Logging
         [TestMethod]
         public void FatalTest()
         {
-            LogEntry lastEntry = null;
+            LogEntry? lastEntry = null;
             var logWriterMock = new Mock<ILogEntryWriter>();
             logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
                 .Callback((LogEntry e) => lastEntry = e);
 
-            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName ?? string.Empty);
             logger.Fatal("Test");
 
             Assert.IsNotNull(lastEntry);
-            Assert.AreEqual(LogLevel.Fatal, lastEntry.Level);
-            Assert.AreEqual("Test", lastEntry.Message);
+            Assert.AreEqual(LogLevel.Fatal, lastEntry?.Level);
+            Assert.AreEqual("Test", lastEntry?.Message);
         }
 
         /// <summary>
@@ -196,18 +196,18 @@ namespace Mjolnir.Tests.Logging
         [TestMethod]
         public void FatalExceptionTest()
         {
-            LogEntry lastEntry = null;
+            LogEntry? lastEntry = null;
             var logWriterMock = new Mock<ILogEntryWriter>();
             logWriterMock.Setup(w => w.Write(It.IsAny<LogEntry>()))
                 .Callback((LogEntry e) => lastEntry = e);
 
-            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName);
+            ILogger logger = new Logger(logWriterMock.Object, this.GetType().FullName ?? string.Empty);
             logger.Fatal("Test", new Exception());
 
             Assert.IsNotNull(lastEntry);
-            Assert.IsNotNull(lastEntry.Exception);
-            Assert.AreEqual(LogLevel.Fatal, lastEntry.Level);
-            Assert.AreEqual("Test", lastEntry.Message);
+            Assert.IsNotNull(lastEntry?.Exception);
+            Assert.AreEqual(LogLevel.Fatal, lastEntry?.Level);
+            Assert.AreEqual("Test", lastEntry?.Message);
         }
     }
 }
