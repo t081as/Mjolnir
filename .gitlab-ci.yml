@@ -1,5 +1,3 @@
-image: mcr.microsoft.com/dotnet/core/sdk:3.0.100
-
 stages:
     - test
     - deploy
@@ -14,13 +12,13 @@ release:
         paths:
           - ./*.nupkg
     script:
-        - ./build.sh --configuration Release --buildnumber $CI_PIPELINE_IID
+        - ./build.ps1 --configuration Release --buildnumber $CI_PIPELINE_IID
         - dotnet nuget push Mjolnir*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json --no-symbols 1
 
 debug:
     stage: test
     script:
-        - ./build.sh
+        - ./build.ps1
 
 pages:
   stage: documentation
@@ -30,4 +28,4 @@ pages:
     paths:
     - public
   script:
-  - ./build.sh --configuration Release --buildnumber $CI_PIPELINE_IID
+  - ./build.ps1 --configuration Release --buildnumber $CI_PIPELINE_IID
