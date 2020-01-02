@@ -16,7 +16,7 @@ release:
         paths:
           - ./*.nupkg
     script:
-        - ./build --configuration=Release
+        - ./build --configuration Release
         - dotnet nuget push Mjolnir*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json --no-symbols 1
 
 debug:
@@ -32,4 +32,4 @@ pages:
     paths:
     - public
   script:
-  - ./build --configuration=Release
+  - ./build --configuration Release
