@@ -3,10 +3,6 @@ stages:
     - deploy
     - documentation
 
-cache:
-  paths:
-  - .cache/
-
 release:
     stage: deploy
     only:
