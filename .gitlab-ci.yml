@@ -14,13 +14,13 @@ release:
         paths:
           - ./*.nupkg
     script:
-        - ./build --configuration Release --buildnumber $CI_PIPELINE_IID
+        - ./build.sh --configuration Release --buildnumber $CI_PIPELINE_IID
         - dotnet nuget push Mjolnir*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json --no-symbols 1
 
 debug:
     stage: test
     script:
-        - ./build
+        - ./build.sh
 
 pages:
   stage: documentation
@@ -30,4 +30,4 @@ pages:
     paths:
     - public
   script:
-  - ./build --configuration Release --buildnumber $CI_PIPELINE_IID
+  - ./build.sh --configuration Release --buildnumber $CI_PIPELINE_IID
