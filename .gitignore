@@ -215,7 +215,7 @@ ModelManifest.xml
 StyleCop.Cache
 
 # vs code
-.vscode/
+.vscode/**/*
 !.vscode/extensions.json
 
 # GitLab pages output
