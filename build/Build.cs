@@ -53,7 +53,10 @@ class Build : NukeBuild
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath TestsDirectory => RootDirectory / "tests";
-    AbsolutePath OutputDirectory => RootDirectory / "output";
+
+    string shortVersion = "0.0.0";
+    string version = "0.0.0.0";
+    string semanticVersion = "0.0.0+XXXXXXXX";
 
     Target Clean => _ => _
         .Before(Restore)
@@ -62,7 +65,6 @@ class Build : NukeBuild
             SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
             TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
             DotNetClean();
-            EnsureCleanDirectory(OutputDirectory);
         });
 
     Target Restore => _ => _
@@ -72,13 +74,76 @@ class Build : NukeBuild
                 .SetProjectFile(Solution));
         });
 
+    Target Version => _ => _
+        .Executes(() =>
+        {
+            if (Configuration == Configuration.Release)
+            {
+                try
+                {
+                    (string shortVersion, string version, string semanticVersion) = GitVersion.Get(RootDirectory, Buildnumber);
+
+                    this.shortVersion = shortVersion;
+                    this.version = version;
+                    this.semanticVersion = semanticVersion;
+                }
+                catch
+                {
+                    Logger.Info("Ignoring version detection problems");
+                }
+
+                Logger.Info($"Version: {version}");
+                Logger.Info($"Short Version: {shortVersion}");
+                Logger.Info($"Semantic Version: {semanticVersion}");
+                Logger.Info($"Buildnumber: {Buildnumber}");
+            }
+            else
+            {
+                Logger.Info("Debug build - skipping version");
+            }
+        });
+
     Target Compile => _ => _
         .DependsOn(Restore)
+        .DependsOn(Version)
         .Executes(() =>
         {
             DotNetBuild(_ => _
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
+                .SetVersion(semanticVersion)
+                .SetAssemblyVersion(version)
+                .SetFileVersion(version)
                 .EnableNoRestore());
+
+            if (Configuration == Configuration.Release)
+            {
+                DotNetPack(_ => _
+                .SetProject(RootDirectory / "src" / "Mjolnir" / "Mjolnir.csproj")
+                .EnableNoRestore()
+                .SetOutputDirectory(RootDirectory));
+
+                DotNetPack(_ => _
+                .SetProject(RootDirectory / "src" / "Mjolnir.Forms" / "Mjolnir.Forms.csproj")
+                .EnableNoRestore()
+                .SetOutputDirectory(RootDirectory));
+
+                DotNetPack(_ => _
+                .SetProject(RootDirectory / "src" / "Mjolnir.Windows" / "Mjolnir.Windows.csproj")
+                .EnableNoRestore()
+                .SetOutputDirectory(RootDirectory));
+
+                DotNetPack(_ => _
+                .SetProject(RootDirectory / "src" / "Mjolnir.Build" / "Mjolnir.Build.csproj")
+                .EnableNoRestore()
+                .SetOutputDirectory(RootDirectory));
+            }
+        });
+
+    Target Test => _ => _
+        .DependsOn(Compile)
+        .Executes(() =>
+        {
+            Logger.Info("TODO - Test");
         });
 }
