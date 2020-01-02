@@ -17,7 +17,6 @@
 [Rr]eleases/
 x64/
 x86/
-build/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -220,3 +219,6 @@ StyleCop.Cache
 
 # GitLab pages output
 public/
+
+# Nuke build output
+output/
