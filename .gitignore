@@ -218,9 +218,5 @@ StyleCop.Cache
 .vscode/
 !.vscode/extensions.json
 
-# CAKE build
-tools/**
-!tools/Packages.config
-
 # GitLab pages output
 public/
