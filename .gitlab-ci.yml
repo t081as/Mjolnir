@@ -24,7 +24,7 @@ debug:
         - output/coverage
         reports:
             junit:
-                - '**/TestResults/TestResults.xml'
+                - './tests/**/TestResults/TestResults.xml'
 
 
 
