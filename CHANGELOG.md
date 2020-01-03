@@ -1,3 +1,6 @@
+## [vNext]
+- ENHANCEMENT: switching to snupkg package format
+
 ## [0.3.1] / 2020-01-03
 - BUGFIX: fixing build script
 

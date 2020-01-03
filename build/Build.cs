@@ -23,7 +23,10 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 
+using System.IO;
+using System.Linq;
 using Nuke.Common;
+using Nuke.Common.IO;
 using Nuke.Common.Execution;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
@@ -35,8 +38,6 @@ using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using static Nuke.Common.Tools.ReportGenerator.ReportGeneratorTasks;
-using System.IO;
-using System.Linq;
 
 [CheckBuildProjectConfigurations]
 [UnsetVisualStudioEnvironmentVariables]
@@ -69,6 +70,8 @@ class Build : NukeBuild
     Target Clean => _ => _
         .Executes(() =>
         {
+            TestsDirectory.GlobFiles("**/TestResults/TestResults.xml").ForEach(DeleteFile);
+
             RootDirectory.GlobFiles("**/*.nupkg").ForEach(DeleteFile);
             RootDirectory.GlobFiles(coverageFiles).ForEach(DeleteFile);
 
@@ -131,6 +134,7 @@ class Build : NukeBuild
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
+                .SetLogger("junit")
                 .EnableNoBuild());
             }
             else
@@ -139,6 +143,7 @@ class Build : NukeBuild
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
+                .SetLogger("junit")
                 .SetDataCollector("XPlat Code Coverage"));
 
                 var reportFiles = RootDirectory / coverageFiles;
@@ -178,6 +183,7 @@ class Build : NukeBuild
                     .SetFileVersion(version)
                     .SetIncludeSource(true)
                     .SetIncludeSymbols(true)
+                    .SetSymbolPackageFormat(DotNetSymbolPackageFormat.snupkg)
                     .SetPackageReleaseNotes(changeLog)
                     .SetOutputDirectory(OutputDirectory));
             }
