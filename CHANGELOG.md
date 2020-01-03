@@ -1,3 +1,6 @@
+## [vNext]
+- BUGFIX: fixing build script
+
 ## [0.3.0] / 2020-01-03
 - FEATURE: Logging added
 - FEATURE: CharExtensions added

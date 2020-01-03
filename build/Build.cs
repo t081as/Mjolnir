@@ -189,12 +189,14 @@ class Build : NukeBuild
         .Requires(() => Configuration == Configuration.Release)
         .Executes(() =>
         {
-            var generatedPackages = RootDirectory.GlobFiles(OutputDirectory / "*.nupkg")
+            var generatedPackages = OutputDirectory.GlobFiles("*.nupkg")
                 .NotEmpty()
                 .Where(p => !p.ToString().EndsWith(".symbols.nupkg"));
 
             foreach (var package in generatedPackages)
             {
+                Logger.Info($"Pushing package {package}");
+
                 DotNetNuGetPush(_ => _
                     .SetTargetPath(package)
                     .SetApiKey(Key)
