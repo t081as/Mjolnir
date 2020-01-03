@@ -19,9 +19,13 @@ debug:
     script:
         - ./build.ps1
     coverage: /Line coverage[\s\S].+%/
-    reports:
-      junit:
-        - '**/TestResults/TestResults.xml'
+    artifacts:
+        paths:
+        - output/coverage
+        reports:
+        junit:
+            - '**/TestResults/TestResults.xml'
+
 
 
 pages:
