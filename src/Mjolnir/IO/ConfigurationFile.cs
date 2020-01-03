@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,14 +22,11 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -39,8 +35,6 @@ namespace Mjolnir.IO
     /// </summary>
     public class ConfigurationFile : IConfigurationReader, IConfigurationWriter
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The default marker for single line comments.
         /// </summary>
@@ -52,26 +46,12 @@ namespace Mjolnir.IO
         public const string DefaultSeperator = "=";
 
         /// <summary>
-        /// Represents the comment marker used by this instance.
-        /// </summary>
-        private string commentMarker;
-
-        /// <summary>
-        /// Represents the seperator used by this instance.
-        /// </summary>
-        private string seperator;
-
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ConfigurationFile"/> class.
         /// </summary>
         public ConfigurationFile()
         {
-            this.commentMarker = DefaultCommentMarker;
-            this.seperator = DefaultSeperator;
+            this.CommentMarker = DefaultCommentMarker;
+            this.Seperator = DefaultSeperator;
         }
 
         /// <summary>
@@ -82,40 +62,26 @@ namespace Mjolnir.IO
         /// <param name="seperator">The seperator for keys and values.</param>
         public ConfigurationFile(string commentMarker, string seperator)
         {
-            this.commentMarker = commentMarker;
-            this.seperator = seperator;
+            this.CommentMarker = commentMarker;
+            this.Seperator = seperator;
         }
-
-        #endregion
-
-        #region Properties
 
         /// <summary>
         /// Gets the comment marker used by this instance.
         /// </summary>
         /// <value>The comment marker used by this instance.</value>
-        public string CommentMarker
-        {
-            get => this.commentMarker;
-        }
+        public string CommentMarker { get; private set; }
 
         /// <summary>
         /// Gets the seperator used by this instance.
         /// </summary>
         /// <value>The seperator used by this instance.</value>
-        public string Seperator
-        {
-            get => this.seperator;
-        }
-
-        #endregion
-
-        #region Methods
+        public string Seperator { get; private set; }
 
         /// <inheritdoc />
         public IConfiguration Read(Stream stream)
         {
-            Task<IConfiguration> result = null;
+            Task<IConfiguration>? result = null;
 
             try
             {
@@ -126,16 +92,16 @@ namespace Mjolnir.IO
             {
                 aex.Handle((exception) =>
                 {
-                    if (exception is IOException)
+                    if (exception is IOException ioex)
                     {
-                        throw exception as IOException;
+                        throw ioex;
                     }
 
                     return false;
                 });
             }
 
-            return result?.Result;
+            return result?.Result ?? new DefaultConfiguration();
         }
 
         /// <inheritdoc />
@@ -144,7 +110,7 @@ namespace Mjolnir.IO
             StreamReader reader = new StreamReader(stream, new UTF8Encoding(false));
 
             IConfiguration configuration = new DefaultConfiguration();
-            string line;
+            string? line;
             ulong lineNumber = 0;
 
             while ((line = await reader.ReadLineAsync().ConfigureAwait(false)) != null)
@@ -152,18 +118,18 @@ namespace Mjolnir.IO
                 lineNumber++;
                 line = line.Trim();
 
-                if (line.Contains(this.commentMarker))
+                if (line.Contains(this.CommentMarker))
                 {
-                    line = line.Substring(0, line.IndexOf(this.commentMarker, 0, StringComparison.InvariantCulture));
+                    line = line.Substring(0, line.IndexOf(this.CommentMarker, 0, StringComparison.InvariantCulture));
                 }
 
                 if (!string.IsNullOrEmpty(line))
                 {
-                    string[] parts = line.Split(new string[] { this.seperator }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] parts = line.Split(new string[] { this.Seperator }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (parts.Length != 2)
                     {
-                        throw new IOException($"Error in line {lineNumber}; expecting format: key{this.seperator}value (but got {line})");
+                        throw new IOException($"Error in line {lineNumber}; expecting format: key{this.Seperator}value (but got {line})");
                     }
 
                     string key = parts[0].Trim();
@@ -184,6 +150,16 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public void Write(IConfiguration configuration, Stream stream)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             try
             {
                 var result = this.WriteAsync(configuration, stream);
@@ -193,9 +169,9 @@ namespace Mjolnir.IO
             {
                 aex.Handle((exception) =>
                 {
-                    if (exception is IOException)
+                    if (exception is IOException ioex)
                     {
-                        throw exception as IOException;
+                        throw ioex;
                     }
 
                     return false;
@@ -206,6 +182,16 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public async Task WriteAsync(IConfiguration configuration, Stream stream)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             try
             {
                 StreamWriter writer = new StreamWriter(stream, new UTF8Encoding(false));
@@ -222,7 +208,7 @@ namespace Mjolnir.IO
                         throw new IOException($"Entry {entry.Key}: the value contains the following invalid sequence: {valueSequence}");
                     }
 
-                    await writer.WriteLineAsync($"{entry.Key}{this.seperator}{entry.Value}").ConfigureAwait(false);
+                    await writer.WriteLineAsync($"{entry.Key}{this.Seperator}{entry.Value}").ConfigureAwait(false);
                 }
 
                 await writer.FlushAsync().ConfigureAwait(false);
@@ -246,7 +232,7 @@ namespace Mjolnir.IO
         /// <returns><c>True</c> if the value contains an invalid sequence, <c>false</c> otherwise.</returns>
         protected virtual bool ContainsInvalidSequences(string value, out string invalidSequence)
         {
-            string[] invalidSequences = new string[] { this.commentMarker, this.seperator, "\n", "\r\n" };
+            string[] invalidSequences = new string[] { this.CommentMarker, this.Seperator, "\n", "\r\n" };
 
             foreach (var sequence in invalidSequences)
             {
@@ -260,7 +246,5 @@ namespace Mjolnir.IO
             invalidSequence = string.Empty;
             return false;
         }
-
-        #endregion
     }
 }

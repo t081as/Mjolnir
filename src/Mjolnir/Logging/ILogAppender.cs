@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,12 +22,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
-using System.Threading.Tasks;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -37,8 +32,6 @@ namespace Mjolnir.Logging
     /// </summary>
     public interface ILogAppender
     {
-        #region Properties
-
         /// <summary>
         /// Gets or sets the minimum log level processed by this log appender.
         /// </summary>
@@ -51,17 +44,11 @@ namespace Mjolnir.Logging
         /// <value>The maximum log level processed by this log appender.</value>
         LogLevel MaxLevel { get; set; }
 
-        #endregion
-
-        #region Method
-
         /// <summary>
         /// Appends the given <paramref name="entry"/> to the specific sink.
         /// </summary>
         /// <param name="entry">The <see cref="LogEntry"/> that shall be appended.</param>
         /// <exception cref="ArgumentNullException"><c>entry</c> is <c>null</c>.</exception>
         void Append(LogEntry entry);
-
-        #endregion
     }
 }

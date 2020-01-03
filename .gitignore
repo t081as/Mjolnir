@@ -17,7 +17,6 @@
 [Rr]eleases/
 x64/
 x86/
-build/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -214,12 +213,12 @@ ModelManifest.xml
 # StyleCop
 StyleCop.Cache
 
-# Persistent cache (gitlab ci)
-.cache/
-
-# CAKE build
-tools/**
-!tools/Packages.config
+# vs code
+.vscode/**/*
+!.vscode/extensions.json
 
 # GitLab pages output
 public/
+
+# Nuke build output
+output/

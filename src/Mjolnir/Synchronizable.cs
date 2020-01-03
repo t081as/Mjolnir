@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,11 +22,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
-#endregion
 
 namespace Mjolnir
 {
@@ -48,9 +44,8 @@ namespace Mjolnir
     /// </code>
     /// </example>
     public class Synchronizable<T>
+        where T : class
     {
-        #region Constrcutors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Synchronizable{T}"/> class.
         /// </summary>
@@ -60,35 +55,16 @@ namespace Mjolnir
             this.Value = value;
         }
 
-        #endregion
-
-        #region Properties
-
         /// <summary>
         /// Gets the encapsulated value.
         /// </summary>
         /// <value>The encapsulated value.</value>
-        public T Value { get; private set; } = default(T);
+        public T Value { get; private set; }
 
         /// <summary>
         /// Gets the synchonization lock object.
         /// </summary>
         /// <value>The synchonization lock object.</value>
         public object SyncRoot { get; private set; } = new object();
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Returns the value of a <see cref="Synchronizable{T}"/>.
-        /// </summary>
-        /// <param name="synchronizable">The <see cref="Synchronizable{T}.Value"/> of a <see cref="Synchronizable{T}"/>.</param>
-        public static implicit operator T(Synchronizable<T> synchronizable)
-        {
-            return synchronizable.Value;
-        }
-
-        #endregion
     }
 }

@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,15 +22,12 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -40,18 +36,12 @@ namespace Mjolnir.IO
     /// </summary>
     public class JsonConfigurationFile : IConfigurationReader, IConfigurationWriter
     {
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonConfigurationFile"/> class.
         /// </summary>
         public JsonConfigurationFile()
         {
         }
-
-        #endregion
-
-        #region Methods
 
         /// <inheritdoc />
         public IConfiguration Read(Stream stream)
@@ -84,6 +74,16 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public void Write(IConfiguration configuration, Stream stream)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             try
             {
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
@@ -105,9 +105,17 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public async Task WriteAsync(IConfiguration configuration, Stream stream)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             await Task.Run(() => this.Write(configuration, stream)).ConfigureAwait(false);
         }
-
-        #endregion
     }
 }

@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,12 +22,9 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -37,16 +33,10 @@ namespace Mjolnir.Logging
     /// </summary>
     public class LogFactoryBuilder
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The log appenders used to produce an instance of the <see cref="ILogFactory"/> class.
         /// </summary>
         private List<ILogAppender> appenders;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LogFactoryBuilder"/> class.
@@ -55,10 +45,6 @@ namespace Mjolnir.Logging
         {
             this.appenders = new List<ILogAppender>();
         }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LogFactoryBuilder"/> class.
@@ -74,7 +60,6 @@ namespace Mjolnir.Logging
         /// </summary>
         /// <param name="appender">An instance of the <see cref="ILogAppender"/> interface.</param>
         /// <returns>The current <see cref="LogFactoryBuilder"/>.</returns>
-        /// <exception cref="ArgumentNullException"><c>appender</c> is <c>null</c>.</exception>
         public LogFactoryBuilder WithAppender(ILogAppender appender)
         {
             this.appenders.Add(appender);
@@ -89,7 +74,5 @@ namespace Mjolnir.Logging
         {
             return new LogFactory(this.appenders);
         }
-
-        #endregion
     }
 }

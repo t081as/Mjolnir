@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,13 +22,10 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.IO;
 using System.Threading.Tasks;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -38,14 +34,11 @@ namespace Mjolnir.IO
     /// </summary>
     public interface IConfigurationReader
     {
-        #region Methods
-
         /// <summary>
         /// Reads configuration data from the given <paramref name="stream"/>.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> containing the configuration data.</param>
         /// <returns>A new implementation of the <see cref="IConfiguration"/> interface representing the configuration data.</returns>
-        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while reading the data.</exception>
         IConfiguration Read(Stream stream);
 
@@ -58,10 +51,7 @@ namespace Mjolnir.IO
         /// The <c>TResult</c> parameter contains an implementation of the <see cref="IConfiguration"/>
         /// interface representing the configuration data.
         /// </returns>
-        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while reading the data.</exception>
         Task<IConfiguration> ReadAsync(Stream stream);
-
-        #endregion
     }
 }

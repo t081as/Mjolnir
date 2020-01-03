@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,14 +22,10 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Globalization;
 using System.Text;
-using Mjolnir.Extensions;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -40,16 +35,10 @@ namespace Mjolnir.Logging
     /// </summary>
     public class LineFormatter : ILogFormatter
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The encoding used for writing the entries.
         /// </summary>
         private Encoding encoding;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LineFormatter"/> class.
@@ -68,10 +57,6 @@ namespace Mjolnir.Logging
             this.encoding = encoding;
         }
 
-        #endregion
-
-        #region Methods
-
         /// <inheritdoc />
         public byte[] Format(LogEntry entry)
         {
@@ -89,7 +74,7 @@ namespace Mjolnir.Logging
 
             if (entry.Exception != null)
             {
-                Exception currentException = entry.Exception;
+                Exception? currentException = entry.Exception;
 
                 while (currentException != null)
                 {
@@ -141,11 +126,15 @@ namespace Mjolnir.Logging
                 logLineBuilder.Append(' '.Repeat(2));
 
                 // Thread
-                string threadName = entry.Thread;
+                string threadName;
 
-                if (string.IsNullOrEmpty(threadName))
+                if (entry.Thread == null || entry.Thread.Length == 0)
                 {
                     threadName = "UNKN";
+                }
+                else
+                {
+                    threadName = entry.Thread;
                 }
 
                 if (threadName.Length > 4)
@@ -167,7 +156,5 @@ namespace Mjolnir.Logging
 
             return this.encoding.GetBytes(logLineBuilder.ToString());
         }
-
-        #endregion
     }
 }

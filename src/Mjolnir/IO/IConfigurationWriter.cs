@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,13 +22,10 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.IO;
 using System.Threading.Tasks;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -38,16 +34,14 @@ namespace Mjolnir.IO
     /// </summary>
     public interface IConfigurationWriter
     {
-        #region Methods
-
         /// <summary>
         /// Writes the given <paramref name="configuration"/> data to the given <paramref name="stream"/>.
         /// </summary>
         /// <param name="configuration">The configuration data that shall be written.</param>
         /// <param name="stream">The <see cref="Stream"/> the configuration data shall be written to.</param>
+        /// <exception cref="IOException">Error while writing the data.</exception>
         /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
-        /// <exception cref="IOException">Error while writing the data.</exception>
         void Write(IConfiguration configuration, Stream stream);
 
         /// <summary>
@@ -55,12 +49,10 @@ namespace Mjolnir.IO
         /// </summary>
         /// <param name="configuration">The configuration data that shall be written.</param>
         /// <param name="stream">The <see cref="Stream"/> the configuration data shall be written to.</param>
-        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while writing the data.</exception>
         /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
+        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         Task WriteAsync(IConfiguration configuration, Stream stream);
-
-        #endregion
     }
 }

@@ -1,18 +1,17 @@
 <Project>
 
   <PropertyGroup>
-    <PackageId>Mjolnir</PackageId>
     <Authors>Tobias Koch</Authors>
     <Company>Tobias Koch</Company>
     <Product>Mjolnir</Product>
     <Description>One of the most fearsome and powerful tools in existence, capable of leveling mountains</Description>
-    <Copyright>Copyright © 2017-2019 Tobias Koch</Copyright>
+    <Copyright>Copyright © 2017-2020 Tobias Koch</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://gitlab.com/tobiaskoch/Mjolnir</PackageProjectUrl>
     <RepositoryUrl>https://gitlab.com/tobiaskoch/Mjolnir.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageIconUrl>https://gitlab.com/tobiaskoch/Mjolnir/raw/master/img/Mjolnir.png</PackageIconUrl>
+    <PackageIcon>Mjolnir.png</PackageIcon>
     <PackageTags>framework library core</PackageTags>
   </PropertyGroup>
   

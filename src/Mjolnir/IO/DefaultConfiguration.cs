@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,13 +22,11 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -38,17 +35,11 @@ namespace Mjolnir.IO
     /// </summary>
     internal class DefaultConfiguration : IConfiguration
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The synchronizable dictionary storing the actual configuration.
         /// </summary>
-        private Synchronizable<Dictionary<string, string>> configurationValues =
+        private readonly Synchronizable<Dictionary<string, string>> configurationValues =
             new Synchronizable<Dictionary<string, string>>(new Dictionary<string, string>());
-
-        #endregion
-
-        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultConfiguration"/> class.
@@ -74,10 +65,6 @@ namespace Mjolnir.IO
             }
         }
 
-        #endregion
-
-        #region Properties
-
         /// <inheritdoc />
         public IReadOnlyDictionary<string, string> Entries
         {
@@ -90,19 +77,10 @@ namespace Mjolnir.IO
             }
         }
 
-        #endregion
-
-        #region Methods
-
         /// <inheritdoc />
         public void SetValue(string key, string value)
         {
-            this.CheckKeyNullOrEmpty(key);
-
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            this.CheckKeyEmpty(key);
 
             lock (this.configurationValues.SyncRoot)
             {
@@ -120,7 +98,7 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public string GetValue(string key)
         {
-            this.CheckKeyNullOrEmpty(key);
+            this.CheckKeyEmpty(key);
 
             lock (this.configurationValues.SyncRoot)
             {
@@ -136,7 +114,7 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public string GetValue(string key, string defaultValue)
         {
-            this.CheckKeyNullOrEmpty(key);
+            this.CheckKeyEmpty(key);
 
             try
             {
@@ -151,14 +129,14 @@ namespace Mjolnir.IO
         /// <inheritdoc />
         public T GetValue<T>(string key)
         {
-            this.CheckKeyNullOrEmpty(key);
+            this.CheckKeyEmpty(key);
             return (T)Convert.ChangeType(this.GetValue(key), typeof(T), CultureInfo.InvariantCulture);
         }
 
         /// <inheritdoc />
         public T GetValue<T>(string key, T defaultValue)
         {
-            this.CheckKeyNullOrEmpty(key);
+            this.CheckKeyEmpty(key);
 
             try
             {
@@ -171,9 +149,9 @@ namespace Mjolnir.IO
         }
 
         /// <inheritdoc />
-        public bool TryGetValue<T>(string key, out T value)
+        public bool TryGetValue<T>(string key, ref T value)
         {
-            this.CheckKeyNullOrEmpty(key);
+            this.CheckKeyEmpty(key);
 
             try
             {
@@ -182,7 +160,6 @@ namespace Mjolnir.IO
             }
             catch
             {
-                value = default(T);
                 return false;
             }
         }
@@ -191,21 +168,13 @@ namespace Mjolnir.IO
         /// Checks the <paramref name="key"/> parameter.
         /// </summary>
         /// <param name="key">The key that shall be checked.</param>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
-        protected virtual void CheckKeyNullOrEmpty(string key)
+        protected virtual void CheckKeyEmpty(string key)
         {
-            if (key is null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentException("The key must not be empty", nameof(key));
             }
         }
-
-        #endregion
     }
 }

@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,12 +22,9 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -37,25 +33,17 @@ namespace Mjolnir.IO
     /// </summary>
     public interface IConfiguration
     {
-        #region Properties
-
         /// <summary>
         /// Gets all configuration key-value-pairs.
         /// </summary>
         /// <value>A <see cref="IReadOnlyDictionary{TKey, TValue}"/> containing all configuration key-value-pairs.</value>
         IReadOnlyDictionary<string, string> Entries { get; }
 
-        #endregion
-
-        #region Methods
-
         /// <summary>
         /// Sets the given <paramref name="key"/> to the given <paramref name="value"/>.
         /// </summary>
         /// <param name="key">The key that shall be used to store the value.</param>
         /// <param name="value">The value that shall be stored.</param>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
-        /// <exception cref="ArgumentNullException"><c>value</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         void SetValue(string key, string value);
 
@@ -64,7 +52,6 @@ namespace Mjolnir.IO
         /// </summary>
         /// <param name="key">The key that shall be used to retrieve the value.</param>
         /// <returns>The value associated with the given key.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         /// <exception cref="ArgumentException"><c>key</c> does not contain a value.</exception>
         string GetValue(string key);
@@ -76,7 +63,6 @@ namespace Mjolnir.IO
         /// <param name="key">The key that shall be used to retrieve the value.</param>
         /// <param name="defaultValue">The value that shall be returned if there is no stored value for the given key.</param>
         /// <returns>The value associated with the given key or the default value.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         string GetValue(string key, string defaultValue);
 
@@ -86,7 +72,6 @@ namespace Mjolnir.IO
         /// <typeparam name="T">The <see cref="Type"/> of the value.</typeparam>
         /// <param name="key">The key that shall be used to retrieve the value.</param>
         /// <returns>The value associated with the given key.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         /// <exception cref="ArgumentException"><c>key</c> does not contain a value.</exception>
         T GetValue<T>(string key);
@@ -99,7 +84,6 @@ namespace Mjolnir.IO
         /// <param name="key">The key that shall be used to retrieve the value.</param>
         /// <param name="defaultValue">The value that shall be returned if there is no stored value for the given key.</param>
         /// <returns>The value associated with the given key or the default value.</returns>
-        /// <exception cref="ArgumentNullException"><c>key</c> is null.</exception>
         /// <exception cref="ArgumentException"><c>key</c> is empty.</exception>
         T GetValue<T>(string key, T defaultValue);
 
@@ -110,8 +94,6 @@ namespace Mjolnir.IO
         /// <param name="key">The key that shall be used to retrieve the value.</param>
         /// <param name="value">The value associated with the given key if available.</param>
         /// <returns><c>True</c> if the value is available, <c>false</c> otherwise.</returns>
-        bool TryGetValue<T>(string key, out T value);
-
-        #endregion
+        bool TryGetValue<T>(string key, ref T value);
     }
 }

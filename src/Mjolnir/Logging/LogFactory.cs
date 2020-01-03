@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,13 +22,10 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
 using System.Threading;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -38,8 +34,6 @@ namespace Mjolnir.Logging
     /// </summary>
     internal class LogFactory : ILogFactory, ILogEntryWriter, IDisposable
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The configured log appenders.
         /// </summary>
@@ -58,21 +52,17 @@ namespace Mjolnir.Logging
         /// <summary>
         /// The <see cref="Thread"/> used to write the log entries to the <see cref="appenders"/>.
         /// </summary>
-        private Thread logEntryWriterThread;
+        private Thread? logEntryWriterThread;
 
         /// <summary>
         /// The reset event used to trigger the <see cref="logEntryWriterThread"/>.
         /// </summary>
-        private ManualResetEvent logThreadresetEvent;
+        private ManualResetEvent? logThreadresetEvent;
 
         /// <summary>
         /// Indicates if the class has already been disposed.
         /// </summary>
         private bool disposed = false;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LogFactory"/> class with the given log <paramref name="appenders"/>.
@@ -99,10 +89,6 @@ namespace Mjolnir.Logging
             this.Dispose(false);
         }
 
-        #endregion
-
-        #region Properties
-
         /// <inheritdoc />
         public IEnumerable<ILogAppender> Appenders
         {
@@ -115,10 +101,6 @@ namespace Mjolnir.Logging
             }
         }
 
-        #endregion
-
-        #region Methods
-
         /// <inheritdoc />
         public ILogger GetLogger<T>()
         {
@@ -128,12 +110,7 @@ namespace Mjolnir.Logging
         /// <inheritdoc />
         public ILogger GetLogger(Type type)
         {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            string typeName = type.FullName;
+            string typeName = type.FullName ?? string.Empty;
 
             lock (this.loggers.SyncRoot)
             {
@@ -156,7 +133,7 @@ namespace Mjolnir.Logging
                     this.entries.Value.Enqueue(entry);
                 }
 
-                this.logThreadresetEvent.Set();
+                this.logThreadresetEvent?.Set();
             }
         }
 
@@ -212,7 +189,7 @@ namespace Mjolnir.Logging
             {
                 while (true)
                 {
-                    LogEntry currentEntry = null;
+                    LogEntry? currentEntry = null;
 
                     lock (this.entries.SyncRoot)
                     {
@@ -239,11 +216,11 @@ namespace Mjolnir.Logging
                             }
                         }
 
-                        this.logThreadresetEvent.Reset();
+                        this.logThreadresetEvent?.Reset();
                     }
                     else
                     {
-                        this.logThreadresetEvent.WaitOne();
+                        this.logThreadresetEvent?.WaitOne();
                     }
                 }
             }
@@ -252,7 +229,5 @@ namespace Mjolnir.Logging
                 Thread.ResetAbort();
             }
         }
-
-        #endregion
     }
 }

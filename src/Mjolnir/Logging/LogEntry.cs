@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,11 +22,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -36,8 +32,6 @@ namespace Mjolnir.Logging
     /// </summary>
     public class LogEntry
     {
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="LogEntry"/> class.
         /// </summary>
@@ -53,7 +47,7 @@ namespace Mjolnir.Logging
         /// <param name="level">The level of this log message.</param>
         /// <param name="thread">The name of the thread that emitted this entry.</param>
         /// <param name="message">The log message.</param>
-        public LogEntry(DateTime timeStamp, string logger, LogLevel level, string thread, string message)
+        public LogEntry(DateTime timeStamp, string logger, LogLevel level, string? thread, string message)
         {
             this.TimeStamp = timeStamp;
             this.Logger = logger;
@@ -61,10 +55,6 @@ namespace Mjolnir.Logging
             this.Thread = thread;
             this.Message = message;
         }
-
-        #endregion
-
-        #region Properties
 
         /// <summary>
         /// Gets or sets the timestamp of this log entry.
@@ -88,7 +78,7 @@ namespace Mjolnir.Logging
         /// Gets or sets the name of the thread that emitted this entry.
         /// </summary>
         /// <value>The name of the thread that emitted this entry.</value>
-        public string Thread { get; set; } = string.Empty;
+        public string? Thread { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the log message.
@@ -100,8 +90,6 @@ namespace Mjolnir.Logging
         /// Gets or sets the <see cref="Exception"/> associated with this entry.
         /// </summary>
         /// <value>The <see cref="Exception"/> associated with this entry.</value>
-        public Exception Exception { get; set; } = null;
-
-        #endregion
+        public Exception? Exception { get; set; } = null;
     }
 }

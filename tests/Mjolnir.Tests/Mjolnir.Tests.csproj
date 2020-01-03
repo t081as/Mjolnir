@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>..\..\Mjolnir.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>1701;1702;1705;NU1701</NoWarn>
+    <WarningsAsErrors />
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Mjolnir.Tests.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <Import Project="..\..\src\Misc.props" />
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugType>None</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="1.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Mjolnir\Mjolnir.csproj" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <None Update="IO\AuthorTests.Default.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\ConfigurationFileTest.Default.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\ConfigurationFileTest.KeyNotUnique.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\ConfigurationFileTest.WrongFormat.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\ConfigurationFileTests.Default.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\ConfigurationFileTests.KeyNotUnique.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\ConfigurationFileTests.WrongFormat.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\JSonConfigurationFileTest.Default.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\JSonConfigurationFileTest.KeyNotUnique.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\JSonConfigurationFileTest.WrongFormat.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\JSonConfigurationFileTests.Default.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\JSonConfigurationFileTests.KeyNotUnique.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IO\JSonConfigurationFileTests.WrongFormat.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+    
+  <ItemGroup>
+    <None Include="..\..\Mjolnir.ruleset" Link="Mjolnir.ruleset" />
+  </ItemGroup>
+
+</Project>

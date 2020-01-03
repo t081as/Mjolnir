@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,15 +22,12 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -40,8 +36,6 @@ namespace Mjolnir.IO
     /// </summary>
     public class Author
     {
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Author"/> class.
         /// </summary>
@@ -60,10 +54,6 @@ namespace Mjolnir.IO
             this.EMailAddress = eMailAddress;
         }
 
-        #endregion
-
-        #region Properties
-
         /// <summary>
         /// Gets or sets the name of the author.
         /// </summary>
@@ -76,20 +66,15 @@ namespace Mjolnir.IO
         /// <value>The email address of the author.</value>
         public string EMailAddress { get; set; } = string.Empty;
 
-        #endregion
-
-        #region Methods
-
         /// <summary>
         /// Reads a list of authors from the given <paramref name="stream"/>.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> containing the author list.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> containing the authors.</returns>
-        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while reading the stream.</exception>
         public static IEnumerable<Author> From(Stream stream)
         {
-            Task<IEnumerable<Author>> result = null;
+            Task<IEnumerable<Author>>? result = null;
 
             try
             {
@@ -100,16 +85,16 @@ namespace Mjolnir.IO
             {
                 aex.Handle((exception) =>
                 {
-                    if (exception is IOException)
+                    if (exception is IOException ioex)
                     {
-                        throw exception as IOException;
+                        throw ioex;
                     }
 
                     return false;
                 });
             }
 
-            return result?.Result;
+            return result?.Result ?? new List<Author>();
         }
 
         /// <summary>
@@ -121,7 +106,6 @@ namespace Mjolnir.IO
         /// The <c>TResult</c> parameter contains an <see cref="IEnumerable{T}"/>
         /// containing the authors.
         /// </returns>
-        /// <exception cref="ArgumentNullException"><c>stream</c> is <c>null</c>.</exception>
         /// <exception cref="IOException">Error while reading the stream.</exception>
         public static async Task<IEnumerable<Author>> FromAsync(Stream stream)
         {
@@ -131,15 +115,18 @@ namespace Mjolnir.IO
                 StreamReader reader = new StreamReader(stream);
 
                 IConfiguration configuration = new DefaultConfiguration();
-                string line;
+                string? line;
 
                 while ((line = await reader.ReadLineAsync().ConfigureAwait(false)) != null)
                 {
                     var matches = Regex.Matches(line.Trim(), @"^(?<name>.+?)\<(?<mail>.+?)\>$");
 
-                    foreach (Match match in matches)
+                    foreach (Match? match in matches)
                     {
-                        authors.Add(new Author(match.Groups["name"].Value.Trim(), match.Groups["mail"].Value.Trim()));
+                        if (match != null)
+                        {
+                            authors.Add(new Author(match.Groups["name"].Value.Trim(), match.Groups["mail"].Value.Trim()));
+                        }
                     }
                 }
 
@@ -150,7 +137,5 @@ namespace Mjolnir.IO
                 throw new IOException("Error while reading the stream", ex);
             }
         }
-
-        #endregion
     }
 }

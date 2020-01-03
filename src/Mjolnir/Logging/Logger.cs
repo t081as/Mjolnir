@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,12 +22,9 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Threading;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -37,8 +33,6 @@ namespace Mjolnir.Logging
     /// </summary>
     internal class Logger : ILogger
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The reference to the log entry writer.
         /// </summary>
@@ -48,10 +42,6 @@ namespace Mjolnir.Logging
         /// The name of the type this logger is used for.
         /// </summary>
         private string typeName;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Logger"/> class.
@@ -63,10 +53,6 @@ namespace Mjolnir.Logging
             this.writer = writer;
             this.typeName = typeName;
         }
-
-        #endregion
-
-        #region Methods
 
         /// <inheritdoc />
         public void Trace(string message)
@@ -199,7 +185,5 @@ namespace Mjolnir.Logging
         {
             this.writer.Write(entry);
         }
-
-        #endregion
     }
 }

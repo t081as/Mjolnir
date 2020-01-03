@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,11 +22,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
-#endregion
 
 namespace Mjolnir.IO
 {
@@ -36,8 +32,6 @@ namespace Mjolnir.IO
     /// </summary>
     public static class ConfigurationFactory
     {
-        #region Methods
-
         /// <summary>
         /// Creates and returns an implementation of the <see cref="IConfiguration"/> interface.
         /// </summary>
@@ -53,11 +47,15 @@ namespace Mjolnir.IO
         /// </summary>
         /// <param name="configuration">The <see cref="IConfiguration"/> that shall be copied.</param>
         /// <returns>A new implementation of the <see cref="IConfiguration"/> interface.</returns>
+        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
         public static IConfiguration Copy(IConfiguration configuration)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
             return new DefaultConfiguration(configuration);
         }
-
-        #endregion
     }
 }

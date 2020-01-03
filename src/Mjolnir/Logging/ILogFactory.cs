@@ -1,7 +1,6 @@
-﻿#region MIT License
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
-// Copyright © 2017-2019 Tobias Koch <t.koch@tk-software.de>
+// Copyright © 2017-2020 Tobias Koch
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,12 +22,9 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-#endregion
 
-#region Namespaces
 using System;
 using System.Collections.Generic;
-#endregion
 
 namespace Mjolnir.Logging
 {
@@ -37,17 +33,11 @@ namespace Mjolnir.Logging
     /// </summary>
     public interface ILogFactory
     {
-        #region Properties
-
         /// <summary>
         /// Gets the configured appenders.
         /// </summary>
         /// <value>The configured appenders.</value>
         IEnumerable<ILogAppender> Appenders { get; }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Produces and returns instances of <see cref="ILogger"/> classes.
@@ -61,9 +51,6 @@ namespace Mjolnir.Logging
         /// </summary>
         /// <param name="type">The type the logger shall be produced for.</param>
         /// <returns>An instances of an <see cref="ILogger"/> class.</returns>
-        /// <exception cref="ArgumentNullException"><c>type</c> is <c>null</c>.</exception>
         ILogger GetLogger(Type type);
-
-        #endregion
     }
 }
