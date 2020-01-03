@@ -69,6 +69,8 @@ class Build : NukeBuild
     Target Clean => _ => _
         .Executes(() =>
         {
+            TestsDirectory.GlobFiles("**/TestResults/TestResults.xml").ForEach(DeleteFile);
+
             RootDirectory.GlobFiles("**/*.nupkg").ForEach(DeleteFile);
             RootDirectory.GlobFiles(coverageFiles).ForEach(DeleteFile);
 
