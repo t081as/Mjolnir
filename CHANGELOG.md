@@ -1,13 +1,14 @@
 ## [vNext]
 - FEATURE: Logging added
 - FEATURE: CharExtensions added
+- ENHANCEMENT: library splitted (Mjolnir, Mjolnir.Forms, Mjolnir.Windows, Mjolnir.Build)
 
-## [0.2.0] (2019-02-16)
+## [0.2.0] / 2019-02-16
 - FEATURE: ControlExtensions added
 - FEATURE: DateTimeExtensions added
 - FEATURE: Configuration file serializer (text format) added
 - FEATURE: Configuration file serializer (json format) added
 - FEATURE: AUTHOR file parser added
 
-## [0.1.0] (2019-01-13)
+## [0.1.0] / 2019-01-13
 - Initial release
