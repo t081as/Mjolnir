@@ -178,6 +178,7 @@ class Build : NukeBuild
                     .SetFileVersion(version)
                     .SetIncludeSource(true)
                     .SetIncludeSymbols(true)
+                    .SetSymbolPackageFormat(DotNetSymbolPackageFormat.snupkg)
                     .SetPackageReleaseNotes(changeLog)
                     .SetOutputDirectory(OutputDirectory));
             }
