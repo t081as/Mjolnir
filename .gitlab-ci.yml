@@ -23,8 +23,8 @@ debug:
         paths:
         - output/coverage
         reports:
-        junit:
-            - '**/TestResults/TestResults.xml'
+            junit:
+                - '**/TestResults/TestResults.xml'
 
 
 
