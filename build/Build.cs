@@ -32,16 +32,18 @@ using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
+using Nuke.Common.Tools.ReportGenerator;
 using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
+using static Nuke.Common.Tools.ReportGenerator.ReportGeneratorTasks;
 
 [CheckBuildProjectConfigurations]
 [UnsetVisualStudioEnvironmentVariables]
 class Build : NukeBuild
 {
-    public static int Main () => Execute<Build>(x => x.Compile);
+    public static int Main() => Execute<Build>(x => x.Compile);
 
     [Parameter]
     readonly Configuration Configuration = Configuration.Debug;
@@ -49,7 +51,11 @@ class Build : NukeBuild
     [Parameter]
     readonly ulong Buildnumber = 0;
 
-    [Solution] readonly Solution Solution;
+    [Parameter]
+    readonly string Key = string.Empty;
+
+    [Solution]
+    readonly Solution Solution;
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath TestsDirectory => RootDirectory / "tests";
@@ -62,8 +68,11 @@ class Build : NukeBuild
         .Before(Restore)
         .Executes(() =>
         {
+            RootDirectory.GlobFiles("*.nupkg").ForEach(DeleteFile);
+
             SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
             TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
+
             DotNetClean();
         });
 
@@ -115,35 +124,78 @@ class Build : NukeBuild
                 .SetAssemblyVersion(version)
                 .SetFileVersion(version)
                 .EnableNoRestore());
-
-            if (Configuration == Configuration.Release)
-            {
-                DotNetPack(_ => _
-                .SetProject(RootDirectory / "src" / "Mjolnir" / "Mjolnir.csproj")
-                .EnableNoRestore()
-                .SetOutputDirectory(RootDirectory));
-
-                DotNetPack(_ => _
-                .SetProject(RootDirectory / "src" / "Mjolnir.Forms" / "Mjolnir.Forms.csproj")
-                .EnableNoRestore()
-                .SetOutputDirectory(RootDirectory));
-
-                DotNetPack(_ => _
-                .SetProject(RootDirectory / "src" / "Mjolnir.Windows" / "Mjolnir.Windows.csproj")
-                .EnableNoRestore()
-                .SetOutputDirectory(RootDirectory));
-
-                DotNetPack(_ => _
-                .SetProject(RootDirectory / "src" / "Mjolnir.Build" / "Mjolnir.Build.csproj")
-                .EnableNoRestore()
-                .SetOutputDirectory(RootDirectory));
-            }
         });
 
     Target Test => _ => _
         .DependsOn(Compile)
         .Executes(() =>
         {
-            Logger.Info("TODO - Test");
+            if (Configuration == Configuration.Release)
+            {
+                DotNetTest(_ => _
+                .SetProjectFile(Solution)
+                .SetConfiguration(Configuration)
+                .EnableNoRestore()
+                .EnableNoBuild());
+            }
+            else
+            {
+                DotNetTest(_ => _
+                .SetProjectFile(Solution)
+                .SetConfiguration(Configuration)
+                .EnableNoRestore()
+                .SetDataCollector("XPlat Code Coverage"));
+
+                const string reportFile = "**/TestResults/*/coverage.cobertura.xml";
+
+                ReportGenerator(_ => _
+                    .SetReports(reportFile)
+                    .SetTargetDirectory(RootDirectory / "output" / "coverage")
+                    .SetReportTypes(ReportTypes.TextSummary, ReportTypes.Html));
+            }
+            
+        });
+
+    Target Pack => _ => _
+        .DependsOn(Test)
+        .Requires(() => Configuration == Configuration.Release)
+        .Executes(() =>
+        {
+            var projects = new string[]
+            {
+                RootDirectory / "src" / "Mjolnir" / "Mjolnir.csproj",
+                RootDirectory / "src" / "Mjolnir.Forms" / "Mjolnir.Forms.csproj",
+                RootDirectory / "src" / "Mjolnir.Windows" / "Mjolnir.Windows.csproj",
+                RootDirectory / "src" / "Mjolnir.Build" / "Mjolnir.Build.csproj"
+            };
+
+            foreach (var project in projects)
+            {
+                DotNetPack(_ => _
+                    .SetProject(project)
+                    .EnableNoRestore()
+                    .SetVersion(semanticVersion)
+                    .SetAssemblyVersion(version)
+                    .SetFileVersion(version)
+                    .SetIncludeSource(true)
+                    .SetOutputDirectory(RootDirectory));
+            }
+        });
+
+    Target Push => _ => _
+        .DependsOn(Pack)
+        .Requires(() => Key)
+        .Requires(() => Configuration == Configuration.Release)
+        .Executes(() =>
+        {
+            var generatedPackages = RootDirectory.GlobFiles("*.nupkg").NotEmpty();
+
+            foreach (var package in generatedPackages)
+            {
+                DotNetNuGetPush(_ => _
+                    .SetTargetPath(package)
+                    .SetApiKey(Key)
+                    .SetSource("https://api.nuget.org/v3/index.json"));
+            }
         });
 }
