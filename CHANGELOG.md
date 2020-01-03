@@ -1,4 +1,4 @@
-## [vNext]
+## [0.3.0] / 2020-01-03
 - FEATURE: Logging added
 - FEATURE: CharExtensions added
 - ENHANCEMENT: library splitted (Mjolnir, Mjolnir.Forms, Mjolnir.Windows, Mjolnir.Build)
