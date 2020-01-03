@@ -49,7 +49,7 @@ namespace Mjolnir.Tests.IO
             IEnumerable<Author> authors = Author.From(authorStream);
 
             Assert.AreEqual(4, authors.Count());
-            Assert.AreEqual("t.koch@tk-software.de", authors.Where(a => a.Name == "Tobias Koch").FirstOrDefault().EMailAddress);
+            Assert.AreEqual("tobias@test.com", authors.Where(a => a.Name == "Tobias Koch").FirstOrDefault().EMailAddress);
             Assert.AreEqual("toni@test.de", authors.Where(a => a.Name == "Tony Test").FirstOrDefault().EMailAddress);
             Assert.AreEqual("berta-beta@testmail.org", authors.Where(a => a.Name == "Berta Beta").FirstOrDefault().EMailAddress);
             Assert.AreEqual("master@anton_alpha.de", authors.Where(a => a.Name == "Anton Alpha").FirstOrDefault().EMailAddress);
