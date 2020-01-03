@@ -131,6 +131,7 @@ class Build : NukeBuild
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
+                .SetLogger("junit")
                 .EnableNoBuild());
             }
             else
@@ -139,6 +140,7 @@ class Build : NukeBuild
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
+                .SetLogger("junit")
                 .SetDataCollector("XPlat Code Coverage"));
 
                 var reportFiles = RootDirectory / coverageFiles;
