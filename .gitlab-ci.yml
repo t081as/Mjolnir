@@ -1,7 +1,6 @@
 stages:
     - test
     - deploy
-    - documentation
 
 release:
     stage: deploy
@@ -25,15 +24,3 @@ debug:
         reports:
             junit:
                 - './tests/**/TestResults/TestResults.xml'
-
-
-
-pages:
-  stage: documentation
-  only:
-  - tags
-  artifacts:
-    paths:
-    - public
-  script:
-  - ./build.ps1 --configuration Release --buildnumber $CI_PIPELINE_IID

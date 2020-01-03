@@ -7,9 +7,7 @@
             "**/**.csproj"
           ],
           "exclude": [
-            "**/**.Tests.csproj",
-            "**/tools.csproj",
-            "examples/**"
+            "tests/**/*.csproj"
           ],
           "src": ".."
         }
@@ -18,7 +16,7 @@
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
       "properties": {
-         "TargetFramework": "netstandard2.0"
+         "TargetFramework": "netstandard3.0"
      }
     }
   ],
