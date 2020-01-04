@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Mjolnir.Windows</PackageId>
-    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;netcoreapp3.0</TargetFrameworks>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
