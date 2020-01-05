@@ -1,4 +1,4 @@
-## [0.4] / 2020-01-05
+## [0.4.0] / 2020-01-05
 - ENHANCEMENT: switching to snupkg package format
 - FEATURE: Mjolnir.Build: ReplaceInFile method added
 - FEATURE: Mjolnir.Build: GetGitTagVersion method added
