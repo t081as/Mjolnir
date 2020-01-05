@@ -25,6 +25,7 @@
 
 using System.IO;
 using System.Linq;
+using static Mjolnir.Build.VCS.GitVersionTasks;
 using Nuke.Common;
 using Nuke.Common.IO;
 using Nuke.Common.Execution;
@@ -90,18 +91,19 @@ class Build : NukeBuild
     Target Version => _ => _
         .Executes(() =>
         {
+            
+            (string shortVersion, string version, string semanticVersion) = GetGitTagVersion(RootDirectory, Buildnumber);
+
+            Logger.Info($"Version: {version}");
+            Logger.Info($"Short Version: {shortVersion}");
+            Logger.Info($"Semantic Version: {semanticVersion}");
+            Logger.Info($"Buildnumber: {Buildnumber}");
+
             if (Configuration == Configuration.Release)
             {
-                (string shortVersion, string version, string semanticVersion) = GitVersion.Get(RootDirectory, Buildnumber);
-
                 this.shortVersion = shortVersion;
                 this.version = version;
                 this.semanticVersion = semanticVersion;
-
-                Logger.Info($"Version: {version}");
-                Logger.Info($"Short Version: {shortVersion}");
-                Logger.Info($"Semantic Version: {semanticVersion}");
-                Logger.Info($"Buildnumber: {Buildnumber}");
             }
             else
             {
