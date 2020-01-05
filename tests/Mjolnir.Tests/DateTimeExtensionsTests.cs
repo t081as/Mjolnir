@@ -26,7 +26,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Mjolnir.Tests.Extensions
+namespace Mjolnir.Tests
 {
     /// <summary>
     /// Contains unit tests for the <see cref="DateTimeExtensions"/> class.
