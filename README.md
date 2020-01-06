@@ -16,7 +16,7 @@ NuGet packages are available [here](https://www.nuget.org/packages/Mjolnir/).
 #### Requirements
 The following tools must be available:
 
-* [.NET Core SDK 3.1](https://dotnet.microsoft.com/download)
+* [.NET Core SDK 3.1 (Windows)](https://dotnet.microsoft.com/download)
 
 #### Source code
 Get the source code using the following command:
@@ -26,12 +26,17 @@ Get the source code using the following command:
 #### Test
     > ./build.ps1
 
-The script will report if the tests succeeded; the coverage report will be located in the directory *./src/Mjolnir.Tests/bin/Debug/Coverage/*.
+The script will report if the tests succeeded; the coverage report will be located in the directory *./output/coverage/*.
 
 #### Build
-    > ./build.ps1 --configuration=Release
+    > ./build.ps1 --configuration Release
 
-The libraries will be located in the directory *./src/Mjolnir/bin/Release* if the build succeeds.
+The script will report if the build succeeded; the libraries will be located in the directories *./src/../bin/Release*.
+
+#### Generate packages
+    > ./build.ps1 --configuration Release --target Pack
+
+The nuget packages will be located in the directory *./output* if the build succeeds.
 
 ## Usage
 The documentation of this library can be found here: [https://tobiaskoch.gitlab.io/Mjolnir/](https://tobiaskoch.gitlab.io/Mjolnir/)
