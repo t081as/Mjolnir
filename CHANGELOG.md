@@ -1,3 +1,6 @@
+## [vNext]
+- FEATURE: Mjolnir.Forms: RenderingHintLabel added
+
 ## [0.4.0] / 2020-01-05
 - ENHANCEMENT: switching to snupkg package format
 - FEATURE: Mjolnir.Build: ReplaceInFile method added
