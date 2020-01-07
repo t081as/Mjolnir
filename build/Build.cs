@@ -68,7 +68,15 @@ class Build : NukeBuild
     string version = "0.0.0.0";
     string semanticVersion = "0.0.0+XXXXXXXX";
 
+    Target Restore => _ => _
+        .Executes(() =>
+        {
+            DotNetRestore(_ => _
+                .SetProjectFile(Solution));
+        });
+
     Target Clean => _ => _
+        .DependsOn(Restore)
         .Executes(() =>
         {
             TestsDirectory.GlobFiles("**/TestResults/TestResults.xml").ForEach(DeleteFile);
@@ -78,14 +86,6 @@ class Build : NukeBuild
 
             EnsureCleanDirectory(OutputDirectory);
             DotNetClean();
-        });
-
-    Target Restore => _ => _
-        .DependsOn(Clean)
-        .Executes(() =>
-        {
-            DotNetRestore(_ => _
-                .SetProjectFile(Solution));
         });
 
     Target Version => _ => _
