@@ -1,5 +1,6 @@
 ## [vNext]
 - FEATURE: Mjolnir.Forms: RenderingHintLabel added
+- ENHANCEMENT: Mjonlir, Mjolnir.Forms, Mjolnir.Windows, Mjolnir.Build: assemblies signed with strong name key
 
 ## [0.4.0] / 2020-01-05
 - ENHANCEMENT: switching to snupkg package format
