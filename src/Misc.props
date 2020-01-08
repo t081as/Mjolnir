@@ -6,4 +6,14 @@
         <EmbedAllSources>true</EmbedAllSources>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="..\Mjolnir.snk" Link="Mjolnir.snk" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <SignAssembly>true</SignAssembly>
+        <DelaySign>false</DelaySign>
+        <AssemblyOriginatorKeyFile>..\..\src\Mjolnir.snk</AssemblyOriginatorKeyFile>
+    </PropertyGroup>
+
 </Project>
