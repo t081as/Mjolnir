@@ -39,6 +39,9 @@ using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using static Nuke.Common.Tools.ReportGenerator.ReportGeneratorTasks;
+using System.Xml.Linq;
+using System.Globalization;
+using System;
 
 [CheckBuildProjectConfigurations]
 [UnsetVisualStudioEnvironmentVariables]
@@ -150,13 +153,34 @@ class Build : NukeBuild
 
                 var reportFiles = RootDirectory / coverageFiles;
 
-                ReportGenerator(_ => _
-                    .SetToolPath(ToolPathResolver.GetPackageExecutable("ReportGenerator", "ReportGenerator.exe", null, "netcoreapp3.0"))
-                    .SetReports(reportFiles)
-                    .SetTargetDirectory(OutputDirectory / "coverage")
-                    .SetReportTypes(ReportTypes.TextSummary, ReportTypes.Html));
+                if (EnvironmentInfo.IsWin)
+                {
+                    ReportGenerator(_ => _
+                        .SetToolPath(ToolPathResolver.GetPackageExecutable("ReportGenerator", "ReportGenerator.exe", null, "netcoreapp3.0"))
+                        .SetReports(reportFiles)
+                        .SetTargetDirectory(OutputDirectory / "coverage")
+                        .SetReportTypes(ReportTypes.TextSummary, ReportTypes.Html));
 
-                Logger.Info(File.ReadAllText(OutputDirectory / "coverage" / "Summary.txt"));
+                    Logger.Info(File.ReadAllText(OutputDirectory / "coverage" / "Summary.txt"));
+                }
+                else
+                {
+                    var coverageFileNames = RootDirectory.GlobFiles(coverageFiles);
+
+                    double overallLineConverage = 0;
+
+                    foreach (var coverageFileName in coverageFileNames)
+                    {
+                        XDocument xdoc = XDocument.Load(coverageFileName);
+                        double lineCoverage = double.Parse(xdoc.Descendants("coverage").FirstOrDefault().Attribute("line-rate").Value, CultureInfo.GetCultureInfo("en-US"));
+
+                        overallLineConverage += lineCoverage;
+                    }
+
+                    Logger.Info("Summary");
+                    Logger.Info($"  Line coverage: {Math.Round(overallLineConverage * 100, 2).ToString(CultureInfo.GetCultureInfo("en-US"))}%");
+                    Logger.Info("End Summary");
+                }
             }
         });
 
@@ -168,9 +192,6 @@ class Build : NukeBuild
             var projects = new string[]
             {
                 RootDirectory / "src" / "Mjolnir" / "Mjolnir.csproj",
-                RootDirectory / "src" / "Mjolnir.Forms" / "Mjolnir.Forms.csproj",
-                RootDirectory / "src" / "Mjolnir.Windows" / "Mjolnir.Windows.csproj",
-                RootDirectory / "src" / "Mjolnir.Build" / "Mjolnir.Build.csproj"
             };
 
             var changeLog = GetNuGetReleaseNotes(RootDirectory / "CHANGELOG.md");
