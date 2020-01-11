@@ -58,22 +58,13 @@
     <None Update="IO\ConfigurationFileTests.WrongFormat.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="IO\JSonConfigurationFileTest.Default.json">
+    <None Update="IO\JsonConfigurationFileTests.Default.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="IO\JSonConfigurationFileTest.KeyNotUnique.json">
+    <None Update="IO\JsonConfigurationFileTests.KeyNotUnique.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="IO\JSonConfigurationFileTest.WrongFormat.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="IO\JSonConfigurationFileTests.Default.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="IO\JSonConfigurationFileTests.KeyNotUnique.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="IO\JSonConfigurationFileTests.WrongFormat.json">
+    <None Update="IO\JsonConfigurationFileTests.WrongFormat.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -21,8 +21,6 @@ debug:
         - ./build.sh
     coverage: /Line coverage[\s\S].+%/
     artifacts:
-        paths:
-        - output/coverage
         reports:
             junit:
                 - './tests/**/TestResults/TestResults.xml'
