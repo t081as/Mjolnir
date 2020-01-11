@@ -1,7 +1,0 @@
-<Project>
-
-  <ItemGroup>
-    <PackageReference Include="Mjolnir" Version="[0.5,1.0]" />
-  </ItemGroup>
-  
-</Project>
