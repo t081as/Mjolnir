@@ -1,3 +1,5 @@
+image: mcr.microsoft.com/dotnet/core/sdk:3.1.100-bionic
+
 stages:
     - test
     - deploy
@@ -11,12 +13,12 @@ release:
         paths:
           - ./**/*.nupkg
     script:
-        - ./build.ps1 --configuration Release --buildnumber $CI_PIPELINE_IID --target Push --key $NUGET_API_KEY
+        - ./build.sh --configuration Release --buildnumber $CI_PIPELINE_IID --target Push --key $NUGET_API_KEY
 
 debug:
     stage: test
     script:
-        - ./build.ps1
+        - ./build.sh
     coverage: /Line coverage[\s\S].+%/
     artifacts:
         paths:
