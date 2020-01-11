@@ -26,6 +26,7 @@
     </PackageReference>
   </ItemGroup>
 
+  <Import Project="..\MjolnirReference.props" />
   <Import Project="..\AssemblyInfo.props" />
   <Import Project="..\Version.props" />
   <Import Project="..\TargetFrameworkConstants.props" />
