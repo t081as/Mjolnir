@@ -5,7 +5,7 @@
 *One of the most fearsome and powerful tools in existence, capable of leveling mountains*
 
 ---
-This is the framework library I use in (most of) my projects.
+This is a common library for .NET applications.
 
 ## Installation
 
