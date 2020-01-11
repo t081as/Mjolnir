@@ -26,7 +26,7 @@
 namespace Mjolnir.Windows
 {
     /// <summary>
-    /// Describes objects serving as a view using data binding.
+    /// Describes objects serving as a view for data binding.
     /// </summary>
     public interface IView
     {
