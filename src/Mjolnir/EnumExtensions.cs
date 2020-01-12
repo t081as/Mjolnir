@@ -40,7 +40,7 @@ namespace Mjolnir
         /// </summary>
         /// <param name="value">The value whose description shall be returned.</param>
         /// <returns>
-        /// The <see cref="DescriptionAttribute"/> of the value or the value itself if no description is available.
+        /// The <see cref="DescriptionAttribute"/> of the value or the value if no description is available.
         /// </returns>
         public static string AsString(this Enum value)
         {
