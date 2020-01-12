@@ -60,7 +60,7 @@ namespace Mjolnir
             }
             else
             {
-                return "n/a";
+                return string.Empty;
             }
         }
     }
