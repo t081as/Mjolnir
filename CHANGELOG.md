@@ -1,8 +1,9 @@
 ## [Unreleased]
 - TaskExtensions added
+- EnumExtensions added
 
 ## [0.5.0] - 2020-01-08
-- Mjonlir, Mjolnir.Forms, Mjolnir.Windows, Mjolnir.Build: assemblies signed with strong name key
+- Assemblies signed with strong name key
 
 ## [0.4.0] - 2020-01-05
 - Switched to snupkg package format
