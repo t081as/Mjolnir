@@ -42,24 +42,25 @@ namespace Mjolnir
         /// <returns>
         /// The <see cref="DescriptionAttribute"/> of the value or the value itself if no description is available.
         /// </returns>
-        /// <exception cref="ArgumentNullException"><c>value</c> is <c>null</c>.</exception>
-        public static string GetDescription(this Enum value)
+        public static string AsString(this Enum value)
         {
-            if (value == null)
+            if (value != null)
             {
-                throw new ArgumentNullException(nameof(value));
-            }
+                var enumFieldInfo = value.GetType().GetField(value.ToString());
+                var enumFieldAttributes = enumFieldInfo?.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
 
-            var enumFieldInfo = value.GetType().GetField(value.ToString());
-            var enumFieldAttributes = enumFieldInfo?.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
-
-            if (enumFieldAttributes != null && enumFieldAttributes.Any())
-            {
-                return enumFieldAttributes.First().Description;
+                if (enumFieldAttributes != null && enumFieldAttributes.Any())
+                {
+                    return enumFieldAttributes.First().Description;
+                }
+                else
+                {
+                    return value.ToString();
+                }
             }
             else
             {
-                return value.ToString();
+                return "n/a";
             }
         }
     }
