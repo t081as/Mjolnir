@@ -38,9 +38,6 @@ The script will report if the build succeeded; the libraries will be located in 
 
 The nuget packages will be located in the directory *./output* if the build succeeds.
 
-## Usage
-The documentation of this library can be found here: [https://tobiaskoch.gitlab.io/Mjolnir/](https://tobiaskoch.gitlab.io/Mjolnir/)
-
 ## Contributing
 see [CONTRIBUTING.md](https://gitlab.com/tobiaskoch/Mjolnir/blob/master/CONTRIBUTING.md)
 
