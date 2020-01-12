@@ -1,4 +1,4 @@
-## [Unreleased]
+## [0.6.0] - 2020-01-12
 - TaskExtensions added
 - EnumExtensions added
 
