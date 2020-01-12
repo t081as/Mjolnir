@@ -38,21 +38,18 @@ namespace Mjolnir
         /// </summary>
         /// <param name="task">The <see cref="Task"/> that shall be executed.</param>
         /// <param name="exceptionHandler">An <see cref="IExceptionHandler"/> implementation that handles exceptions that might be thrown.</param>
-        /// <exception cref="ArgumentNullException"><c>task</c> is <c>null</c>.</exception>
         public static async void Invoke(this Task task, IExceptionHandler? exceptionHandler)
         {
-            if (task == null)
+            if (task != null)
             {
-                throw new ArgumentNullException(nameof(task));
-            }
-
-            try
-            {
-                await task.ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                exceptionHandler?.HandleException(ex);
+                try
+                {
+                    await task.ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    exceptionHandler?.HandleException(ex);
+                }
             }
         }
     }
