@@ -23,4 +23,4 @@ debug:
     artifacts:
         reports:
             junit:
-                - './tests/**/TestResults/TestResults.xml'
+                - './**/TestResults/TestResults.xml'
