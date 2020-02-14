@@ -133,13 +133,15 @@ class Build : NukeBuild
         .DependsOn(Compile)
         .Executes(() =>
         {
+            string loggerConfiguration = $"junit;LogFilePath={OutputDirectory / "TestResults" / "TestResults.xml"};MethodFormat=Class;FailureBodyFormat=Verbose";
+
             if (Configuration == Configuration.Release)
             {
                 DotNetTest(_ => _
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
-                .SetLogger("junit")
+                .SetLogger(loggerConfiguration)
                 .EnableNoBuild());
             }
             else
@@ -148,7 +150,7 @@ class Build : NukeBuild
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
-                .SetLogger("junit")
+                .SetLogger(loggerConfiguration)
                 .SetDataCollector("XPlat Code Coverage"));
 
                 var reportFiles = RootDirectory / coverageFiles;
